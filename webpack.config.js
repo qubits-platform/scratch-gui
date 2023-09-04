@@ -164,7 +164,6 @@ module.exports = [
                 'process.env.NODE_ENV': `"${process.env.NODE_ENV}"`,
                 'process.env.DEBUG': Boolean(process.env.DEBUG),
                 'process.env.GA_ID': `"${process.env.GA_ID || 'UA-000000-01'}"`,
-                // 'process.env.REACT_APP_SCRATCH_API_URL':`"${process.env.REACT_APP_SCRATCH_API_URL}"`
             }),
             new DotenvWebpackPlugin(),
             new HtmlWebpackPlugin({
