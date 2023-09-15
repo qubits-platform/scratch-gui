@@ -4,6 +4,7 @@
 # NPM
 /node_modules
 npm-*
+.env
 
 # Testing
 /.nyc_output

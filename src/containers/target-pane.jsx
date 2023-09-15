@@ -1,5 +1,5 @@
 import bindAll from 'lodash.bindall';
-import React from 'react';
+import React,{Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {intlShape, injectIntl} from 'react-intl';
@@ -240,13 +240,15 @@ class TargetPane extends React.Component {
             isRtl,
             onActivateTab,
             onCloseImporting,
+            onSetAutoSave,
             onHighlightTarget,
             onReceivedBlocks,
             onShowImporting,
             workspaceMetrics,
+            setAutoSave,
             ...componentProps
         } = this.props;
-        /* eslint-enable no-unused-vars */
+       
         return (
             <TargetPaneComponent
                 {...componentProps}
@@ -283,6 +285,7 @@ TargetPane.propTypes = {
     intl: intlShape.isRequired,
     onCloseImporting: PropTypes.func,
     onShowImporting: PropTypes.func,
+    onSetAutoSave: PropTypes.func,
     ...targetPaneProps
 };
 
@@ -318,7 +321,8 @@ const mapDispatchToProps = dispatch => ({
         dispatch(highlightTarget(id));
     },
     onCloseImporting: () => dispatch(closeAlertWithId('importingAsset')),
-    onShowImporting: () => dispatch(showStandardAlert('importingAsset'))
+    onShowImporting: () => dispatch(showStandardAlert('importingAsset')),
+    
 });
 
 export default injectIntl(connect(

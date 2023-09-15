@@ -72,6 +72,7 @@ const GUIComponent = props => {
         canChangeTheme,
         canCreateNew,
         canEditTitle,
+        canFileUpload,
         canManageFiles,
         canRemix,
         canSave,
@@ -221,6 +222,7 @@ const GUIComponent = props => {
                     canCreateCopy={canCreateCopy}
                     canCreateNew={canCreateNew}
                     canEditTitle={canEditTitle}
+                    canFileUpload={canFileUpload}
                     canManageFiles={canManageFiles}
                     canRemix={canRemix}
                     canSave={canSave}
@@ -388,6 +390,7 @@ GUIComponent.propTypes = {
     canCreateCopy: PropTypes.bool,
     canCreateNew: PropTypes.bool,
     canEditTitle: PropTypes.bool,
+    canFileUpload: PropTypes.bool,
     canManageFiles: PropTypes.bool,
     canRemix: PropTypes.bool,
     canSave: PropTypes.bool,
@@ -459,6 +462,7 @@ GUIComponent.defaultProps = {
     isTotallyNormal: false,
     loading: false,
     showComingSoon: false,
+    canFileUpload: true,
     stageSizeMode: STAGE_SIZE_MODES.large
 };
 

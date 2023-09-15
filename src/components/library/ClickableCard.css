@@ -1,0 +1,101 @@
+
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  flex-basis: 160px;
+  position: relative;
+  max-width: 300px;
+  height: 236px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: hsla(225, 15%, 40%, 1);
+  background: white;
+  border-width: 2px;
+  border-style: solid;
+  border-color: hsla(0, 0%, 0%, 0.15);
+  border-radius: 10px;
+  cursor: pointer;
+
+}
+.cardimg {
+  width: 100%;
+
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.deleteButton {
+  position: relative;
+  bottom: 2.5rem;
+  left: 7.5rem;
+  padding: 3px 13px;                                                                                                             
+  color: #fff;                                                                                    
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s; 
+  width: 65px;                                                     
+}
+
+.deleteButton:hover {
+  background-color: #d32f2f;
+}
+
+.container {
+  position: relative;
+}
+
+.blur {
+  filter: blur(0px); 
+}
+
+
+.modal {
+  font-size: 20px;
+  width: 37vw;
+  height: 24vh;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modal button {
+  margin: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+
+.buttonCancel {
+  background-color: blue;
+  color:white;
+ padding: 10px 21px;
+ border-width:0; 
+  border-radius:10px;
+}
+
+
+.buttonConfirm {
+  background-color: red;
+  color:white;
+ padding: 10px 21px;
+ border-width:0; 
+  border-radius:10px;
+}
+
+.buttonFlex {
+  display: flex;
+}

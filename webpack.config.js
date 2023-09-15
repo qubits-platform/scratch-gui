@@ -7,6 +7,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
+const DotenvWebpackPlugin = require('dotenv-webpack');
+
 // PostCss
 const autoprefixer = require('autoprefixer');
 const postcssVars = require('postcss-simple-vars');
@@ -161,8 +163,9 @@ module.exports = [
             new webpack.DefinePlugin({
                 'process.env.NODE_ENV': `"${process.env.NODE_ENV}"`,
                 'process.env.DEBUG': Boolean(process.env.DEBUG),
-                'process.env.GA_ID': `"${process.env.GA_ID || 'UA-000000-01'}"`
+                'process.env.GA_ID': `"${process.env.GA_ID || 'UA-000000-01'}"`,
             }),
+            new DotenvWebpackPlugin(),
             new HtmlWebpackPlugin({
                 chunks: ['lib.min', 'gui'],
                 template: 'src/playground/index.ejs',
