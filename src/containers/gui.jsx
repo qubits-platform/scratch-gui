@@ -121,7 +121,7 @@ class GUI extends React.Component {
         };
 
         const queryParams = new URLSearchParams(window.location.search);
-        queryParams.set("uid", "python");
+        queryParams.set("uid", M.assn.uid);
         window.history.replaceState({}, "", `?${queryParams.toString()}`);
 
         setIsScratchDesktop(this.props.isScratchDesktop);
@@ -139,9 +139,9 @@ class GUI extends React.Component {
         const params = new URLSearchParams(window.location.search); // id=123
         let id = params.get("uid"); // 123
         //const url = `${M.cfg.wwwroot}/lib/ajax/service.php?sesskey=${M.cfg.sesskey}&info=mod_qbassign_get_assignment_service`;
-        const url =
-            "http://qubits.localhost.com/lib/ajax/service-react.php?sesskey=vTM5hHtphr&info=mod_qbassign_get_assignment_service";
-        //    const url = `${M.cfg.wwwroot}/lib/ajax/service.php?sesskey=${M.cfg.sesskey}&info=mod_qbassign_get_assignment_service`
+        // const url =
+        //     "http://qubits.localhost.com/lib/ajax/service-react.php?sesskey=vTM5hHtphr&info=mod_qbassign_get_assignment_service";
+           const url = `${M.cfg.wwwroot}/lib/ajax/service.php?sesskey=${M.cfg.sesskey}&info=mod_qbassign_get_assignment_service`
         const payload = [
             {
                 index: 0,
@@ -235,9 +235,9 @@ class GUI extends React.Component {
         const assignmentid = responseData?.map((item) => {
             return item.data.assignmentdetails.assignmentid;
         });
-        const url =
-            "http://qubits.localhost.com/lib/ajax/service-react.php?sesskey=BBSdS6BdX0&info=mod_qbassign_scratch_submission";
-        // const url =  `${M.cfg.wwwroot}/lib/ajax/service.php?sesskey=${M.cfg.sesskey}&info=mod_qbassign_scratch_submission`
+        // const url =
+        //     "http://qubits.localhost.com/lib/ajax/service-react.php?sesskey=BBSdS6BdX0&info=mod_qbassign_scratch_submission";
+        const url =  `${M.cfg.wwwroot}/lib/ajax/service.php?sesskey=${M.cfg.sesskey}&info=mod_qbassign_scratch_submission`
         const payload = [
             {
                 index: 0,
@@ -303,9 +303,9 @@ class GUI extends React.Component {
             return item.data.assignmentdetails.submission_id;
         });
 
-        const url =
-            "http://qubits.localhost.com/lib/ajax/service-react.php?sesskey=NKrdQp6eDZ&info=mod_qbassign_remove_submission";
-        // const url =  `${M.cfg.wwwroot}/lib/ajax/service.php?sesskey=${M.cfg.sesskey}&info=mod_qbassign_remove_submission`
+        // const url =
+        //     "http://qubits.localhost.com/lib/ajax/service-react.php?sesskey=NKrdQp6eDZ&info=mod_qbassign_remove_submission";
+        const url =  `${M.cfg.wwwroot}/lib/ajax/service.php?sesskey=${M.cfg.sesskey}&info=mod_qbassign_remove_submission`
         const payload = [
             {
                 index: 0,
