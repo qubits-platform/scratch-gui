@@ -53,7 +53,8 @@ export default (filename, blob, id) => {
                         async function ps() {
                             const createdData = await apiService.post(
                                 filename,
-                                data
+                                data,
+                                screenshotDataUrl
                             ); // Make a POST request
                             const response = {
                                 fmsg: "Name must be unique",

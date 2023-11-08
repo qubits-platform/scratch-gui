@@ -21,7 +21,7 @@ import { closeFileMenu } from "../reducers/menus";
 
 const messages = defineMessages({
     loadError: {
-        id: "gui.projectLoader.loadError",
+        id: "gui.projectLoader.loadError",  
         defaultMessage: "The project file that was selected failed to load.",
         description:
             "An error that displays when a local project file fails to load.",
@@ -71,7 +71,7 @@ const SBFileUploaderHOC = function (WrappedComponent) {
 
         async getProjectsToOpen(id) {
             const data = await apiServeice.getProject(id);
-            this.onload(data);
+            this.onload1(data.data, data.fileName);
         }
 
         componentWillUnmount() {
@@ -191,6 +191,35 @@ const SBFileUploaderHOC = function (WrappedComponent) {
             }
         }
 
+        onload1(arrayBuffer, filename) {
+            if (filename) {            
+                let loadingSuccess = false;
+                this.props.vm
+                    .loadProject(arrayBuffer)
+                    .then(() => {
+                        if (filename) {
+                            const uploadedProjectTitle =
+                                this.getProjectTitleFromFilename(filename);
+                            this.props.onSetProjectTitle(uploadedProjectTitle);
+                        }
+                        loadingSuccess = true;
+                    })
+                    .catch((error) => {
+                        log.warn(error);
+                        // alert(this.props.intl.formatMessage(messages.loadError));
+                    })
+                    .then(() => {
+                        this.props.onLoadingFinished(
+                            this.props.loadingState,
+                            loadingSuccess
+                        );
+                        // go back to step 7: whether project loading succeeded
+                        // or failed, reset file objects
+                        this.removeFileObjects();
+                    });
+            }
+        }
+
         removeFileObjects() {
             if (this.inputElement) {
                 this.inputElement.value = null;
@@ -202,7 +231,6 @@ const SBFileUploaderHOC = function (WrappedComponent) {
         }
         render() {
             const {
-                /* eslint-disable no-unused-vars */
                 cancelFileUpload,
                 closeFileMenu: closeFileMenuProp,
                 isLoadingUpload,
@@ -218,7 +246,6 @@ const SBFileUploaderHOC = function (WrappedComponent) {
                 addupload,
                 updatestatetofalse,
                 swapestate,
-                /* eslint-enable no-unused-vars */
                 ...componentProps
             } = this.props;
             return (
@@ -302,7 +329,7 @@ const SBFileUploaderHOC = function (WrappedComponent) {
     const mergeProps = (stateProps, dispatchProps, ownProps) =>
         Object.assign({}, stateProps, dispatchProps, ownProps);
     return injectIntl(
-        connect(
+    connect(
             mapStateToProps,
             mapDispatchToProps,
             mergeProps

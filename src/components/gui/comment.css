@@ -1,0 +1,61 @@
+.accordion {
+    box-shadow: none !important;
+  }
+  .shortname-profile {
+    background-color: #9e9ea2;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+  }
+  .flexrow {
+    display: flex;
+    align-items: center;
+  }
+  .fullname{
+    color: #116cbf !important;
+
+  }
+  .comment-heading {
+    color: #116cbf !important;
+  }
+
+  .comment-heading:hover {
+    text-decoration: underline;
+  }
+  .delete-icon {
+    color: #116cbf;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .MuiSvgIcon-root.delete-icon {
+    margin-left: 50px;
+  }
+  .no-overflow {
+    margin-left: 55px;
+  }
+  .expand-icon:hover {
+    background: #116cbf;
+    color: white;
+    height: 30px;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    border-radius: 50%;
+    justify-content: end;
+  }
+  .expand-icon {
+    height: 30px;
+    width: 30px;
+  }
+  .css-o4b71y-MuiAccordionSummary-content.Mui-expanded {
+    margin: 0 !important;
+  }
+  .p-0 {
+    padding: 0 !important;
+  }
+  

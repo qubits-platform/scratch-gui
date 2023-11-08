@@ -3,7 +3,8 @@
 @import "../../css/z-index.css";
 
 .page-wrapper {
-    height: 100%;
+    height: 50vmax;
+    padding: 20px;
 }
 
 .body-wrapper {
@@ -320,3 +321,38 @@ $fade-out-distance: 15px;
 .tool-select-base_mod-tool-select_8BmWU.tool-select-base_is-selected_2pt0e{
     background-color: red !important;
 }
+
+
+
+
+.assignment-wrapper {
+    padding: 20px 20px 0px 20px;
+   
+  }
+
+  .gui-button {
+    display: inline-flex;
+  }
+  .table-start{
+    margin-top: 25px;
+  }
+  .save-button:hover{
+    background-color: transparent !important;
+
+  }
+  .save-button{
+    display: flex !important;
+    justify-content: center;
+    margin:30px 0px 30px 0px;
+    padding-bottom: 30px;
+  }
+  .save-changes{
+    margin-bottom: 20px;
+  }
+  .save-changes:hover{
+    background-color: transparent !important;
+  }
+
+  .feed-back{
+    padding: 20px;
+  }

@@ -73,3 +73,7 @@
 .sprite-input {
     width: 8rem;
 }
+
+.small-input{
+    width: 3rem !important;
+}

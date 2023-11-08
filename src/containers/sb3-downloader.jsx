@@ -1,35 +1,49 @@
-import bindAll from 'lodash.bindall';
-import PropTypes from 'prop-types';
-import React from 'react';
-import {connect} from 'react-redux';
-import {projectTitleInitialState} from '../reducers/project-title';
-import downloadBlob from '../lib/download-blob';
-
+import bindAll from "lodash.bindall";
+import PropTypes from "prop-types";
+import React from "react";
+import { connect } from "react-redux";
+import { projectTitleInitialState } from "../reducers/project-title";
+import downloadBlob from "../lib/download-blob";
 
 class SB3Downloader extends React.Component {
-    constructor (props) {
+    constructor(props) {
         super(props);
-       
-        bindAll(this, [
-            'downloadProject'
-            
-        ]);
-    }
- 
 
-    downloadProject () {
-        this.props.saveProjectSb3().then(content => {
+        this.state = {
+            isId: null
+        };
+
+        bindAll(this, ["downloadProject"]);
+    }
+
+    downloadProject() {
+        this.props.saveProjectSb3().then((content) => {
             if (this.props.onSaveFinished) {
                 this.props.onSaveFinished();
             }
+
+            const params = new URLSearchParams(window.location.search); // id=123
+        let id = params.get("uid"); // 123
+        // const idVal = id == null ? false: true;
+        const idVal = id  !== null;
+        this.setState({isId : idVal})
+
+        if(this.state.isId == false) {
+
+        
+            downloadBlob(
+                this?.props?.projectFilename,
+                content,
+                this?.props?.fileId
+            );
+            // this.props.siva(this.props.projectFilename);
+        }
+            this.props.getContent(content);
             
-            downloadBlob(this?.props?.projectFilename, content, this?.props?.fileId);
         });
     }
-    render () {
-        const {
-            children
-        } = this.props;
+    render() {
+        const { children } = this.props;
         return children(
             this.props.className,
             this.downloadProject,
@@ -54,26 +68,27 @@ SB3Downloader.propTypes = {
     onSaveFinished: PropTypes.func,
     projectFilename: PropTypes.string,
     saveProjectSb3: PropTypes.func,
-    isToggled : PropTypes.bool,
+    isToggled: PropTypes.bool,
     fileId: PropTypes.number,
 };
 SB3Downloader.defaultProps = {
-    className: ''
+    className: "",
 };
 
-
-const mapDispatchToProps = dispatch => ({
-    switchToggle: () => dispatch({type: "SWITCHTOGGLE"})
-    
+const mapDispatchToProps = (dispatch) => ({
+    switchToggle: () => dispatch({ type: "SWITCHTOGGLE" }),
 });
-const mapStateToProps = state => ({
-    saveProjectSb3: state.scratchGui.vm.saveProjectSb3.bind(state.scratchGui.vm),
-    projectFilename: getProjectFilename(state.scratchGui.projectTitle, projectTitleInitialState),
+const mapStateToProps = (state) => ({
+    saveProjectSb3: state.scratchGui.vm.saveProjectSb3.bind(
+        state.scratchGui.vm
+    ),
+    projectFilename: getProjectFilename(
+        state.scratchGui.projectTitle,
+        projectTitleInitialState
+    ),
     isToggled: state.toggleReducer.isToggled,
     fileId: state?.uploadReducer?.items?.id,
 });
-
-
 
 export default connect(
     mapStateToProps,

@@ -118,6 +118,7 @@ class SpriteInfo extends React.Component {
                 <Label text="x">
                     <BufferedInput
                         small
+                        className={styles.smallInput}
                         disabled={this.props.disabled}
                         placeholder="x"
                         tabIndex="0"
@@ -146,6 +147,7 @@ class SpriteInfo extends React.Component {
                     <BufferedInput
                         small
                         disabled={this.props.disabled}
+                        className={styles.smallInput}
                         placeholder="y"
                         tabIndex="0"
                         type="text"

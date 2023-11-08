@@ -13,7 +13,7 @@ class ApiService {
                 headers: {
                     "Content-Type": "application/json",
                     "x-moodle-session-key":
-                        session_key /* Moodle Prod or Staging Session Key  */,
+                    session_key/* Moodle Prod or Staging Session Key  */,
                 },
             });
             if (!response.ok) {
@@ -30,6 +30,7 @@ class ApiService {
 
     async getProject(id) {
         let data;
+        let fileName;
         try {
             const session_key = Cookies.get("MoodleSession");
             await fetch(`${this.baseUrl}/${id}`, {
@@ -39,24 +40,26 @@ class ApiService {
                     "x-moodle-session-key": session_key,
                 },
             })
-                .then((res) => {
-                    return res.blob();
+                .then(async(res) => {
+                    const projectData = await res.json()
+                    const content = await projectData.content
+                    fileName = projectData.name
+                    const arrayBuffer = new Uint8Array(content.data).buffer;
+                    data =  arrayBuffer;
+                    return data
                 })
-                .then((blob) => {
-                    return blob.arrayBuffer();
-                })
-                .then((arrayBuffer) => {
-                    data = arrayBuffer;
-                    return data;
-                });
+                
 
-            return data;
+            return {
+                data, fileName
+                };
         } catch (error) {
             throw error;
         }
     }
 
-    async post(filename, data) {
+
+    async post(filename, data, screen) {
         try {
             const session_key = Cookies.get("MoodleSession");
             const response = await fetch(`${this.baseUrl}`, {
@@ -68,6 +71,7 @@ class ApiService {
                 body: JSON.stringify({
                     name: filename,
                     content: data,
+                    thumbnail: screen
                 }),
             });
             const responseData = await response.json();

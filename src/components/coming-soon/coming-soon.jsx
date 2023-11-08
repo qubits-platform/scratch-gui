@@ -123,7 +123,7 @@ const ComingSoonTooltip = props => (
 );
 
 ComingSoonTooltip.propTypes = {
-    children: PropTypes.node.isRequired,
+    // children: PropTypes.node.isRequired,
     className: PropTypes.string,
     delayHide: PropTypes.number,
     delayShow: PropTypes.number,
