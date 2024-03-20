@@ -1,3 +1,16 @@
 .controls-container {
     display: flex;
 }
+.sprite-icon{
+    display: flex;
+    justify-items: center;
+    align-items:center ;
+    background-color: rgb(75, 117, 78);
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    font-size: 0.7rem;
+    color: white;
+    cursor: pointer;
+    border-radius: 3px;
+    margin-right: 0.5rem;
+}

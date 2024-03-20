@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
-
+import {connect} from 'react-redux';
 import Box from '../box/box.jsx';
 import DOMElementRenderer from '../../containers/dom-element-renderer.jsx';
 import Loupe from '../loupe/loupe.jsx';
@@ -13,6 +13,7 @@ import MicIndicator from '../mic-indicator/mic-indicator.jsx';
 import {STAGE_DISPLAY_SIZES} from '../../lib/layout-constants.js';
 import {getStageDimensions} from '../../lib/screen-utils.js';
 import styles from './stage.css';
+import {setFlagClickedState} from './../../reducers/vm-status.js';
 
 const StageComponent = props => {
     const {
@@ -29,10 +30,12 @@ const StageComponent = props => {
         onDeactivateColorPicker,
         onDoubleClick,
         onQuestionAnswered,
+        flagClicked,
         ...boxProps
     } = props;
 
     const stageDimensions = getStageDimensions(stageSize, isFullScreen);
+
 
     return (
         <React.Fragment>
@@ -47,19 +50,25 @@ const StageComponent = props => {
                         styles.stage,
                         {[styles.fullScreen]: isFullScreen}
                     )}
-                    style={{
-                        height: stageDimensions.height,
-                        width: stageDimensions.width
-                    }}
+                    // style={{
+                    //     height: stageDimensions.height,
+                    //     width: stageDimensions.width
+                    // }}
                 >
-                    <DOMElementRenderer
-                        domElement={canvas}
-                        style={{
-                            height: stageDimensions.height,
-                            width: stageDimensions.width
-                        }}
-                        {...boxProps}
-                    />
+                   <div className={styles.relativeContainer}>
+                    <button className={styles.canvasPos} onClick={() => props.setFlagClickedState(false)}>
+                        &times;
+                     </button>
+                        <DOMElementRenderer
+                            domElement={canvas}
+                            className={styles.renderer}
+                            style={{
+                                height: stageDimensions.height,
+                                width: stageDimensions.width
+                            }}
+                            {...boxProps}
+                        />
+                    </div>
                     <Box className={styles.monitorWrapper}>
                         <MonitorList
                             draggable={useEditorDragStyle}
@@ -151,4 +160,13 @@ StageComponent.propTypes = {
 StageComponent.defaultProps = {
     dragRef: () => {}
 };
-export default StageComponent;
+
+const mapStateToProps = state => ({
+    flagClicked: state.scratchGui.vmStatus.flagClicked
+});
+
+const mapDispatchToProps = {
+    setFlagClickedState
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(StageComponent);

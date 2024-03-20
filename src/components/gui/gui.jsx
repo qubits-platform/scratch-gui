@@ -40,6 +40,7 @@ import addExtensionIcon from './icon--extensions.svg';
 import codeIcon from './icon--code.svg';
 import costumesIcon from './icon--costumes.svg';
 import soundsIcon from './icon--sounds.svg';
+import {setSpriteClickedState} from './../../reducers/vm-status.js';
 
 const messages = defineMessages({
     addExtension: {
@@ -124,6 +125,8 @@ const GUIComponent = props => {
         theme,
         tipsLibraryVisible,
         vm,
+        flagClicked,
+        spriteClicked,
         ...componentProps
     } = omit(props, 'dispatch');
     if (children) {
@@ -211,7 +214,7 @@ const GUIComponent = props => {
                         onRequestClose={onRequestCloseBackdropLibrary}
                     />
                 ) : null}
-                <MenuBar
+                {/* <MenuBar
                     accountNavOpen={accountNavOpen}
                     authorId={authorId}
                     authorThumbnailUrl={authorThumbnailUrl}
@@ -243,7 +246,7 @@ const GUIComponent = props => {
                     onShare={onShare}
                     onStartSelectingFileUpload={onStartSelectingFileUpload}
                     onToggleLoginOpen={onToggleLoginOpen}
-                />
+                /> */}
                 <Box className={styles.bodyWrapper}>
                     <Box className={styles.flexWrapper}>
                         <Box className={styles.editorWrapper}>
@@ -343,9 +346,9 @@ const GUIComponent = props => {
                                     {soundsTabVisible ? <SoundTab vm={vm} /> : null}
                                 </TabPanel>
                             </Tabs>
-                            {backpackVisible ? (
+                            {/* {backpackVisible ? (
                                 <Backpack host={backpackHost} />
-                            ) : null}
+                            ) : null} */}
                         </Box>
 
                         <Box className={classNames(styles.stageAndTargetWrapper, styles[stageSize])}>
@@ -356,7 +359,10 @@ const GUIComponent = props => {
                                 stageSize={stageSize}
                                 vm={vm}
                             />
-                            <Box className={styles.targetWrapper}>
+                            <Box className={spriteClicked?styles.targetWrapper:styles.targetWrapperHide}>
+                                <button className={styles.canvasPos} onClick={() => props.setSpriteClickedState(false)}>
+                                    &times;
+                                </button>
                                 <TargetPane
                                     stageSize={stageSize}
                                     vm={vm}
@@ -466,9 +472,15 @@ const mapStateToProps = state => ({
     // This is the button's mode, as opposed to the actual current state
     blocksId: state.scratchGui.timeTravel.year.toString(),
     stageSizeMode: state.scratchGui.stageSize.stageSize,
-    theme: state.scratchGui.theme.theme
+    theme: state.scratchGui.theme.theme,
+    flagClicked: state.scratchGui.vmStatus.flagClicked,
+    spriteClicked: state.scratchGui.vmStatus.spriteClicked
 });
 
+const mapDispatchToProps = {
+    setSpriteClickedState
+};
+
 export default injectIntl(connect(
-    mapStateToProps
+    mapStateToProps,mapDispatchToProps
 )(GUIComponent));

@@ -29,6 +29,7 @@ const Controls = function (props) {
         intl,
         onGreenFlagClick,
         onStopAllClick,
+        onSpriteFlagClick,
         turbo,
         ...componentProps
     } = props;
@@ -37,6 +38,9 @@ const Controls = function (props) {
             className={classNames(styles.controlsContainer, className)}
             {...componentProps}
         >
+            {/* <div className={styles.spriteIcon} onClick={onSpriteFlagClick}>Saved Projects</div> */}
+            {/* <div className={styles.spriteIcon} onClick={onSpriteFlagClick}>Save</div> */}
+            <div className={styles.spriteIcon} onClick={onSpriteFlagClick}>Sprite</div>
             <GreenFlag
                 active={active}
                 title={intl.formatMessage(messages.goTitle)}

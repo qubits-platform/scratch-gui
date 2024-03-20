@@ -78,3 +78,11 @@
 [dir="rtl"] .stage-button-icon {
     transform: scaleX(-1);
 }
+
+@media (max-width: 1024px) {
+.stage-header-wrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+}

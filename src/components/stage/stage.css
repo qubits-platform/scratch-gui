@@ -14,7 +14,7 @@
     overflow: hidden;
 
     /* @todo: This is for overriding the value being set somewhere. Where is it being set? */
-    background-color: transparent;
+    background-color: white;
 
     /* Allow custom touch handling to prevent scrolling on Edge */
     touch-action: none;
@@ -30,6 +30,17 @@
     border: $stage-full-screen-border-width solid rgb(126, 133, 151);
 }
 
+.canvas-pos{
+    display: none;
+}
+.relative-container {
+    /* position: relative; */
+}
+
+.renderer {
+    height: 100%;
+    width: 100%;
+}
 .with-color-picker {
     cursor: none;
     z-index: $z-index-stage-with-color-picker;
@@ -151,4 +162,20 @@ stage doesn't "spill" out from under its rounded corners. instead, shift these o
 @keyframes flash {
     0% { opacity: 1; }
     100% { opacity: 0; }
+}
+
+@media (max-width: 1024px) {
+    .canvas-pos{
+        cursor: pointer;
+        position: absolute;
+        top: 0.3rem;
+        right: 0.3rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        display: block;
+    }
+    .relative-container {
+        position: relative;
+    }
+
 }
