@@ -6,6 +6,8 @@ import {defineMessages, injectIntl, intlShape} from 'react-intl';
 import GreenFlag from '../green-flag/green-flag.jsx';
 import StopAll from '../stop-all/stop-all.jsx';
 import TurboMode from '../turbo-mode/turbo-mode.jsx';
+import {connect} from 'react-redux';
+import logo from './../../lib/assets/download.svg';
 
 import styles from './controls.css';
 
@@ -31,26 +33,40 @@ const Controls = function (props) {
         onStopAllClick,
         onSpriteFlagClick,
         turbo,
+        spriteClicked,
+        isFullScreen,
         ...componentProps
     } = props;
+    // console.log(props.costumeURLFax) // This is the costumeURLFax from mapStateToProps
     return (
         <div
             className={classNames(styles.controlsContainer, className)}
             {...componentProps}
         >
-            {/* <div className={styles.spriteIcon} onClick={onSpriteFlagClick}>Saved Projects</div> */}
-            {/* <div className={styles.spriteIcon} onClick={onSpriteFlagClick}>Save</div> */}
-            <div className={styles.spriteIcon} onClick={onSpriteFlagClick}>Sprite</div>
-            <GreenFlag
-                active={active}
-                title={intl.formatMessage(messages.goTitle)}
-                onClick={onGreenFlagClick}
-            />
-            <StopAll
-                active={active}
-                title={intl.formatMessage(messages.stopTitle)}
-                onClick={onStopAllClick}
-            />
+            {!isFullScreen&&<div className={`${spriteClicked?styles.spriteIconBg:styles.spriteIcon}`} onClick={onSpriteFlagClick}>
+                <div className={styles.spriteImageOuter}>
+                    <div className={styles.spriteImageInner}>
+                        <img
+                            className={styles.spriteImage}
+                            draggable={false}
+                            src={logo}
+                        />
+                    </div>
+                </div>
+            </div>}
+            
+            <div className={styles.redGreenButtons}>
+                <GreenFlag
+                    active={active}
+                    title={intl.formatMessage(messages.goTitle)}
+                    onClick={onGreenFlagClick}
+                />
+                <StopAll
+                    active={active}
+                    title={intl.formatMessage(messages.stopTitle)}
+                    onClick={onStopAllClick}
+                />
+            </div>
             {turbo ? (
                 <TurboMode />
             ) : null}
@@ -72,4 +88,13 @@ Controls.defaultProps = {
     turbo: false
 };
 
-export default injectIntl(Controls);
+const mapStateToProps = state => ({
+    costumeURLFax: state.scratchGui.vmStatus.costumeURLFax,
+    spriteClicked: state.scratchGui.vmStatus.spriteClicked,
+    isFullScreen: state.scratchGui.mode.isFullScreen,
+});
+
+
+export default injectIntl(connect(
+    mapStateToProps,null
+)(Controls));

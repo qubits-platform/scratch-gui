@@ -7,6 +7,7 @@
 }
 
 .stage-header-wrapper-overlay {
+  
     position: fixed;
     background-color: rgb(232, 237, 241);
     top: 0;
@@ -79,10 +80,35 @@
     transform: scaleX(-1);
 }
 
+.stage-controls-display{
+    display: block;
+}
+.stage-controls-display-res{
+    display: none;
+}
+.flag-controls-display{
+    display: block;
+}
+.flag-controls-display-res{
+    display: none;
+}
+
 @media (max-width: 1024px) {
 .stage-header-wrapper {
     position: absolute;
     top: 0;
     right: 0;
+}
+.stage-controls-display{
+    display: none;
+}
+.stage-controls-display-res{
+    display: block;
+}
+.flag-controls-display{
+    display: none;
+}
+.flag-controls-display-res{
+    display: block;
 }
 }

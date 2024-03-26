@@ -38,15 +38,20 @@ const StageWrapperComponent = function (props) {
                     vm={vm}
                 />
             </Box>
-            <Box className={flagClicked ? `${styles.stageCanvasWrapper} ${styles.show}` : styles.stageCanvasWrapper}>
+            <Box className={flagClicked?styles.stageCanvasWrapper:styles.stageCanvasWrapperHide}>
                 {
                     isRendererSupported ?
                         <Stage
                             stageSize={stageSize}
                             vm={vm}
                         /> :
-                        null
+                        <Stage
+                        stageSize={stageSize}
+                        vm={vm}
+                    /> 
+                    // (to-do)need to change this to the following the css is conflicting with isRendererSupported check that 
                 }
+                
             </Box>
             {loading ? (
                 <Loader isFullScreen={isFullScreen} />

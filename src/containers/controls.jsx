@@ -21,6 +21,7 @@ class Controls extends React.Component {
         if (e.shiftKey) {
             this.props.vm.setTurboMode(!this.props.turbo);
         } else {
+            this.props.setSpriteClickedState(false);
             this.props.setFlagClickedState(true);
             if (!this.props.isStarted) {
                 this.props.vm.start();
@@ -34,7 +35,13 @@ class Controls extends React.Component {
     }
     handleSpriteFlagClick (e) {
         e.preventDefault();
-        this.props.setSpriteClickedState(true);
+        if(this.props.spriteClicked===true){
+            this.props.setSpriteClickedState(false);
+        } else{
+            this.props.setFlagClickedState(false);
+            this.props.setSpriteClickedState(true);
+        }
+      
     }
 
     render () {

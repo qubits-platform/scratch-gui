@@ -125,7 +125,6 @@ const GUIComponent = props => {
         theme,
         tipsLibraryVisible,
         vm,
-        flagClicked,
         spriteClicked,
         ...componentProps
     } = omit(props, 'dispatch');
@@ -368,6 +367,12 @@ const GUIComponent = props => {
                                     vm={vm}
                                 />
                             </Box>
+                            {/* <Box className={styles.targetWrapper}>
+                                <TargetPane
+                                    stageSize={stageSize}
+                                    vm={vm}
+                                />
+                            </Box> */}
                         </Box>
                     </Box>
                 </Box>
@@ -473,7 +478,6 @@ const mapStateToProps = state => ({
     blocksId: state.scratchGui.timeTravel.year.toString(),
     stageSizeMode: state.scratchGui.stageSize.stageSize,
     theme: state.scratchGui.theme.theme,
-    flagClicked: state.scratchGui.vmStatus.flagClicked,
     spriteClicked: state.scratchGui.vmStatus.spriteClicked
 });
 

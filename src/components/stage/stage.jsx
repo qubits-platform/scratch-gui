@@ -56,9 +56,9 @@ const StageComponent = props => {
                     // }}
                 >
                    <div className={styles.relativeContainer}>
-                    <button className={styles.canvasPos} onClick={() => props.setFlagClickedState(false)}>
-                        &times;
-                     </button>
+                        {!isFullScreen&&<button className={styles.canvasPos} onClick={() => props.setFlagClickedState(false)}>
+                            &times;
+                        </button>}
                         <DOMElementRenderer
                             domElement={canvas}
                             className={styles.renderer}
@@ -162,7 +162,7 @@ StageComponent.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-    flagClicked: state.scratchGui.vmStatus.flagClicked
+    flagClicked: state.scratchGui.vmStatus.flagClicked,
 });
 
 const mapDispatchToProps = {
