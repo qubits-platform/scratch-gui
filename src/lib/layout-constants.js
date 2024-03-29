@@ -42,7 +42,7 @@ const BLOCKS_DEFAULT_SCALE = 0.675;
 
 const STAGE_DISPLAY_SCALES = {};
 STAGE_DISPLAY_SCALES[STAGE_DISPLAY_SIZES.large] = 1; // large mode, wide browser (standard)
-STAGE_DISPLAY_SCALES[STAGE_DISPLAY_SIZES.largeConstrained] = 1.25; // large mode but narrow browser
+STAGE_DISPLAY_SCALES[STAGE_DISPLAY_SIZES.largeConstrained] = 1; // large mode but narrow browser
 STAGE_DISPLAY_SCALES[STAGE_DISPLAY_SIZES.small] = 0.5; // small mode, regardless of browser size
 
 export default {

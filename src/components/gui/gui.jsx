@@ -41,6 +41,9 @@ import codeIcon from './icon--code.svg';
 import costumesIcon from './icon--costumes.svg';
 import soundsIcon from './icon--sounds.svg';
 import {setSpriteClickedState} from './../../reducers/vm-status.js';
+import LanguageMenu from '../menu-bar/language-menu.jsx';
+
+import { Cog6ToothIcon } from '@heroicons/react/24/outline'
 
 const messages = defineMessages({
     addExtension: {
@@ -213,6 +216,17 @@ const GUIComponent = props => {
                         onRequestClose={onRequestCloseBackdropLibrary}
                     />
                 ) : null}
+                
+                <div className={styles.topNavIcons}>
+                    <div className={styles.languageRes}>
+                        <LanguageMenu />
+                    </div>
+                    <div className={styles.settingIcon}>
+                        <Cog6ToothIcon style={{width:'1.1rem',height:'1.1rem',color:'#787878'}}/>
+                    </div>
+                </div>
+               
+
                 {/* <MenuBar
                     accountNavOpen={accountNavOpen}
                     authorId={authorId}

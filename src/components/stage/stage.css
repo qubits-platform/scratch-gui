@@ -173,6 +173,15 @@ stage doesn't "spill" out from under its rounded corners. instead, shift these o
         padding-left: 1rem;
         padding-right: 1rem;
         display: block;
+        border-radius: 2px;
+        border: 1px solid #cccccc;
+        color: #801d80;
+        background-color: #d7c4d7;
+    }
+    .canvas-pos:hover{
+        color: white;
+        background-color: #801d80;
+        transition: 0.1s ease-in-out;
     }
     .relative-container {
         position: relative;

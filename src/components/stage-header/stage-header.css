@@ -96,7 +96,7 @@
 @media (max-width: 1024px) {
 .stage-header-wrapper {
     position: absolute;
-    top: 0;
+    top: 3rem;
     right: 0;
 }
 .stage-controls-display{

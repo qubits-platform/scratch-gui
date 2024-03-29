@@ -16,6 +16,8 @@ import styles from './settings-menu.css';
 
 import dropdownCaret from './dropdown-caret.svg';
 
+import { LanguageIcon } from '@heroicons/react/24/outline'
+
 class LanguageMenu extends React.PureComponent {
     constructor (props) {
         super(props);
@@ -50,24 +52,25 @@ class LanguageMenu extends React.PureComponent {
             >
                 <div
                     className={styles.option}
-                    onClick={this.props.onRequestOpen}
-                    onMouseOver={this.handleMouseOver}
+                    // onClick={this.props.onRequestOpen}
+                    // onMouseOver={this.handleMouseOver}
                 >
-                    <img
+                    {/* <img
                         className={styles.icon}
                         src={languageIcon}
-                    />
-                    <span className={styles.submenuLabel}>
+                    /> */}
+                    < LanguageIcon className={styles.icon} />
+                    {/* <span className={styles.submenuLabel}>
                         <FormattedMessage
                             defaultMessage="Language"
                             description="Language sub-menu"
                             id="gui.menuBar.language"
                         />
-                    </span>
-                    <img
+                    </span> */}
+                    {/* <img
                         className={styles.expandCaret}
                         src={dropdownCaret}
-                    />
+                    /> */}
                 </div>
                 <Submenu
                     className={styles.languageSubmenu}

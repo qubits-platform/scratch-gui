@@ -33,6 +33,9 @@
 }
 
 @media (max-width: 1024px) {
+    .controls-container{
+        padding-top: 4px;
+    }
     .sprite-icon{
         display: flex;
         justify-items: center;
