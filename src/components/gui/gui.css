@@ -2,6 +2,11 @@
 @import "../../css/colors.css";
 @import "../../css/z-index.css";
 
+.menu-bar-menu {
+    margin-top: $menu-bar-height;
+    z-index: $z-index-menu-bar;
+}
+
 .page-wrapper {
     height: 100%;
     /* background-color: aquamarine; */
@@ -360,6 +365,7 @@ $fade-out-distance: 15px;
   }
   .body-wrapper {
     /* height: auto;  */
+    width: 720px !important;
   }
   .stage-and-target-wrapper {
     width: 100%;

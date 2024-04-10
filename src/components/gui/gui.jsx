@@ -42,8 +42,12 @@ import costumesIcon from './icon--costumes.svg';
 import soundsIcon from './icon--sounds.svg';
 import {setSpriteClickedState} from './../../reducers/vm-status.js';
 import LanguageMenu from '../menu-bar/language-menu.jsx';
+import {MenuItem, MenuSection} from '../menu/menu.jsx';
+import sharedMessages from '../../lib/shared-messages';
+import SB3Downloader from '../../containers/sb3-downloader.jsx';
 
 import { Cog6ToothIcon } from '@heroicons/react/24/outline'
+import MenuBarGuiSub from '../menu-bar/menu-bar-gui-sub.jsx';
 
 const messages = defineMessages({
     addExtension: {
@@ -222,7 +226,40 @@ const GUIComponent = props => {
                         <LanguageMenu />
                     </div>
                     <div className={styles.settingIcon}>
-                        <Cog6ToothIcon style={{width:'1.1rem',height:'1.1rem',color:'#787878'}}/>
+                        {/* <Cog6ToothIcon style={{width:'1.1rem',height:'1.1rem',color:'#787878'}}/> */}
+                            <MenuBarGuiSub 
+                                accountNavOpen={accountNavOpen}
+                                authorId={authorId}
+                                authorThumbnailUrl={authorThumbnailUrl}
+                                authorUsername={authorUsername}
+                                canChangeLanguage={canChangeLanguage}
+                                canChangeTheme={canChangeTheme}
+                                canCreateCopy={canCreateCopy}
+                                canCreateNew={canCreateNew}
+                                canEditTitle={canEditTitle}
+                                canManageFiles={canManageFiles}
+                                canRemix={canRemix}
+                                canSave={canSave}
+                                canShare={canShare}
+                                className={styles.menuBarPosition}
+                                enableCommunity={enableCommunity}
+                                isShared={isShared}
+                                isTotallyNormal={isTotallyNormal}
+                                logo={logo}
+                                renderLogin={renderLogin}
+                                showComingSoon={showComingSoon}
+                                onClickAbout={onClickAbout}
+                                onClickAccountNav={onClickAccountNav}
+                                onClickLogo={onClickLogo}
+                                onCloseAccountNav={onCloseAccountNav}
+                                onLogOut={onLogOut}
+                                onOpenRegistration={onOpenRegistration}
+                                onProjectTelemetryEvent={onProjectTelemetryEvent}
+                                onSeeCommunity={onSeeCommunity}
+                                onShare={onShare}
+                                onStartSelectingFileUpload={onStartSelectingFileUpload}
+                                onToggleLoginOpen={onToggleLoginOpen}
+                            />
                     </div>
                 </div>
                
