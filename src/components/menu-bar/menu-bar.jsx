@@ -413,7 +413,7 @@ class MenuBar extends React.Component {
                 {remixMessage}
             </Button>
         );
-        // Show the About button only if we have a handler for it (like in the desktop app)
+        // Show the About button only if we have a handler for it (like in the desktop app) d
         const aboutButton = this.buildAboutMenu(this.props.onClickAbout);
         return (
             <Box
