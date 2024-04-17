@@ -50,7 +50,7 @@ const messages = defineMessages({
 });
 
 // Cache this value to only retrieve it once the first time.
-// Assume that it doesn't change for a session.
+// Assume that it doesn't change for a session.ss
 let isRendererSupported = null;
 
 const GUIComponent = props => {
