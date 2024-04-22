@@ -7,7 +7,9 @@ import Box from '../box/box.jsx';
 import {STAGE_DISPLAY_SIZES} from '../../lib/layout-constants.js';
 import StageHeader from '../../containers/stage-header.jsx';
 import Stage from '../../containers/stage.jsx';
-import Loader from '../loader/loader.jsx';
+import Loader from '../loader/loader.jsx'
+import {connect} from 'react-redux';
+import {setFlagClickedState} from './../../reducers/vm-status.js';
 
 import styles from './stage-wrapper.css';
 
@@ -18,7 +20,8 @@ const StageWrapperComponent = function (props) {
         isRendererSupported,
         loading,
         stageSize,
-        vm
+        vm,
+        flagClicked
     } = props;
 
     return (
@@ -35,15 +38,20 @@ const StageWrapperComponent = function (props) {
                     vm={vm}
                 />
             </Box>
-            <Box className={styles.stageCanvasWrapper}>
+            <Box className={flagClicked?styles.stageCanvasWrapper:styles.stageCanvasWrapperHide}>
                 {
                     isRendererSupported ?
                         <Stage
                             stageSize={stageSize}
                             vm={vm}
                         /> :
-                        null
+                        <Stage
+                        stageSize={stageSize}
+                        vm={vm}
+                    /> 
+                    // (to-do)need to change this to the following the css is conflicting with isRendererSupported check that 
                 }
+                
             </Box>
             {loading ? (
                 <Loader isFullScreen={isFullScreen} />
@@ -61,4 +69,11 @@ StageWrapperComponent.propTypes = {
     vm: PropTypes.instanceOf(VM).isRequired
 };
 
-export default StageWrapperComponent;
+const mapStateToProps = state => ({
+    flagClicked: state.scratchGui.vmStatus.flagClicked
+});
+// no-op function to prevent dispatch prop being passed to component
+const mapDispatchToProps = {
+    setFlagClickedState
+};
+export default connect(mapStateToProps, mapDispatchToProps)(StageWrapperComponent);

@@ -413,7 +413,7 @@ class MenuBar extends React.Component {
                 {remixMessage}
             </Button>
         );
-        // Show the About button only if we have a handler for it (like in the desktop app)
+        // Show the About button only if we have a handler for it (like in the desktop app) d
         const aboutButton = this.buildAboutMenu(this.props.onClickAbout);
         return (
             <Box
@@ -436,7 +436,6 @@ class MenuBar extends React.Component {
                                 onClick={this.props.onClickLogo}
                             />
                         </div>
-                        <div>s</div>
                         {(this.props.canChangeTheme || this.props.canChangeLanguage) && (<SettingsMenu
                             canChangeLanguage={this.props.canChangeLanguage}
                             canChangeTheme={this.props.canChangeTheme}
@@ -514,6 +513,7 @@ class MenuBar extends React.Component {
                                         )}</SB3Downloader>
                                     </MenuSection>
                                 </MenuBarMenu>
+                                
                             </div>
                         )}
                         <div

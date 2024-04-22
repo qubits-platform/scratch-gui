@@ -58,7 +58,9 @@ const StageHeaderComponent = function (props) {
         onSetStageUnFull,
         showBranding,
         stageSizeMode,
-        vm
+        vm,
+        spriteClicked,
+        flagClicked,
     } = props;
 
     let header = null;
@@ -137,21 +139,47 @@ const StageHeaderComponent = function (props) {
                 <Box className={styles.stageMenuWrapper}>
                     <Controls vm={vm} />
                     <div className={styles.stageSizeRow}>
-                        {stageControls}
-                        <div>
-                            <Button
-                                className={styles.stageButton}
-                                onClick={onSetStageFull}
-                            >
-                                <img
-                                    alt={props.intl.formatMessage(messages.fullStageSizeMessage)}
-                                    className={styles.stageButtonIcon}
-                                    draggable={false}
-                                    src={fullScreenIcon}
-                                    title={props.intl.formatMessage(messages.fullscreenControl)}
-                                />
-                            </Button>
+                        {/* todo change the css styles not efficient */}
+                        <div className={styles.stageControlsDisplay}>
+                            {stageControls}
                         </div>
+                        <div className={styles.stageControlsDisplayRes}>
+                            {spriteClicked?stageControls:''}
+                        </div>
+
+                        <div className={styles.flagControlsDisplay}>
+                            <div>
+                                <Button
+                                    className={styles.stageButton}
+                                    onClick={onSetStageFull}
+                                >
+                                    <img
+                                        alt={props.intl.formatMessage(messages.fullStageSizeMessage)}
+                                        className={styles.stageButtonIcon}
+                                        draggable={false}
+                                        src={fullScreenIcon}
+                                        title={props.intl.formatMessage(messages.fullscreenControl)}
+                                    />
+                                </Button>
+                            </div>
+                        </div>
+                        <div className={styles.flagControlsDisplayRes}>
+                            {flagClicked?<div>
+                                <Button
+                                    className={styles.stageButton}
+                                    onClick={onSetStageFull}
+                                >
+                                    <img
+                                        alt={props.intl.formatMessage(messages.fullStageSizeMessage)}
+                                        className={styles.stageButtonIcon}
+                                        draggable={false}
+                                        src={fullScreenIcon}
+                                        title={props.intl.formatMessage(messages.fullscreenControl)}
+                                    />
+                                </Button>
+                            </div>:''}
+                        </div>
+                        
                     </div>
                 </Box>
             </Box>
@@ -163,7 +191,9 @@ const StageHeaderComponent = function (props) {
 
 const mapStateToProps = state => ({
     // This is the button's mode, as opposed to the actual current state
-    stageSizeMode: state.scratchGui.stageSize.stageSize
+    stageSizeMode: state.scratchGui.stageSize.stageSize,
+    flagClicked: state.scratchGui.vmStatus.flagClicked,
+    spriteClicked: state.scratchGui.vmStatus.spriteClicked
 });
 
 StageHeaderComponent.propTypes = {

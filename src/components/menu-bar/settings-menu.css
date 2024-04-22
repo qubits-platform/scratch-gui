@@ -1,5 +1,7 @@
 .icon {
-    width: 1.5rem;
+    width: 1.1rem;
+    color: #787878;
+    /* background-color: gray; */
 }
 
 .theme-label {
@@ -58,6 +60,7 @@
 .language-submenu > ul {
     max-height: calc(100vh - 5rem); /* Fallback if dvh not supported */
     max-height: calc(100dvh - 5rem);
+    z-index: 100000;
 }
 
 @media only screen and (max-width: 1024px) {

@@ -51,14 +51,18 @@ class Stage extends React.Component {
             colorInfo: null,
             question: null
         };
+
         if (this.props.vm.renderer) {
             this.renderer = this.props.vm.renderer;
             this.canvas = this.renderer.canvas;
         } else {
             this.canvas = document.createElement('canvas');
             this.renderer = new Renderer(this.canvas);
+            let sprite = this.props.vm.runtime.targets.find(target => target.isSprite());
+            if (sprite) {
+                this.props.vm.setSpriteSize(sprite.id, 5);
+            }
             this.props.vm.attachRenderer(this.renderer);
-
             // Only attach a video provider once because it is stateful
             this.props.vm.setVideoProvider(new VideoProvider());
 
@@ -413,6 +417,7 @@ class Stage extends React.Component {
         } = this.props;
         return (
             <StageComponent
+                vm={vm}
                 canvas={this.canvas}
                 colorInfo={this.state.colorInfo}
                 dragRef={this.setDragCanvas}

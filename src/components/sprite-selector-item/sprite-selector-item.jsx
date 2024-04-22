@@ -1,17 +1,24 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import React from 'react';
-
+import React,{useEffect} from 'react';
+import {connect} from 'react-redux';
 import DeleteButton from '../delete-button/delete-button.jsx';
 import styles from './sprite-selector-item.css';
 import {ContextMenuTrigger} from 'react-contextmenu';
 import {DangerousMenuItem, ContextMenu, MenuItem} from '../context-menu/context-menu.jsx';
 import {FormattedMessage} from 'react-intl';
+import {setCostumeClickedState} from './../../reducers/vm-status.js';
 
 // react-contextmenu requires unique id to match trigger and context menu
 let contextMenuId = 0;
 
-const SpriteSelectorItem = props => (
+const SpriteSelectorItem = props => { 
+
+        useEffect(() => {
+            props.setCostumeClickedState(props.costumeURL)
+        }, []);
+        
+    return(
     <ContextMenuTrigger
         attributes={{
             className: classNames(props.className, styles.spriteSelectorItem, {
@@ -85,7 +92,7 @@ const SpriteSelectorItem = props => (
             </ContextMenu>
         ) : null}
     </ContextMenuTrigger>
-);
+)};
 
 SpriteSelectorItem.propTypes = {
     className: PropTypes.string,
@@ -105,4 +112,12 @@ SpriteSelectorItem.propTypes = {
     selected: PropTypes.bool.isRequired
 };
 
-export default SpriteSelectorItem;
+const mapStateToProps = state => ({
+    costumeURLFax: state.scratchGui.vmStatus.costumeURLFax
+});
+
+const mapDispatchToProps = {
+    setCostumeClickedState
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SpriteSelectorItem);

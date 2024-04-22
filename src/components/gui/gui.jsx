@@ -40,6 +40,13 @@ import addExtensionIcon from './icon--extensions.svg';
 import codeIcon from './icon--code.svg';
 import costumesIcon from './icon--costumes.svg';
 import soundsIcon from './icon--sounds.svg';
+import {setSpriteClickedState} from './../../reducers/vm-status.js';
+import LanguageMenu from '../menu-bar/language-menu.jsx';
+import {MenuItem, MenuSection} from '../menu/menu.jsx';
+import sharedMessages from '../../lib/shared-messages';
+import SB3Downloader from '../../containers/sb3-downloader.jsx';
+
+import MenuBarGuiSub from '../menu-bar/menu-bar-gui-sub.jsx';
 
 const messages = defineMessages({
     addExtension: {
@@ -50,7 +57,7 @@ const messages = defineMessages({
 });
 
 // Cache this value to only retrieve it once the first time.
-// Assume that it doesn't change for a session.ss
+// Assume that it doesn't change for a session.
 let isRendererSupported = null;
 
 const GUIComponent = props => {
@@ -124,6 +131,7 @@ const GUIComponent = props => {
         theme,
         tipsLibraryVisible,
         vm,
+        spriteClicked,
         ...componentProps
     } = omit(props, 'dispatch');
     if (children) {
@@ -211,7 +219,50 @@ const GUIComponent = props => {
                         onRequestClose={onRequestCloseBackdropLibrary}
                     />
                 ) : null}
-                <MenuBar
+                
+                <div className={styles.topNavIcons}>
+                    <div className={styles.languageRes}>
+                        <LanguageMenu />
+                    </div>
+                    <div className={styles.settingIcon}>
+                            <MenuBarGuiSub 
+                                accountNavOpen={accountNavOpen}
+                                authorId={authorId}
+                                authorThumbnailUrl={authorThumbnailUrl}
+                                authorUsername={authorUsername}
+                                canChangeLanguage={canChangeLanguage}
+                                canChangeTheme={canChangeTheme}
+                                canCreateCopy={canCreateCopy}
+                                canCreateNew={canCreateNew}
+                                canEditTitle={canEditTitle}
+                                canManageFiles={canManageFiles}
+                                canRemix={canRemix}
+                                canSave={canSave}
+                                canShare={canShare}
+                                className={styles.menuBarPosition}
+                                enableCommunity={enableCommunity}
+                                isShared={isShared}
+                                isTotallyNormal={isTotallyNormal}
+                                logo={logo}
+                                renderLogin={renderLogin}
+                                showComingSoon={showComingSoon}
+                                onClickAbout={onClickAbout}
+                                onClickAccountNav={onClickAccountNav}
+                                onClickLogo={onClickLogo}
+                                onCloseAccountNav={onCloseAccountNav}
+                                onLogOut={onLogOut}
+                                onOpenRegistration={onOpenRegistration}
+                                onProjectTelemetryEvent={onProjectTelemetryEvent}
+                                onSeeCommunity={onSeeCommunity}
+                                onShare={onShare}
+                                onStartSelectingFileUpload={onStartSelectingFileUpload}
+                                onToggleLoginOpen={onToggleLoginOpen}
+                            />
+                    </div>
+                </div>
+               
+
+                {/* <MenuBar
                     accountNavOpen={accountNavOpen}
                     authorId={authorId}
                     authorThumbnailUrl={authorThumbnailUrl}
@@ -243,7 +294,7 @@ const GUIComponent = props => {
                     onShare={onShare}
                     onStartSelectingFileUpload={onStartSelectingFileUpload}
                     onToggleLoginOpen={onToggleLoginOpen}
-                />
+                /> */}
                 <Box className={styles.bodyWrapper}>
                     <Box className={styles.flexWrapper}>
                         <Box className={styles.editorWrapper}>
@@ -343,9 +394,9 @@ const GUIComponent = props => {
                                     {soundsTabVisible ? <SoundTab vm={vm} /> : null}
                                 </TabPanel>
                             </Tabs>
-                            {backpackVisible ? (
+                            {/* {backpackVisible ? (
                                 <Backpack host={backpackHost} />
-                            ) : null}
+                            ) : null} */}
                         </Box>
 
                         <Box className={classNames(styles.stageAndTargetWrapper, styles[stageSize])}>
@@ -356,12 +407,21 @@ const GUIComponent = props => {
                                 stageSize={stageSize}
                                 vm={vm}
                             />
-                            <Box className={styles.targetWrapper}>
+                            <Box className={spriteClicked?styles.targetWrapper:styles.targetWrapperHide}>
+                                <button className={styles.canvasPos} onClick={() => props.setSpriteClickedState(false)}>
+                                    &times;
+                                </button>
                                 <TargetPane
                                     stageSize={stageSize}
                                     vm={vm}
                                 />
                             </Box>
+                            {/* <Box className={styles.targetWrapper}>
+                                <TargetPane
+                                    stageSize={stageSize}
+                                    vm={vm}
+                                />
+                            </Box> */}
                         </Box>
                     </Box>
                 </Box>
@@ -466,9 +526,14 @@ const mapStateToProps = state => ({
     // This is the button's mode, as opposed to the actual current state
     blocksId: state.scratchGui.timeTravel.year.toString(),
     stageSizeMode: state.scratchGui.stageSize.stageSize,
-    theme: state.scratchGui.theme.theme
+    theme: state.scratchGui.theme.theme,
+    spriteClicked: state.scratchGui.vmStatus.spriteClicked
 });
 
+const mapDispatchToProps = {
+    setSpriteClickedState
+};
+
 export default injectIntl(connect(
-    mapStateToProps
+    mapStateToProps,mapDispatchToProps
 )(GUIComponent));
