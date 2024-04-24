@@ -92,6 +92,7 @@ import prehistoricLogo from './prehistoric-logo.svg';
 import oldtimeyLogo from './oldtimey-logo.svg';
 
 import sharedMessages from '../../lib/shared-messages';
+import { ChevronDoubleDownIcon, FolderIcon } from '@heroicons/react/24/outline';
 
 class MenuBarGuiSub extends React.Component {
     constructor (props) {
@@ -318,15 +319,17 @@ class MenuBarGuiSub extends React.Component {
                                 })}
                                 onMouseUp={this.props.onClickFile}
                             >
-                                <img src={fileIcon} />
-                                <span className={styles.collapsibleLabel}>
+                                {/* <img src={fileIcon} /> */}
+                                <FolderIcon className={styles.fileDropDown}/>
+                                {/* <span className={styles.collapsibleLabel}>
                                     <FormattedMessage
                                         defaultMessage="File"
                                         description="Text for file dropdown menu"
                                         id="gui.menuBar.file"
                                     />
-                                </span>
-                                <img src={dropdownCaret} />
+                                </span> */}
+                                {/* <img src={dropdownCaret} /> */}
+                                {/* <ChevronDoubleDownIcon className={styles.fileDropDown}/> */}
                                 <MenuBarMenu
                                     className={classNames(styles.menuBarMenu)}
                                     open={this.props.fileMenuOpen}

@@ -7,6 +7,7 @@
     flex-direction: row;
     justify-content: space-between;
     flex-wrap: nowrap;
+    align-items: center;
     /*
         For most things, we shouldn't explicitly set height, and let the
         content push the element to whatever fits. Using a fixed height
@@ -26,8 +27,12 @@
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: $menu-bar-standard-font-size;
     font-weight: bold;
-    background-color: $looks-secondary;
+    /* background-color: $looks-secondary; */
+    /* background-color:gray; */
+    /* border: 1px solid #e0e0e0;    */
+    /* border-radius: 5px; */
     color: $ui-white;
+    /* padding: 1rem 0.3rem 1rem 0.3rem; */
 }
 
 .main-menu {
@@ -54,7 +59,8 @@
     display: flex;
     padding: 0 0.25rem;
     text-decoration: none;
-    color: $ui-white;
+    /* color: $ui-white; */
+    color: #787878;
     user-select: none;
     align-self: center;
     position: relative;
@@ -69,7 +75,7 @@
 
 .menu-bar-item.active,
 .menu-bar-item.hoverable:hover {
-    background-color: $ui-black-transparent;
+    /* background-color: $ui-black-transparent; */
 }
 
 .menu-bar-item.growable {
@@ -214,11 +220,21 @@
 }
 
 .collapsible-label {
-    margin: 0 .5rem 0 .25rem;
+    font-size: 0.9rem;
+    margin: 0 .25rem 0 .25rem;
 }
 
 [dir="rtl"] .collapsible-label {
     margin: 0 0.25rem 0 0.5rem;
+}
+
+.file-drop-down{
+    width:1.1rem;
+    color: #787878;
+    padding-bottom: 0.2rem;
+}
+.file-drop-down:hover{
+    color: rgb(51, 51, 51);
 }
 
 @media only screen and (max-width: 1024px) {
