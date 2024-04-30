@@ -1,79 +1,58 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import classNames from 'classnames';
-import VM from 'scratch-vm';
+import PropTypes from 'prop-types'
+import React from 'react'
+import classNames from 'classnames'
+import VM from 'scratch-vm'
 
-import Box from '../box/box.jsx';
-import {STAGE_DISPLAY_SIZES} from '../../lib/layout-constants.js';
-import StageHeader from '../../containers/stage-header.jsx';
-import Stage from '../../containers/stage.jsx';
+import Box from '../box/box.jsx'
+import { STAGE_DISPLAY_SIZES } from '../../lib/layout-constants.js'
+import StageHeader from '../../containers/stage-header.jsx'
+import Stage from '../../containers/stage.jsx'
 import Loader from '../loader/loader.jsx'
-import {connect} from 'react-redux';
-import {setFlagClickedState} from './../../reducers/vm-status.js';
+import { connect } from 'react-redux'
+import { setFlagClickedState } from './../../reducers/vm-status.js'
 
-import styles from './stage-wrapper.css';
+import styles from './stage-wrapper.css'
 
 const StageWrapperComponent = function (props) {
-    const {
-        isFullScreen,
-        isRtl,
-        isRendererSupported,
-        loading,
-        stageSize,
-        vm,
-        flagClicked
-    } = props;
+  const { isFullScreen, isRtl, isRendererSupported, loading, stageSize, vm, flagClicked } = props
 
-    return (
-        <Box
-            className={classNames(
-                styles.stageWrapper,
-                {[styles.fullScreen]: isFullScreen}
-            )}
-            dir={isRtl ? 'rtl' : 'ltr'}
-        >
-            <Box className={styles.stageMenuWrapper}>
-                <StageHeader
-                    stageSize={stageSize}
-                    vm={vm}
-                />
-            </Box>
-            <Box className={flagClicked?styles.stageCanvasWrapper:styles.stageCanvasWrapperHide}>
-                {
-                    isRendererSupported ?
-                        <Stage
-                            stageSize={stageSize}
-                            vm={vm}
-                        /> :
-                        <Stage
-                        stageSize={stageSize}
-                        vm={vm}
-                    /> 
-                    // (to-do)need to change this to the following the css is conflicting with isRendererSupported check that 
-                }
-                
-            </Box>
-            {loading ? (
-                <Loader isFullScreen={isFullScreen} />
-            ) : null}
-        </Box>
-    );
-};
+  return (
+    <Box
+      className={classNames(styles.stageWrapper, { [styles.fullScreen]: isFullScreen })}
+      dir={isRtl ? 'rtl' : 'ltr'}
+    >
+      <Box className={styles.stageMenuWrapper}>
+        <StageHeader stageSize={stageSize} vm={vm} />
+      </Box>
+      <Box className={flagClicked ? styles.stageCanvasWrapper : styles.stageCanvasWrapperHide}>
+        {
+          isRendererSupported ? (
+            <Stage stageSize={stageSize} vm={vm} />
+          ) : (
+            <Stage stageSize={stageSize} vm={vm} />
+          )
+          // (to-do)need to change this to the following the css is conflicting with isRendererSupported check that
+        }
+      </Box>
+      {loading ? <Loader isFullScreen={isFullScreen} /> : null}
+    </Box>
+  )
+}
 
 StageWrapperComponent.propTypes = {
-    isFullScreen: PropTypes.bool,
-    isRendererSupported: PropTypes.bool.isRequired,
-    isRtl: PropTypes.bool.isRequired,
-    loading: PropTypes.bool,
-    stageSize: PropTypes.oneOf(Object.keys(STAGE_DISPLAY_SIZES)).isRequired,
-    vm: PropTypes.instanceOf(VM).isRequired
-};
+  isFullScreen: PropTypes.bool,
+  isRendererSupported: PropTypes.bool.isRequired,
+  isRtl: PropTypes.bool.isRequired,
+  loading: PropTypes.bool,
+  stageSize: PropTypes.oneOf(Object.keys(STAGE_DISPLAY_SIZES)).isRequired,
+  vm: PropTypes.instanceOf(VM).isRequired,
+}
 
-const mapStateToProps = state => ({
-    flagClicked: state.scratchGui.vmStatus.flagClicked
-});
+const mapStateToProps = (state) => ({
+  flagClicked: state.scratchGui.vmStatus.flagClicked,
+})
 // no-op function to prevent dispatch prop being passed to component
 const mapDispatchToProps = {
-    setFlagClickedState
-};
-export default connect(mapStateToProps, mapDispatchToProps)(StageWrapperComponent);
+  setFlagClickedState,
+}
+export default connect(mapStateToProps, mapDispatchToProps)(StageWrapperComponent)
