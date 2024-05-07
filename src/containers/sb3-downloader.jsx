@@ -35,7 +35,7 @@ class SB3Downloader extends React.Component {
         });
     }
     downloadLocalStorageProject () {
-        const projectName = 'Current_Project_Name'; 
+        const projectName = localStorage.getItem('Current_Project_Name');
         this.props.saveProjectSb3().then(content => {
             if (this.props.onSaveFinished) {
                 this.props.onSaveFinished();

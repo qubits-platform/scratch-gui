@@ -103,7 +103,7 @@ class MenuBarGuiSub extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      projectName: "Current_Project_Name",
+      projectName: localStorage.getItem('Current_Project_Name'),
       downloadLocalStorageProject: null,
     };
     bindAll(this, [
