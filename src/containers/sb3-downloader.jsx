@@ -19,22 +19,48 @@ import downloadBlob from '../lib/download-blob'
  * )}</SB3Downloader>
  */
 class SB3Downloader extends React.Component {
-  constructor(props) {
-    super(props)
-    bindAll(this, ['downloadProject'])
-  }
-  downloadProject() {
-    this.props.saveProjectSb3().then((content) => {
-      if (this.props.onSaveFinished) {
-        this.props.onSaveFinished()
-      }
-      downloadBlob(this.props.projectFilename, content)
-    })
-  }
-  render() {
-    const { children } = this.props
-    return children(this.props.className, this.downloadProject)
-  }
+    constructor (props) {
+        super(props);
+        bindAll(this, [
+            'downloadProject',
+            'downloadLocalStorageProject'
+        ]);
+    }
+    downloadProject () {
+        this.props.saveProjectSb3().then(content => {
+            if (this.props.onSaveFinished) {
+                this.props.onSaveFinished();
+            }
+            downloadBlob(this.props.projectFilename, content);
+        });
+    }
+    downloadLocalStorageProject () {
+        const projectName = 'Current_Project_Name'; 
+        this.props.saveProjectSb3().then(content => {
+            if (this.props.onSaveFinished) {
+                this.props.onSaveFinished();
+            }
+            // Convert the Blob to an ArrayBuffer
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                // Save the ArrayBuffer to local storage as a string
+                const buffer = reader.result;
+                const binaryString = Array.prototype.map.call(new Uint8Array(buffer), x => String.fromCharCode(x)).join('');
+                localStorage.setItem(projectName, binaryString);
+            };
+            reader.readAsArrayBuffer(content);
+        });
+    }
+    render () {
+        const {
+            children
+        } = this.props;
+        return children(
+            this.props.className,
+            this.downloadProject,
+            this.downloadLocalStorageProject
+        );
+    }
 }
 
 const getProjectFilename = (curTitle, defaultTitle) => {

@@ -1,36 +1,41 @@
-import classNames from 'classnames'
-import { connect } from 'react-redux'
-import { compose } from 'redux'
-import { defineMessages, FormattedMessage, injectIntl, intlShape } from 'react-intl'
-import PropTypes from 'prop-types'
-import bindAll from 'lodash.bindall'
-import bowser from 'bowser'
-import React from 'react'
+import classNames from "classnames";
+import { connect } from "react-redux";
+import { compose } from "redux";
+import {
+  defineMessages,
+  FormattedMessage,
+  injectIntl,
+  intlShape,
+} from "react-intl";
+import PropTypes from "prop-types";
+import bindAll from "lodash.bindall";
+import bowser from "bowser";
+import React from "react";
 
-import VM from 'scratch-vm'
+import VM from "scratch-vm";
 
-import Box from '../box/box.jsx'
-import Button from '../button/button.jsx'
-import CommunityButton from './community-button.jsx'
-import ShareButton from './share-button.jsx'
-import { ComingSoonTooltip } from '../coming-soon/coming-soon.jsx'
-import Divider from '../divider/divider.jsx'
-import SaveStatus from './save-status.jsx'
-import ProjectWatcher from '../../containers/project-watcher.jsx'
-import MenuBarMenu from './menu-bar-menu.jsx'
-import { MenuItem, MenuSection } from '../menu/menu.jsx'
-import ProjectTitleInput from './project-title-input.jsx'
-import AuthorInfo from './author-info.jsx'
-import AccountNav from '../../containers/account-nav.jsx'
-import LoginDropdown from './login-dropdown.jsx'
-import SB3Downloader from '../../containers/sb3-downloader.jsx'
-import DeletionRestorer from '../../containers/deletion-restorer.jsx'
-import TurboMode from '../../containers/turbo-mode.jsx'
-import MenuBarHOC from '../../containers/menu-bar-hoc.jsx'
-import SettingsMenu from './settings-menu.jsx'
+import Box from "../box/box.jsx";
+import Button from "../button/button.jsx";
+import CommunityButton from "./community-button.jsx";
+import ShareButton from "./share-button.jsx";
+import { ComingSoonTooltip } from "../coming-soon/coming-soon.jsx";
+import Divider from "../divider/divider.jsx";
+import SaveStatus from "./save-status.jsx";
+import ProjectWatcher from "../../containers/project-watcher.jsx";
+import MenuBarMenu from "./menu-bar-menu.jsx";
+import { MenuItem, MenuSection } from "../menu/menu.jsx";
+import ProjectTitleInput from "./project-title-input.jsx";
+import AuthorInfo from "./author-info.jsx";
+import AccountNav from "../../containers/account-nav.jsx";
+import LoginDropdown from "./login-dropdown.jsx";
+import SB3Downloader from "../../containers/sb3-downloader.jsx";
+import DeletionRestorer from "../../containers/deletion-restorer.jsx";
+import TurboMode from "../../containers/turbo-mode.jsx";
+import MenuBarHOC from "../../containers/menu-bar-hoc.jsx";
+import SettingsMenu from "./settings-menu.jsx";
 
-import { openTipsLibrary } from '../../reducers/modals'
-import { setPlayer } from '../../reducers/mode'
+import { openTipsLibrary } from "../../reducers/modals";
+import { setPlayer } from "../../reducers/mode";
 import {
   isTimeTravel220022BC,
   isTimeTravel1920,
@@ -38,7 +43,7 @@ import {
   isTimeTravel2020,
   isTimeTravelNow,
   setTimeTravel,
-} from '../../reducers/time-travel'
+} from "../../reducers/time-travel";
 import {
   autoUpdateProject,
   getIsUpdating,
@@ -47,7 +52,7 @@ import {
   requestNewProject,
   remixProject,
   saveProjectAsCopy,
-} from '../../reducers/project-state'
+} from "../../reducers/project-state";
 import {
   openAboutMenu,
   closeAboutMenu,
@@ -70,201 +75,254 @@ import {
   settingsMenuOpen,
   openSettingsMenu,
   closeSettingsMenu,
-} from '../../reducers/menus'
+} from "../../reducers/menus";
 
-import collectMetadata from '../../lib/collect-metadata'
+import collectMetadata from "../../lib/collect-metadata";
 
-import styles from './menu-bar.css'
+import styles from "./menu-bar.css";
 
-import helpIcon from '../../lib/assets/icon--tutorials.svg'
-import mystuffIcon from './icon--mystuff.png'
-import profileIcon from './icon--profile.png'
-import remixIcon from './icon--remix.svg'
-import dropdownCaret from './dropdown-caret.svg'
-import aboutIcon from './icon--about.svg'
-import fileIcon from './icon--file.svg'
-import editIcon from './icon--edit.svg'
+import helpIcon from "../../lib/assets/icon--tutorials.svg";
+import mystuffIcon from "./icon--mystuff.png";
+import profileIcon from "./icon--profile.png";
+import remixIcon from "./icon--remix.svg";
+import dropdownCaret from "./dropdown-caret.svg";
+import aboutIcon from "./icon--about.svg";
+import fileIcon from "./icon--file.svg";
+import editIcon from "./icon--edit.svg";
 
-import scratchLogo from './scratch-logo.svg'
-import ninetiesLogo from './nineties_logo.svg'
-import catLogo from './cat_logo.svg'
-import prehistoricLogo from './prehistoric-logo.svg'
-import oldtimeyLogo from './oldtimey-logo.svg'
+import scratchLogo from "./scratch-logo.svg";
+import ninetiesLogo from "./nineties_logo.svg";
+import catLogo from "./cat_logo.svg";
+import prehistoricLogo from "./prehistoric-logo.svg";
+import oldtimeyLogo from "./oldtimey-logo.svg";
 
-import sharedMessages from '../../lib/shared-messages'
-import { ChevronDoubleDownIcon, FolderIcon } from '@heroicons/react/24/outline'
+import sharedMessages from "../../lib/shared-messages";
+import { ChevronDoubleDownIcon, FolderIcon } from "@heroicons/react/24/outline";
 
 class MenuBarGuiSub extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
+    this.state = {
+      projectName: "Current_Project_Name",
+      downloadLocalStorageProject: null,
+    };
     bindAll(this, [
-      'handleClickNew',
-      'handleClickRemix',
-      'handleClickSave',
-      'handleClickSaveAsCopy',
-      'handleClickSeeCommunity',
-      'handleClickShare',
-      'handleSetMode',
-      'handleKeyPress',
-      'handleRestoreOption',
-      'getSaveToComputerHandler',
-      'restoreOptionMessage',
-    ])
+      "handleClickNew",
+      "handleClickRemix",
+      "handleClickSave",
+      "handleClickSaveAsCopy",
+      "handleClickSeeCommunity",
+      "handleClickShare",
+      "handleSetMode",
+      "handleKeyPress",
+      "handleRestoreOption",
+      "getSaveToComputerHandler",
+      "restoreOptionMessage",
+      "onLocalStorageFileUpload",
+      "handleDownloadLocalStorageProject",
+    ]);
   }
+
+  handleDownloadLocalStorageProject = (downloadLocalStorageProject) => {
+    // Only update the state if downloadLocalStorageProject has changed
+    if (
+      this.state.downloadLocalStorageProject !== downloadLocalStorageProject
+    ) {
+      this.setState({ downloadLocalStorageProject });
+    }
+  };
   componentDidMount() {
-    document.addEventListener('keydown', this.handleKeyPress)
+    document.addEventListener("keydown", this.handleKeyPress);
   }
   componentWillUnmount() {
-    document.removeEventListener('keydown', this.handleKeyPress)
+    document.removeEventListener("keydown", this.handleKeyPress);
   }
   handleClickNew() {
-    // if the project is dirty, and user owns the project, we will autosave.
-    // but if they are not logged in and can't save, user should consider
-    // downloading or logging in first.
-    // Note that if user is logged in and editing someone else's project,
-    // they'll lose their work.
     const readyToReplaceProject = this.props.confirmReadyToReplaceProject(
       this.props.intl.formatMessage(sharedMessages.replaceProjectWarning),
-    )
-    this.props.onRequestCloseFile()
+    );
+    this.props.onRequestCloseFile();
     if (readyToReplaceProject) {
-      this.props.onClickNew(this.props.canSave && this.props.canCreateNew)
+      this.props.onClickNew(this.props.canSave && this.props.canCreateNew);
     }
-    this.props.onRequestCloseFile()
+    this.props.onRequestCloseFile();
   }
   handleClickRemix() {
-    this.props.onClickRemix()
-    this.props.onRequestCloseFile()
+    this.props.onClickRemix();
+    this.props.onRequestCloseFile();
   }
   handleClickSave() {
-    this.props.onClickSave()
-    this.props.onRequestCloseFile()
+    this.props.onClickSave();
+    this.props.onRequestCloseFile();
   }
   handleClickSaveAsCopy() {
-    this.props.onClickSaveAsCopy()
-    this.props.onRequestCloseFile()
+    this.props.onClickSaveAsCopy();
+    this.props.onRequestCloseFile();
   }
   handleClickSeeCommunity(waitForUpdate) {
     if (this.props.shouldSaveBeforeTransition()) {
-      this.props.autoUpdateProject() // save before transitioning to project page
-      waitForUpdate(true) // queue the transition to project page
+      this.props.autoUpdateProject(); // save before transitioning to project page
+      waitForUpdate(true); // queue the transition to project page
     } else {
-      waitForUpdate(false) // immediately transition to project page
+      waitForUpdate(false); // immediately transition to project page
     }
   }
   handleClickShare(waitForUpdate) {
     if (!this.props.isShared) {
       if (this.props.canShare) {
         // save before transitioning to project page
-        this.props.onShare()
+        this.props.onShare();
       }
       if (this.props.canSave) {
         // save before transitioning to project page
-        this.props.autoUpdateProject()
-        waitForUpdate(true) // queue the transition to project page
+        this.props.autoUpdateProject();
+        waitForUpdate(true); // queue the transition to project page
       } else {
-        waitForUpdate(false) // immediately transition to project page
+        waitForUpdate(false); // immediately transition to project page
       }
     }
   }
   handleSetMode(mode) {
     return () => {
       // Turn on/off filters for modes.
-      if (mode === '1920') {
-        document.documentElement.style.filter = 'brightness(.9)contrast(.8)sepia(1.0)'
-        document.documentElement.style.height = '100%'
-      } else if (mode === '1990') {
-        document.documentElement.style.filter = 'hue-rotate(40deg)'
-        document.documentElement.style.height = '100%'
+      if (mode === "1920") {
+        document.documentElement.style.filter =
+          "brightness(.9)contrast(.8)sepia(1.0)";
+        document.documentElement.style.height = "100%";
+      } else if (mode === "1990") {
+        document.documentElement.style.filter = "hue-rotate(40deg)";
+        document.documentElement.style.height = "100%";
       } else {
-        document.documentElement.style.filter = ''
-        document.documentElement.style.height = ''
+        document.documentElement.style.filter = "";
+        document.documentElement.style.height = "";
       }
 
       // Change logo for modes
-      if (mode === '1990') {
-        document.getElementById('logo_img').src = ninetiesLogo
-      } else if (mode === '2020') {
-        document.getElementById('logo_img').src = catLogo
-      } else if (mode === '1920') {
-        document.getElementById('logo_img').src = oldtimeyLogo
-      } else if (mode === '220022BC') {
-        document.getElementById('logo_img').src = prehistoricLogo
+      if (mode === "1990") {
+        document.getElementById("logo_img").src = ninetiesLogo;
+      } else if (mode === "2020") {
+        document.getElementById("logo_img").src = catLogo;
+      } else if (mode === "1920") {
+        document.getElementById("logo_img").src = oldtimeyLogo;
+      } else if (mode === "220022BC") {
+        document.getElementById("logo_img").src = prehistoricLogo;
       } else {
-        document.getElementById('logo_img').src = this.props.logo
+        document.getElementById("logo_img").src = this.props.logo;
       }
 
-      this.props.onSetTimeTravelMode(mode)
-    }
+      this.props.onSetTimeTravelMode(mode);
+    };
   }
   handleRestoreOption(restoreFun) {
     return () => {
-      restoreFun()
-      this.props.onRequestCloseEdit()
-    }
+      restoreFun();
+      this.props.onRequestCloseEdit();
+    };
   }
   handleKeyPress(event) {
-    const modifier = bowser.mac ? event.metaKey : event.ctrlKey
-    if (modifier && event.key === 's') {
-      this.props.onClickSave()
-      event.preventDefault()
+    const modifier = bowser.mac ? event.metaKey : event.ctrlKey;
+    if (modifier && event.key === "s") {
+      this.props.onClickSave();
+      event.preventDefault();
     }
   }
   getSaveToComputerHandler(downloadProjectCallback) {
     return () => {
-      this.props.onRequestCloseFile()
-      downloadProjectCallback()
+      this.props.onRequestCloseFile();
+      downloadProjectCallback();
       if (this.props.onProjectTelemetryEvent) {
-        const metadata = collectMetadata(this.props.vm, this.props.projectTitle, this.props.locale)
-        this.props.onProjectTelemetryEvent('projectDidSave', metadata)
+        const metadata = collectMetadata(
+          this.props.vm,
+          this.props.projectTitle,
+          this.props.locale,
+        );
+        this.props.onProjectTelemetryEvent("projectDidSave", metadata);
       }
+    };
+  }
+
+  componentDidMount() {
+    this.onLocalStorageFileUpload();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (
+      this.props.flagClicked !== prevProps.flagClicked &&
+      this.state.downloadLocalStorageProject
+    ) {
+      this.onLocalStorageSave(this.state.downloadLocalStorageProject)();
     }
+  }
+  onLocalStorageFileUpload() {
+    const projectData = localStorage.getItem(this.state.projectName);
+    if (projectData) {
+      const buffer = new Uint8Array(
+        projectData.split("").map((char) => char.charCodeAt(0)),
+      ).buffer;
+      this.props.vm.loadProject(buffer);
+    } else {
+      // console.error('No project found in local storage');
+    }
+  }
+  onLocalStorageSave(downloadLocalStorageProject) {
+    return () => {
+      this.props.onRequestCloseFile();
+      downloadLocalStorageProject();
+      if (this.props.onProjectTelemetryEvent) {
+        const metadata = collectMetadata(
+          this.props.vm,
+          this.props.projectTitle,
+          this.props.locale,
+        );
+        this.props.onProjectTelemetryEvent("projectDidSave", metadata);
+      }
+    };
   }
   restoreOptionMessage(deletedItem) {
     switch (deletedItem) {
-      case 'Sprite':
+      case "Sprite":
         return (
           <FormattedMessage
-            defaultMessage='Restore Sprite'
-            description='Menu bar item for restoring the last deleted sprite.'
-            id='gui.menuBar.restoreSprite'
+            defaultMessage="Restore Sprite"
+            description="Menu bar item for restoring the last deleted sprite."
+            id="gui.menuBar.restoreSprite"
           />
-        )
-      case 'Sound':
+        );
+      case "Sound":
         return (
           <FormattedMessage
-            defaultMessage='Restore Sound'
-            description='Menu bar item for restoring the last deleted sound.'
-            id='gui.menuBar.restoreSound'
+            defaultMessage="Restore Sound"
+            description="Menu bar item for restoring the last deleted sound."
+            id="gui.menuBar.restoreSound"
           />
-        )
-      case 'Costume':
+        );
+      case "Costume":
         return (
           <FormattedMessage
-            defaultMessage='Restore Costume'
-            description='Menu bar item for restoring the last deleted costume.'
-            id='gui.menuBar.restoreCostume'
+            defaultMessage="Restore Costume"
+            description="Menu bar item for restoring the last deleted costume."
+            id="gui.menuBar.restoreCostume"
           />
-        )
+        );
       default: {
         return (
           <FormattedMessage
-            defaultMessage='Restore'
-            description='Menu bar item for restoring the last deleted item in its disabled state.' /* eslint-disable-line max-len */
-            id='gui.menuBar.restore'
+            defaultMessage="Restore"
+            description="Menu bar item for restoring the last deleted item in its disabled state." /* eslint-disable-line max-len */
+            id="gui.menuBar.restore"
           />
-        )
+        );
       }
     }
   }
   buildAboutMenu(onClickAbout) {
     if (!onClickAbout) {
       // hide the button
-      return null
+      return null;
     }
-    if (typeof onClickAbout === 'function') {
+    if (typeof onClickAbout === "function") {
       // make a button which calls a function
-      return <AboutButton onClick={onClickAbout} />
+      return <AboutButton onClick={onClickAbout} />;
     }
     // assume it's an array of objects
     // each item must have a 'title' FormattedMessage and a 'handleClick' function
@@ -280,7 +338,7 @@ class MenuBarGuiSub extends React.Component {
         <MenuBarMenu
           className={classNames(styles.menuBarMenu)}
           open={this.props.aboutMenuOpen}
-          place={this.props.isRtl ? 'right' : 'left'}
+          place={this.props.isRtl ? "right" : "left"}
           onRequestClose={this.props.onRequestCloseAbout}
         >
           {onClickAbout.map((itemProps) => (
@@ -294,22 +352,22 @@ class MenuBarGuiSub extends React.Component {
           ))}
         </MenuBarMenu>
       </div>
-    )
+    );
   }
   wrapAboutMenuCallback(callback) {
     return () => {
-      callback()
-      this.props.onRequestCloseAbout()
-    }
+      callback();
+      this.props.onRequestCloseAbout();
+    };
   }
   render() {
     const newProjectMessage = (
       <FormattedMessage
-        defaultMessage='New'
-        description='Menu bar item for creating a new project'
-        id='gui.menuBar.new'
+        defaultMessage="New"
+        description="Menu bar item for creating a new project"
+        id="gui.menuBar.new"
       />
-    )
+    );
     return (
       <Box className={classNames(this.props.className, styles.menuBar)}>
         {this.props.canManageFiles && (
@@ -319,70 +377,115 @@ class MenuBarGuiSub extends React.Component {
             })}
             onMouseUp={this.props.onClickFile}
           >
-            {/* <img src={fileIcon} /> */}
+            <div style={{ display: "none" }}>
+              <SB3Downloader>
+                {(
+                  className,
+                  downloadProjectCallback,
+                  downloadLocalStorageProject,
+                ) => {
+                  this.handleDownloadLocalStorageProject(
+                    downloadLocalStorageProject,
+                  );
+                  return (
+                    <div
+                      className={className}
+                      onClick={this.onLocalStorageSave(
+                        downloadLocalStorageProject,
+                      )}
+                    >
+                      <FormattedMessage
+                        defaultMessage="Save to your Local Storage"
+                        description="Menu bar item for downloading a project to your computer" // eslint-disable-line max-len
+                        id="gui.menuBar.downloadToLocalStorage"
+                      />
+                    </div>
+                  );
+                }}
+              </SB3Downloader>
+            </div>
             <FolderIcon className={styles.fileDropDown} />
-            {/* <span className={styles.collapsibleLabel}>
-                                    <FormattedMessage
-                                        defaultMessage="File"
-                                        description="Text for file dropdown menu"
-                                        id="gui.menuBar.file"
-                                    />
-                                </span> */}
-            {/* <img src={dropdownCaret} /> */}
-            {/* <ChevronDoubleDownIcon className={styles.fileDropDown}/> */}
             <MenuBarMenu
               className={classNames(styles.menuBarMenu)}
               open={this.props.fileMenuOpen}
-              place={this.props.isRtl ? 'left' : 'right'}
+              place={this.props.isRtl ? "left" : "right"}
               onRequestClose={this.props.onRequestCloseFile}
             >
               <MenuSection>
-                <MenuItem isRtl={this.props.isRtl} onClick={this.handleClickNew}>
+                <MenuItem
+                  isRtl={this.props.isRtl}
+                  onClick={this.handleClickNew}
+                >
                   {newProjectMessage}
                 </MenuItem>
               </MenuSection>
-              {(this.props.canSave || this.props.canCreateCopy || this.props.canRemix) && (
+              {(this.props.canSave ||
+                this.props.canCreateCopy ||
+                this.props.canRemix) && (
                 <MenuSection>
                   {this.props.canSave && (
-                    <MenuItem onClick={this.handleClickSave}>{saveNowMessage}</MenuItem>
+                    <MenuItem onClick={this.handleClickSave}>
+                      {saveNowMessage}
+                    </MenuItem>
                   )}
                   {this.props.canCreateCopy && (
-                    <MenuItem onClick={this.handleClickSaveAsCopy}>{createCopyMessage}</MenuItem>
+                    <MenuItem onClick={this.handleClickSaveAsCopy}>
+                      {createCopyMessage}
+                    </MenuItem>
                   )}
                   {this.props.canRemix && (
-                    <MenuItem onClick={this.handleClickRemix}>{remixMessage}</MenuItem>
+                    <MenuItem onClick={this.handleClickRemix}>
+                      {remixMessage}
+                    </MenuItem>
                   )}
                 </MenuSection>
               )}
               <MenuSection>
                 <MenuItem onClick={this.props.onStartSelectingFileUpload}>
-                  {this.props.intl.formatMessage(sharedMessages.loadFromComputerTitle)}
+                  {this.props.intl.formatMessage(
+                    sharedMessages.loadFromComputerTitle,
+                  )}
                 </MenuItem>
                 <SB3Downloader>
                   {(className, downloadProjectCallback) => (
                     <MenuItem
                       className={className}
-                      onClick={this.getSaveToComputerHandler(downloadProjectCallback)}
+                      onClick={this.getSaveToComputerHandler(
+                        downloadProjectCallback,
+                      )}
                     >
                       <FormattedMessage
-                        defaultMessage='Save to your computer'
-                        description='Menu bar item for downloading a project to your computer' // eslint-disable-line max-len
-                        id='gui.menuBar.downloadToComputer'
+                        defaultMessage="Save to your computer"
+                        description="Menu bar item for downloading a project to your computer" // eslint-disable-line max-len
+                        id="gui.menuBar.downloadToComputer"
                       />
                     </MenuItem>
                   )}
                 </SB3Downloader>
               </MenuSection>
+              {/* <SB3Downloader>{(className, downloadProjectCallback,downloadLocalStorageProject) => (
+                                            <MenuItem
+                                                className={className}
+                                                onClick={this.onLocalStorageSave(downloadLocalStorageProject)}
+                                            >
+                                                <FormattedMessage
+                                                    defaultMessage="Save to your Local Storage"
+                                                    description="Menu bar item for downloading a project to your computer" // eslint-disable-line max-len
+                                                    id="gui.menuBar.downloadToLocalStorage"
+                                                />
+                                            </MenuItem>
+                                        )}</SB3Downloader> */}
             </MenuBarMenu>
           </div>
         )}
       </Box>
-    )
+    );
   }
 }
 const mapStateToProps = (state, ownProps) => {
-  const loadingState = state.scratchGui.projectState.loadingState
-  const user = state.session && state.session.session && state.session.session.user
+  const loadingState = state.scratchGui.projectState.loadingState;
+  const user =
+    state.session && state.session.session && state.session.session.user;
   return {
     aboutMenuOpen: aboutMenuOpen(state),
     accountMenuOpen: accountMenuOpen(state),
@@ -396,18 +499,23 @@ const mapStateToProps = (state, ownProps) => {
     loginMenuOpen: loginMenuOpen(state),
     modeMenuOpen: modeMenuOpen(state),
     projectTitle: state.scratchGui.projectTitle,
-    sessionExists: state.session && typeof state.session.session !== 'undefined',
+    sessionExists:
+      state.session && typeof state.session.session !== "undefined",
     settingsMenuOpen: settingsMenuOpen(state),
     username: user ? user.username : null,
-    userOwnsProject: ownProps.authorUsername && user && ownProps.authorUsername === user.username,
+    userOwnsProject:
+      ownProps.authorUsername &&
+      user &&
+      ownProps.authorUsername === user.username,
     vm: state.scratchGui.vm,
     mode220022BC: isTimeTravel220022BC(state),
     mode1920: isTimeTravel1920(state),
     mode1990: isTimeTravel1990(state),
     mode2020: isTimeTravel2020(state),
     modeNow: isTimeTravelNow(state),
-  }
-}
+    flagClicked: state.scratchGui.vmStatus.flagClicked,
+  };
+};
 
 const mapDispatchToProps = (dispatch) => ({
   autoUpdateProject: () => dispatch(autoUpdateProject()),
@@ -432,10 +540,11 @@ const mapDispatchToProps = (dispatch) => ({
   onClickSaveAsCopy: () => dispatch(saveProjectAsCopy()),
   onSeeCommunity: () => dispatch(setPlayer(true)),
   onSetTimeTravelMode: (mode) => dispatch(setTimeTravel(mode)),
-})
+});
 
 export default compose(
   injectIntl,
   MenuBarHOC,
   connect(mapStateToProps, mapDispatchToProps),
-)(MenuBarGuiSub)
+)(MenuBarGuiSub);
+
