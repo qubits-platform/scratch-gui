@@ -32,7 +32,7 @@ export default defineMessages({
         description: 'Title for uploading a project from your computer'
     },
     loadFromLocalStorage: {
-        id: 'gui.sharedMessages.loadFromLocalStorage',
+        id: 'gui.sharedMessages.loadFromLocalStorages',
         defaultMessage: 'Load from your Local Storage',
         description: 'Title for uploading a project from your computer'
     },
