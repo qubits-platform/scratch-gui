@@ -14,7 +14,7 @@
     overflow: hidden;
 
     /* @todo: This is for overriding the value being set somewhere. Where is it being set? */
-    background-color: white;
+    background-color: none;
 
     /* Allow custom touch handling to prevent scrolling on Edge */
     touch-action: none;
@@ -165,6 +165,9 @@ stage doesn't "spill" out from under its rounded corners. instead, shift these o
 }
 
 @media (max-width: 1024px) {
+    .stage{
+        border: none;
+    }
     .canvas-pos{
         cursor: pointer;
         position: absolute;

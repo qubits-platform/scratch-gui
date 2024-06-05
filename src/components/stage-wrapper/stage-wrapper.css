@@ -28,18 +28,53 @@
     flex-direction: column;
     align-items: center;
 }
+.canvas-pos{
+    display: none;
+}
 
 @media (max-width: 1024px) {
     .stage-canvas-wrapper-hide{
        height: 0;
     }
     .stage-canvas-wrapper{
-        position: absolute;
+        position: relative;
         width: 100%;
-        bottom: 0;
-        z-index: 1000;
-        animation: slideInFromBottom 0.5s ease-in-out;
+        left: 15%;
     }
+    .dummy{
+        position: absolute;
+        bottom: 0;
+        width: 100vw;
+        height: 24.2rem;
+        background-color: white;
+        z-index: 999;
+    }
+    .dummydis{
+        height: 0;
+    }
+    .canvas-pos{
+        cursor: pointer;
+        position: absolute;
+        top: 0.3rem;
+        right: 0.3rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        display: block;
+        border-radius: 2px;
+        border: 1px solid #cccccc;
+        color: #801d80;
+        background-color: #d7c4d7;
+        z-index: 10001;
+    }
+    .canvas-pos:hover{
+        color: white;
+        background-color: #801d80;
+        transition: 0.1s ease-in-out;
+    }
+    .relative-container {
+        position: relative;
+    }
+
     @keyframes slideInFromBottom {
         0% {
             transform: translateY(100%);

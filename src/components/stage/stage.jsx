@@ -46,17 +46,12 @@ const StageComponent = (props) => {
       >
         <Box
           className={classNames(styles.stage, { [styles.fullScreen]: isFullScreen })}
-          // style={{
-          //     height: stageDimensions.height,
-          //     width: stageDimensions.width
-          // }}
+          style={{
+              height: stageDimensions.height,
+              width: stageDimensions.width
+          }}
         >
           <div className={styles.relativeContainer}>
-            {!isFullScreen && (
-              <button className={styles.canvasPos} onClick={() => props.setFlagClickedState(false)}>
-                &times;
-              </button>
-            )}
             <DOMElementRenderer
               domElement={canvas}
               className={styles.renderer}

@@ -24,16 +24,26 @@ const StageWrapperComponent = function (props) {
       <Box className={styles.stageMenuWrapper}>
         <StageHeader stageSize={stageSize} vm={vm} />
       </Box>
-      <Box className={flagClicked ? styles.stageCanvasWrapper : styles.stageCanvasWrapperHide}>
-        {
-          isRendererSupported ? (
-            <Stage stageSize={stageSize} vm={vm} />
-          ) : (
-            <Stage stageSize={stageSize} vm={vm} />
-          )
-          // (to-do)need to change this to the following the css is conflicting with isRendererSupported check that
-        }
-      </Box>
+      <div className={flagClicked ?styles.dummy:styles.dummydis}>
+      <div className={styles.relativeContainer}>
+            {!isFullScreen && (
+              <button className={styles.canvasPos} onClick={() => props.setFlagClickedState(false)}>
+                &times;
+              </button>
+            )}
+          </div>
+        <Box className={ styles.stageCanvasWrapper}>
+          {
+            isRendererSupported ? (
+              <Stage stageSize={stageSize} vm={vm} />
+            ) : (
+              <Stage stageSize={stageSize} vm={vm} />
+            )
+            // (to-do)need to change this to the following the css is conflicting with isRendererSupported check that
+          }
+        </Box>
+      </div>
+      
       {loading ? <Loader isFullScreen={isFullScreen} /> : null}
     </Box>
   )
