@@ -58,7 +58,7 @@ class SpriteInfo extends React.Component {
   }
   render() {
     const { stageSize } = this.props
-
+    console.log('asda',this.props)
     const sprite = (
       <FormattedMessage
         defaultMessage='Sprite'
@@ -106,6 +106,9 @@ class SpriteInfo extends React.Component {
         ) : null}
         <Label text='x'>
           <BufferedInput
+          className={classNames(styles.spriteInputres, {
+            [styles.columnInput]: labelAbove,
+          })}
             small
             disabled={this.props.disabled}
             placeholder='x'
@@ -114,6 +117,7 @@ class SpriteInfo extends React.Component {
             value={this.props.disabled ? '' : Math.round(this.props.x)}
             onSubmit={this.props.onChangeX}
           />
+          <div onClick={() => this.props.onChangeX(0)}>@</div>
         </Label>
       </div>
     )
@@ -127,6 +131,9 @@ class SpriteInfo extends React.Component {
         ) : null}
         <Label text='y'>
           <BufferedInput
+           className={classNames(styles.spriteInputres, {
+            [styles.columnInput]: labelAbove,
+          })}
             small
             disabled={this.props.disabled}
             placeholder='y'
@@ -135,6 +142,7 @@ class SpriteInfo extends React.Component {
             value={this.props.disabled ? '' : Math.round(this.props.y)}
             onSubmit={this.props.onChangeY}
           />
+          <div onClick={() => this.props.onChangeY(0)}>@</div>
         </Label>
       </div>
     )
@@ -166,7 +174,7 @@ class SpriteInfo extends React.Component {
         </div>
         <div className={classNames(styles.row, styles.rowSecondary)}>
           <div className={labelAbove ? styles.column : styles.group}>
-            {stageSize === STAGE_DISPLAY_SIZES.large ? <Label secondary text={showLabel} /> : null}
+            {stageSize === STAGE_DISPLAY_SIZES.large ? <Label secondary text={showLabel} /> : <Label secondary text={showLabel} />}
             <ToggleButtons
               buttons={[
                 {
@@ -197,6 +205,7 @@ class SpriteInfo extends React.Component {
                 onSubmit={this.props.onChangeSize}
               />
             </Label>
+            <div onClick={() => this.props.onChangeSize(100)}>@</div>
           </div>
           <div className={classNames(styles.group, styles.largerInput)}>
             <DirectionPicker
@@ -207,6 +216,7 @@ class SpriteInfo extends React.Component {
               onChangeDirection={this.props.onChangeDirection}
               onChangeRotationStyle={this.props.onChangeRotationStyle}
             />
+            <div onClick={() => this.props.onChangeDirection(90)}>@</div>
           </div>
         </div>
       </Box>

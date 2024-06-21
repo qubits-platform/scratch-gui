@@ -26,6 +26,13 @@ class SB3Downloader extends React.Component {
             'downloadLocalStorageProject'
         ]);
     }
+    componentDidUpdate(prevProps, prevState) {
+        const reset = localStorage.getItem('reset');
+        if (reset === 'true') {
+            this.downloadLocalStorageProject();
+            localStorage.setItem('reset', 'false'); // Reset the flag in localStorage
+        }
+    }
     downloadProject () {
         this.props.saveProjectSb3().then(content => {
             if (this.props.onSaveFinished) {

@@ -15,6 +15,8 @@
 
 .input-group-column span {
     margin-bottom: .25rem;
+    
+
 }
 
 .input-label, .input-label-secondary {
@@ -36,3 +38,21 @@
 .input-label {
     font-weight: bold;
 }
+
+@media (max-width: 1024px) {
+    .input-label, .input-label-secondary {
+        font-size: 0.625rem;
+        user-select: none;
+        cursor: default;
+        width: 3rem;
+        white-space: nowrap;
+        margin-left: 0.5rem;
+    }
+    [dir="ltr"] .input-label, [dir="ltr"] .input-label-secondary {
+        margin-right: 0rem;
+    }
+    
+    [dir="rtl"] .input-label, [dir="rtl"] .input-label-secondary {
+        margin-left: 0rem;
+    }
+  }

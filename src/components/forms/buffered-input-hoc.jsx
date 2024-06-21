@@ -36,13 +36,13 @@ export default function (Input) {
     render() {
       const bufferedValue = this.state.value === null ? this.props.value : this.state.value
       return (
-        <Input
-          {...this.props}
-          value={bufferedValue}
-          onBlur={this.handleFlush}
-          onChange={this.handleChange}
-          onKeyPress={this.handleKeyPress}
-        />
+          <Input
+            {...this.props}
+            value={bufferedValue}
+            onBlur={this.handleFlush}
+            onChange={this.handleChange}
+            onKeyPress={this.handleKeyPress}
+          />
       )
     }
   }

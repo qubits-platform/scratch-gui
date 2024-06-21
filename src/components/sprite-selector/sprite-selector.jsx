@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React from 'react'
+import React,{useState} from 'react'
 import { defineMessages, injectIntl, intlShape } from 'react-intl'
 
 import Box from '../box/box.jsx'
@@ -75,6 +75,8 @@ const SpriteSelectorComponent = function (props) {
     selectedSprite = {}
     spriteInfoDisabled = true
   }
+
+
   return (
     <Box className={styles.spriteSelector} {...componentProps}>
       <SpriteInfo

@@ -9,6 +9,7 @@ class SpriteInfo extends React.Component {
     super(props)
     bindAll(this, ['handleClickVisible', 'handleClickNotVisible'])
   }
+
   handleClickVisible(e) {
     e.preventDefault()
     this.props.onChangeVisibility(true)

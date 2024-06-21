@@ -374,12 +374,7 @@ const GUIComponent = (props) => {
                     </button>
                     <TargetPane stageSize={stageSize} vm={vm} />
                   </Box>
-                  {/* <Box className={styles.targetWrapper}>
-                                <TargetPane
-                                    stageSize={stageSize}
-                                    vm={vm}
-                                />
-                            </Box> */}
+                 
                 </Box>
               </Box>
             </Box>

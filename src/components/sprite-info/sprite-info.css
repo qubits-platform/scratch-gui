@@ -13,9 +13,14 @@
 
 .row {
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
+    /* align-items: flex-start; */
+    /* background-color: aqua;   */
 }
 
+.row > * {
+    flex: 1;
+}
 .row-primary {
     margin-bottom: 0.5rem;
 }
@@ -26,6 +31,7 @@
     display: inline-flex;
     flex-direction: row; /* makes columns, for each label/form group */
     align-items: center;
+    
 }
 
 .column {
@@ -45,6 +51,7 @@
     padding: 0.5rem;
     outline: none;
     user-select: none;
+    
 }
 
 .icon {
@@ -68,8 +75,19 @@
 
 .larger-input input {
     width: 4rem;
+    
 }
 
 .sprite-input {
     width: 8rem;
+    
 }
+
+@media (max-width: 1024px) {
+    .sprite-inputres {
+        width: 8rem;
+    }
+    .larger-input input {
+        width: 8rem;
+    }
+  }
