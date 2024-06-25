@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import { defineMessages, injectIntl, intlShape } from 'react-intl'
 
 import GreenFlag from '../green-flag/green-flag.jsx'
@@ -8,7 +8,7 @@ import StopAll from '../stop-all/stop-all.jsx'
 import TurboMode from '../turbo-mode/turbo-mode.jsx'
 import { connect } from 'react-redux'
 import logo from './../../lib/assets/download.svg'
-
+import localForage from 'localforage';
 import styles from './controls.css'
 
 const messages = defineMessages({
@@ -25,6 +25,7 @@ const messages = defineMessages({
 })
 
 const Controls = function (props) {
+  const greenFlagRef = React.useRef(null);
   const {
     active,
     className,
@@ -53,7 +54,7 @@ const Controls = function (props) {
         </div>
       )}
 
-      <div className={styles.redGreenButtons}>
+      <div ref={greenFlagRef}  className={styles.redGreenButtons}>
         <GreenFlag
           active={active}
           title={intl.formatMessage(messages.goTitle)}

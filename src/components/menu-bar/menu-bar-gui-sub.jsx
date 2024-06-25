@@ -98,12 +98,13 @@ import oldtimeyLogo from "./oldtimey-logo.svg";
 
 import sharedMessages from "../../lib/shared-messages";
 import { ChevronDoubleDownIcon, FolderIcon } from "@heroicons/react/24/outline";
+import localForage from 'localforage';
 
 class MenuBarGuiSub extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      projectName: localStorage.getItem('Current_Project_Name'),
+      projectName: null,
       downloadLocalStorageProject: null,
     };
     bindAll(this, [
@@ -131,6 +132,7 @@ class MenuBarGuiSub extends React.Component {
       this.setState({ downloadLocalStorageProject });
     }
   };
+  
   componentDidMount() {
     document.addEventListener("keydown", this.handleKeyPress);
   }
@@ -242,8 +244,14 @@ class MenuBarGuiSub extends React.Component {
   }
 
   componentDidMount() {
-    this.onLocalStorageFileUpload();
-  }
+    localForage.getItem('Current_Project_Name')
+        .then(projectName => {
+            console.log('console log(projectName): ', projectName)
+            this.setState({ projectName });
+        })
+        .then(() => this.onLocalStorageFileUpload())
+        .catch((error) => console.log('console.log(error): ', error));
+}
 
   componentDidUpdate(prevProps) {
     if (
@@ -253,8 +261,8 @@ class MenuBarGuiSub extends React.Component {
       this.onLocalStorageSave(this.state.downloadLocalStorageProject)();
     }
   }
-  onLocalStorageFileUpload() {
-    const projectData = localStorage.getItem(this.state.projectName);
+  async onLocalStorageFileUpload() {
+    const projectData = await localForage.getItem(this.state.projectName);
     if (projectData) {
       const buffer = new Uint8Array(
         projectData.split("").map((char) => char.charCodeAt(0)),

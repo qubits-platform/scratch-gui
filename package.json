@@ -59,6 +59,7 @@
     "intl": "^1.2.5",
     "js-base64": "^2.4.9",
     "keymirror": "^0.1.1",
+    "localforage": "^1.10.0",
     "lodash.bindall": "^4.4.0",
     "lodash.debounce": "^4.0.8",
     "lodash.defaultsdeep": "^4.6.1",

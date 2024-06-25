@@ -4,6 +4,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { projectTitleInitialState } from '../reducers/project-title'
 import downloadBlob from '../lib/download-blob'
+import localForage from 'localforage';
 /**
  * Project saver component passes a downloadProject function to its child.
  * It expects this child to be a function with the signature
@@ -26,13 +27,6 @@ class SB3Downloader extends React.Component {
             'downloadLocalStorageProject'
         ]);
     }
-    componentDidUpdate(prevProps, prevState) {
-        const reset = localStorage.getItem('reset');
-        if (reset === 'true') {
-            this.downloadLocalStorageProject();
-            localStorage.setItem('reset', 'false'); // Reset the flag in localStorage
-        }
-    }
     downloadProject () {
         this.props.saveProjectSb3().then(content => {
             if (this.props.onSaveFinished) {
@@ -41,19 +35,19 @@ class SB3Downloader extends React.Component {
             downloadBlob(this.props.projectFilename, content);
         });
     }
-    downloadLocalStorageProject () {
-        const projectName = localStorage.getItem('Current_Project_Name');
+    downloadLocalStorageProject = async () => {
+        const projectName = await localForage.getItem('Current_Project_Name');
         this.props.saveProjectSb3().then(content => {
             if (this.props.onSaveFinished) {
                 this.props.onSaveFinished();
             }
             // Convert the Blob to an ArrayBuffer
             const reader = new FileReader();
-            reader.onloadend = () => {
+            reader.onloadend = async() => {
                 // Save the ArrayBuffer to local storage as a string
                 const buffer = reader.result;
                 const binaryString = Array.prototype.map.call(new Uint8Array(buffer), x => String.fromCharCode(x)).join('');
-                localStorage.setItem(projectName, binaryString);
+                await localForage.setItem(projectName, binaryString);
             };
             reader.readAsArrayBuffer(content);
         });

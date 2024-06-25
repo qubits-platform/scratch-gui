@@ -58,7 +58,6 @@ class SpriteInfo extends React.Component {
   }
   render() {
     const { stageSize } = this.props
-    console.log('asda',this.props)
     const sprite = (
       <FormattedMessage
         defaultMessage='Sprite'

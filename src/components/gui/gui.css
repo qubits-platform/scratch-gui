@@ -336,7 +336,7 @@ $fade-out-distance: 15px;
     display: none;
 }
 .top-nav-icons{
-    margin-top: 0.5rem;
+
     display: flex;
     flex-direction: row;
     padding: 0.3rem 0 0.3rem 0;
