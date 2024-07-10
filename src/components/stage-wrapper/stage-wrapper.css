@@ -9,7 +9,42 @@
 .stage-canvas-wrapper {
     /* Hides negative space between edge of rounded corners + container, when selected */
     user-select: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
 }
+
+.stage-menu-wrapper-student{
+    position: absolute;
+    width: 70%;
+    right: 0;
+
+}
+
+.stage-current-student{
+    position: absolute;
+    left: 25%;
+    bottom: 0;
+    z-index: 100;
+  }
+
+
+.stage-menu-wrapper-teacher{
+    position: absolute;
+    width: 70%;
+    right: 1.2rem;
+    top:-2.65rem;
+}
+
+.stage-current-teacher{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 100;
+  }
+  
+
 
 .stage-wrapper.full-screen {
     position: fixed;
@@ -32,6 +67,63 @@
     display: none;
 }
 
+.canvas-pos{
+    cursor: pointer;
+    position: absolute;
+    top: 0.3rem;
+    right: 0.3rem;
+    width: 2rem; /* Add this */
+    height: 2rem; /* Add this */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%; /* make it round */
+    border: 1px solid #cccccc;
+    background-color: #ffffff; /* change background to white */
+    z-index: 10001;
+}
+.canvas-pos:hover{
+    color: white;
+    background-color: hsl(0, 0%, 73%);
+    transition: 0.1s ease-in-out;
+}
+.canvas-pos svg{
+    width: 18px;
+    height: 18px;
+    color: #000000;
+}
+
+.stage-position-student{
+    position: absolute;
+    width: 70vw;
+    bottom: 0;
+    left: 2rem;
+    height: 24.2rem;
+    background-color: rgb(255, 255, 255);
+    z-index: 999;
+
+}
+
+.stage-position-student-hide{
+    height: 0;
+
+}
+
+.stage-position-teacher{
+    position: absolute;
+    width: 99vw;
+    bottom: 0;
+    left: 0.5vw;
+    height: 24.2rem;
+    background-color: rgb(255, 255, 255);
+    z-index: 999;
+
+}
+
+.stage-position-teacher-hide{
+    height: 0;
+}
+
 @media (max-width: 1024px) {
     .stage-canvas-wrapper-hide{
        height: 0;
@@ -40,8 +132,9 @@
         position: relative;
         width: 100%;
         left: 15%;
+        
     }
-    .dummy{
+    .stage-position{
         position: absolute;
         bottom: 0;
         width: 100vw;
@@ -49,7 +142,7 @@
         background-color: white;
         z-index: 999;
     }
-    .dummydis{
+    .stage-position-hide{
         height: 0;
     }
     .canvas-pos{

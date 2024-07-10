@@ -31,6 +31,7 @@ const StageComponent = (props) => {
     onDoubleClick,
     onQuestionAnswered,
     flagClicked,
+    currentLayout,
     ...boxProps
   } = props
 
@@ -45,7 +46,7 @@ const StageComponent = (props) => {
         onDoubleClick={onDoubleClick}
       >
         <Box
-          className={classNames(styles.stage, { [styles.fullScreen]: isFullScreen })}
+          className={classNames((currentLayout==='student' || currentLayout==='teacher') ? styles.stageNoborder : styles.stage, { [styles.fullScreen]: isFullScreen })}
           style={{
               height: stageDimensions.height,
               width: stageDimensions.width

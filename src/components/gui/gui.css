@@ -19,7 +19,7 @@
 }
 
 .body-wrapper * {
-    box-sizing: border-box;
+    box-sizing: border-box; 
 }
 
 .flex-wrapper {
@@ -219,6 +219,22 @@
     flex-basis: 0;
 }
 
+.stage-and-target-wrapper-stlayout {
+    /*
+        Makes rows for children:
+          1) stage menu
+          2) stage
+          3) sprite/stage selectors
+        Only reason we need this, is so .targetWrapper, which holds the selectors,
+        goes to full vertical height of the window
+    */
+    display: flex;
+    flex-direction: column;
+    /* pad entire wrapper to the left and right; allow children to fill width */
+    /* this will only ever be as wide as the stage */
+    flex-basis: 0;
+}
+
 .target-wrapper {
     display: flex;
     flex-grow: 1;
@@ -241,6 +257,32 @@
 
     padding-top: $space;
     min-height: 0;
+}
+
+.target-wrapper-student{
+    position: absolute;
+    width: 71vw;
+    height: 25rem;
+    bottom: 0;
+    right: 1rem;
+    z-index: 10000;
+    animation: slideInFromBottom 0.5s ease-in-out;
+}
+.target-wrapper-student-hide{
+    display: none;
+}
+
+.target-wrapper-teacher{
+    position: absolute;
+    width: 100vw;
+    height: 25rem;
+    bottom: 0;
+    right: 0;
+    z-index: 10000;
+    animation: slideInFromBottom 0.5s ease-in-out;
+}
+.target-wrapper-teacher-hide{
+    display: none;
 }
 
 .extension-button-container {
@@ -335,6 +377,47 @@ $fade-out-distance: 15px;
 .canvasPos{
     display: none;
 }
+.canvas-pos-student{
+    cursor: pointer;
+    position: absolute;
+    right: 1.2rem;
+    top: -2.2rem;
+    width: 1.7rem;
+    height: 1.7rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%; /* make it round */
+    border: 1px solid #cccccc;
+    background-color: #ffffff; /* change background to white */
+    z-index: 100;
+}
+.canvas-pos-student:hover{
+    color: white;
+    background-color: hsl(0, 0%, 73%);
+    transition: 0.1s ease-in-out;
+}
+.canvas-pos-teacher{
+    cursor: pointer;
+    position: absolute;
+    right: 1.2rem;
+    top: -2.2rem;
+    width: 1.7rem;
+    height: 1.7rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%; /* make it round */
+    border: 1px solid #cccccc;
+    background-color: #ffffff; /* change background to white */
+    z-index: 100;
+}
+.canvas-pos-teacher:hover{
+    color: white;
+    background-color: hsl(0, 0%, 73%);
+    transition: 0.1s ease-in-out;
+}
+
 .top-nav-icons{
 
     display: flex;
@@ -364,14 +447,19 @@ $fade-out-distance: 15px;
     flex-direction: column;
   }
   .body-wrapper {
-    /* height: auto;  */
     width: 720px !important;
+  }
+  .body-wrapper-teacher {
+    width: 40rem !important;
+    
+  }
+  .page-wrapper-teacher{
+    width: 40rem !important;
   }
   .stage-and-target-wrapper {
     width: 100%;
     padding-left: 0;
     padding-right: 0;
-    background-color: aquamarine;
   }
   .target-wrapper{
         position: absolute;
@@ -388,15 +476,17 @@ $fade-out-distance: 15px;
     .canvasPos {
         cursor: pointer;
         position: absolute;
-        top: -1rem;
-        right: 10px;
-        padding-left:1rem;
-        padding-right:1rem;
-        display: block;
-        border-radius: 2px;
+        right: 1.2rem;
+        top: -1.6rem;
+        width: 1.7rem;
+        height: 1.7rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%; /* make it round */
         border: 1px solid #cccccc;
-        color: #801d80;
-        background-color: #d7c4d7;
+        background-color: #ffffff; /* change background to white */
+        z-index: 100;
     }
     .canvasPos:hover{
         color: white;

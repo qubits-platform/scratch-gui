@@ -12,36 +12,59 @@ import { connect } from 'react-redux'
 import { setFlagClickedState } from './../../reducers/vm-status.js'
 
 import styles from './stage-wrapper.css'
+import Reload from '../customi-cons/reload.jsx'
+
 
 const StageWrapperComponent = function (props) {
-  const { isFullScreen, isRtl, isRendererSupported, loading, stageSize, vm, flagClicked } = props
+  const { isFullScreen, isRtl, isRendererSupported, loading, stageSize, vm, flagClicked,currentLayout } = props
 
   return (
     <Box
       className={classNames(styles.stageWrapper, { [styles.fullScreen]: isFullScreen })}
       dir={isRtl ? 'rtl' : 'ltr'}
     >
-      <Box className={styles.stageMenuWrapper}>
-        <StageHeader stageSize={stageSize} vm={vm} />
+      <Box className={
+            currentLayout === 'student' ? styles.stageMenuWrapperStudent :
+            currentLayout === 'teacher' ? styles.stageMenuWrapperTeacher :
+            styles.stageMenuWrapper
+          }>
+        <StageHeader stageSize={stageSize} vm={vm} currentLayout={currentLayout} />
       </Box>
-      <div className={flagClicked ?styles.dummy:styles.dummydis}>
-      <div className={styles.relativeContainer}>
-            {!isFullScreen && (
-              <button className={styles.canvasPos} onClick={() => props.setFlagClickedState(false)}>
-                &times;
-              </button>
-            )}
+      <div className={styles.stageBackground}>
+           
+        <div className={
+            currentLayout === 'student' ? styles.stageCurrentStudent :
+            currentLayout === 'teacher' ? styles.stageCurrentTeacher :
+            styles.stageCurrentNormal
+          }>
+            <div className={
+            currentLayout === 'student' ? (flagClicked?styles.stagePositionStudent:styles.stagePositionStudentHide) :
+            currentLayout === 'teacher' ? (flagClicked?styles.stagePositionTeacher:styles.stagePositionTeacherHide) :
+            flagClicked ?styles.stagePosition:styles.stagePositionHide
+          }>
+            {/* <div className={styles.stageBackgroundPos}></div> */}
+            {flagClicked&&<div className={styles.relativeContainer}>
+              {!isFullScreen && (
+                <div className={styles.canvasPos} onClick={() => props.setFlagClickedState(false)}>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                  </svg>
+
+                </div>
+              )}
+            </div>}
+            <Box className={ styles.stageCanvasWrapper}>
+              {
+                isRendererSupported ? (
+                  <Stage stageSize={stageSize} vm={vm} currentLayout={currentLayout}/>
+                ) : (
+                  <Stage stageSize={stageSize} vm={vm} currentLayout={currentLayout}/>
+                )
+                // (to-do)need to change this to the following the css is conflicting with isRendererSupported check that
+              }
+            </Box>
           </div>
-        <Box className={ styles.stageCanvasWrapper}>
-          {
-            isRendererSupported ? (
-              <Stage stageSize={stageSize} vm={vm} />
-            ) : (
-              <Stage stageSize={stageSize} vm={vm} />
-            )
-            // (to-do)need to change this to the following the css is conflicting with isRendererSupported check that
-          }
-        </Box>
+          </div> 
       </div>
       
       {loading ? <Loader isFullScreen={isFullScreen} /> : null}

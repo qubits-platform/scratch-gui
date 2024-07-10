@@ -19,11 +19,24 @@
 }
 
 .blocks :global(.injectionDiv){
+
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
+    border: 1px solid $ui-black-transparent;
+    border-top-right-radius: $space;
+    border-bottom-right-radius: $space;
+}
+
+.blocks-teacher :global(.injectionDiv){
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    /* margin-top: 3rem; */
+    left: -19.2rem;
     border: 1px solid $ui-black-transparent;
     border-top-right-radius: $space;
     border-bottom-right-radius: $space;
@@ -101,7 +114,17 @@
 @media (max-width: 1024px) {
     .blocks :global(.injectionDiv){
         /* height: 500px !important; */
-        width: 720px !important;
+        /* width: 720px !important; */
     }
-    
+    .blocks-teacher :global(.injectionDiv){
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        /* margin-top: 3rem; */
+        left: -19.2rem;
+        border: 1px solid $ui-black-transparent;
+        border-top-right-radius: $space;
+        border-bottom-right-radius: $space;
+    }
   }

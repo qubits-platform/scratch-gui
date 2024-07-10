@@ -4,16 +4,19 @@ import React from 'react'
 import Box from '../box/box.jsx'
 import styles from './blocks.css'
 
+
 const BlocksComponent = (props) => {
-  const { containerRef, dragOver, ...componentProps } = props
+  const { containerRef, dragOver, currentLayout, ...componentProps } = props
   return (
     <Box
-      className={classNames(styles.blocks, {
+      className={classNames({
+        [styles.blocks]: currentLayout !== 'teacher',
+        [styles.blocksTeacher]: currentLayout === 'teacher',
         [styles.dragOver]: dragOver,
       })}
       {...componentProps}
-      componentRef={containerRef}
-    />
+  componentRef={containerRef}
+/>
   )
 }
 BlocksComponent.propTypes = {

@@ -61,6 +61,7 @@ const StageHeaderComponent = function (props) {
     vm,
     spriteClicked,
     flagClicked,
+    currentLayout,
   } = props
 
   let header = null
@@ -89,7 +90,7 @@ const StageHeaderComponent = function (props) {
     header = (
       <Box className={styles.stageHeaderWrapperOverlay}>
         <Box className={styles.stageMenuWrapper} style={{ width: stageDimensions.width }}>
-          <Controls vm={vm} />
+          <Controls vm={vm} currentLayout={currentLayout}/>
           {stageButton}
         </Box>
       </Box>
@@ -122,7 +123,7 @@ const StageHeaderComponent = function (props) {
     header = (
       <Box className={styles.stageHeaderWrapper}>
         <Box className={styles.stageMenuWrapper}>
-          <Controls vm={vm} />
+          <Controls vm={vm} currentLayout={currentLayout}/>
           <div className={styles.stageSizeRow}>
             {/* todo change the css styles not efficient */}
             <div className={styles.stageControlsDisplay}>{stageControls}</div>

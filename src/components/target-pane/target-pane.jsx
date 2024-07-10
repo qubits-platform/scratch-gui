@@ -44,6 +44,7 @@ const TargetPane = ({
   stage,
   stageSize,
   sprites,
+  currentLayout,
   vm,
   ...componentProps
 }) => (

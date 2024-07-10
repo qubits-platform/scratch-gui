@@ -10,6 +10,7 @@ import { connect } from 'react-redux'
 import logo from './../../lib/assets/download.svg'
 import localForage from 'localforage';
 import styles from './controls.css'
+import Reload from '../customi-cons/reload.jsx';
 
 const messages = defineMessages({
   goTitle: {
@@ -36,14 +37,24 @@ const Controls = function (props) {
     turbo,
     spriteClicked,
     isFullScreen,
+    currentLayout,
     ...componentProps
   } = props
-  // console.log(props.costumeURLFax) // This is the costumeURLFax from mapStateToProps
+
+
+  const handleReload = () => {
+    window.parent.postMessage('reloadIframe', '*');
+  };
+
   return (
     <div className={classNames(styles.controlsContainer, className)} {...componentProps}>
       {!isFullScreen && (
         <div
-          className={`${spriteClicked ? styles.spriteIconBg : styles.spriteIcon}`}
+          className={
+            currentLayout === 'student' ? (spriteClicked?styles.spriteIconBgStudent:styles.spriteIconBgStudentHide) :
+            currentLayout === 'teacher' ? (spriteClicked?styles.spriteIconBgTeacher:styles.spriteIconBgTeacherHide) :
+            `${spriteClicked ? styles.spriteIconBg : styles.spriteIconHide}`
+          }
           onClick={onSpriteFlagClick}
         >
           <div className={styles.spriteImageOuter}>
@@ -53,6 +64,7 @@ const Controls = function (props) {
           </div>
         </div>
       )}
+      <div onClick={handleReload}><Reload /></div>
 
       <div ref={greenFlagRef}  className={styles.redGreenButtons}>
         <GreenFlag

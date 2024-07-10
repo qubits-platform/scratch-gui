@@ -47,7 +47,12 @@ class SB3Downloader extends React.Component {
                 // Save the ArrayBuffer to local storage as a string
                 const buffer = reader.result;
                 const binaryString = Array.prototype.map.call(new Uint8Array(buffer), x => String.fromCharCode(x)).join('');
+                let base64blocks = btoa(
+                    new Uint8Array(buffer)
+                        .reduce((data, byte) => data + String.fromCharCode(byte), '')
+                );
                 await localForage.setItem(projectName, binaryString);
+                await localForage.setItem('assignmentProgress', base64blocks);
             };
             reader.readAsArrayBuffer(content);
         });

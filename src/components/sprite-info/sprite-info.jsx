@@ -20,6 +20,7 @@ import yIcon from './icon--y.svg'
 import showIcon from './icon--show.svg'
 import hideIcon from './icon--hide.svg'
 import ToggleButtons from '../toggle-buttons/toggle-buttons.jsx'
+import Reload from '../customi-cons/reload.jsx'
 
 const BufferedInput = BufferedInputHOC(Input)
 
@@ -116,7 +117,7 @@ class SpriteInfo extends React.Component {
             value={this.props.disabled ? '' : Math.round(this.props.x)}
             onSubmit={this.props.onChangeX}
           />
-          <div onClick={() => this.props.onChangeX(0)}>@</div>
+          <div onClick={() => this.props.onChangeX(0)}><Reload /></div>
         </Label>
       </div>
     )
@@ -141,7 +142,7 @@ class SpriteInfo extends React.Component {
             value={this.props.disabled ? '' : Math.round(this.props.y)}
             onSubmit={this.props.onChangeY}
           />
-          <div onClick={() => this.props.onChangeY(0)}>@</div>
+          <div onClick={() => this.props.onChangeY(0)}><Reload /></div>
         </Label>
       </div>
     )
@@ -204,7 +205,7 @@ class SpriteInfo extends React.Component {
                 onSubmit={this.props.onChangeSize}
               />
             </Label>
-            <div onClick={() => this.props.onChangeSize(100)}>@</div>
+            <div onClick={() => this.props.onChangeSize(100)}><Reload /></div>
           </div>
           <div className={classNames(styles.group, styles.largerInput)}>
             <DirectionPicker
@@ -215,7 +216,7 @@ class SpriteInfo extends React.Component {
               onChangeDirection={this.props.onChangeDirection}
               onChangeRotationStyle={this.props.onChangeRotationStyle}
             />
-            <div onClick={() => this.props.onChangeDirection(90)}>@</div>
+            <div onClick={() => this.props.onChangeDirection(90)}><Reload /></div>
           </div>
         </div>
       </Box>

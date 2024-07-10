@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import omit from 'lodash.omit'
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { defineMessages, FormattedMessage, injectIntl, intlShape } from 'react-intl'
 import { connect } from 'react-redux'
 import MediaQuery from 'react-responsive'
@@ -42,6 +42,7 @@ import costumesIcon from './icon--costumes.svg'
 import soundsIcon from './icon--sounds.svg'
 import { setSpriteClickedState } from './../../reducers/vm-status.js'
 import LanguageMenu from '../menu-bar/language-menu.jsx'
+import localForage from 'localforage';
 import { MenuItem, MenuSection } from '../menu/menu.jsx'
 import sharedMessages from '../../lib/shared-messages'
 import SB3Downloader from '../../containers/sb3-downloader.jsx'
@@ -59,6 +60,7 @@ const messages = defineMessages({
 // Cache this value to only retrieve it once the first time.
 // Assume that it doesn't change for a session.
 let isRendererSupported = null
+
 
 const GUIComponent = (props) => {
   const {
@@ -150,6 +152,17 @@ const GUIComponent = (props) => {
   if (isRendererSupported === null) {
     isRendererSupported = Renderer.isSupported()
   }
+  const [currentLayout, setCurrentLayout] = React.useState('')
+
+  useEffect(() => {
+    localForage.getItem('currentLayout').then(value => {
+      if (value !== null) {
+        setCurrentLayout(value)
+      }
+    }).catch(err => {
+    
+    });
+  }, [currentLayout])
 
   return (
     <MediaQuery minWidth={layout.fullSizeMinWidth}>
@@ -168,7 +181,7 @@ const GUIComponent = (props) => {
             {alertsVisible ? <Alerts className={styles.alertsContainer} /> : null}
           </StageWrapper>
         ) : (
-          <Box className={styles.pageWrapper} dir={isRtl ? 'rtl' : 'ltr'} {...componentProps}>
+          <Box className={currentLayout==='teacher'?styles.pageWrapperTeacher:styles.pageWrapper} dir={isRtl ? 'rtl' : 'ltr'} {...componentProps}>
             {telemetryModalVisible ? (
               <TelemetryModal
                 isRtl={isRtl}
@@ -193,7 +206,7 @@ const GUIComponent = (props) => {
             {backdropLibraryVisible ? (
               <BackdropLibrary vm={vm} onRequestClose={onRequestCloseBackdropLibrary} />
             ) : null}
-
+            
             <div className={styles.topNavIcons}>
               <div className={styles.languageRes}>
                 <LanguageMenu />
@@ -231,6 +244,7 @@ const GUIComponent = (props) => {
                   onShare={onShare}
                   onStartSelectingFileUpload={onStartSelectingFileUpload}
                   onToggleLoginOpen={onToggleLoginOpen}
+                  currentLayout={currentLayout}
                 />
               </div>
             </div>
@@ -268,7 +282,7 @@ const GUIComponent = (props) => {
                     onStartSelectingFileUpload={onStartSelectingFileUpload}
                     onToggleLoginOpen={onToggleLoginOpen}
                 /> */}
-            <Box className={styles.bodyWrapper}>
+            <Box className={currentLayout === 'teacher' ? styles.bodyWrapperTeacher : styles.bodyWrapper}>
               <Box className={styles.flexWrapper}>
                 <Box className={styles.editorWrapper}>
                   <Tabs
@@ -279,7 +293,7 @@ const GUIComponent = (props) => {
                     selectedTabPanelClassName={tabClassNames.tabPanelSelected}
                     onSelect={onActivateTab}
                   >
-                    <TabList className={tabClassNames.tabList}>
+                    {currentLayout!=='teacher' && <TabList className={tabClassNames.tabList}>
                       <Tab className={tabClassNames.tab}>
                         <img draggable={false} src={codeIcon} />
                         <FormattedMessage
@@ -312,7 +326,7 @@ const GUIComponent = (props) => {
                           id='gui.gui.soundsTab'
                         />
                       </Tab>
-                    </TabList>
+                    </TabList>}
                     <TabPanel className={tabClassNames.tabPanel}>
                       <Box className={styles.blocksWrapper}>
                         <Blocks
@@ -326,9 +340,10 @@ const GUIComponent = (props) => {
                           stageSize={stageSize}
                           theme={theme}
                           vm={vm}
+                          currentLayout={currentLayout}
                         />
                       </Box>
-                      <Box className={styles.extensionButtonContainer}>
+                     {currentLayout!=='teacher' && <Box className={styles.extensionButtonContainer}>
                         <button
                           className={styles.extensionButton}
                           title={intl.formatMessage(messages.addExtension)}
@@ -340,7 +355,7 @@ const GUIComponent = (props) => {
                             src={addExtensionIcon}
                           />
                         </button>
-                      </Box>
+                      </Box>}
                       <Box className={styles.watermark}>
                         <Watermark />
                       </Box>
@@ -357,22 +372,34 @@ const GUIComponent = (props) => {
                             ) : null} */}
                 </Box>
 
-                <Box className={classNames(styles.stageAndTargetWrapper, styles[stageSize])}>
+                <Box className={classNames(currentLayout === 'teacher' || currentLayout === 'student' ? styles.stageAndTargetWrapperStlayout:styles.stageAndTargetWrapper, styles[stageSize])}>
                   <StageWrapper
                     isFullScreen={isFullScreen}
                     isRendererSupported={isRendererSupported}
                     isRtl={isRtl}
                     stageSize={stageSize}
                     vm={vm}
+                    currentLayout={currentLayout}
                   />
-                  <Box className={spriteClicked ? styles.targetWrapper : styles.targetWrapperHide}>
+
+                  <Box  className={
+                    currentLayout === 'student' ? (spriteClicked?styles.targetWrapperStudent:styles.targetWrapperStudentHide) :
+                    currentLayout === 'teacher' ? (spriteClicked?styles.targetWrapperTeacher:styles.targetWrapperTeacherHide)  :
+                    spriteClicked ? styles.targetWrapper : styles.targetWrapperHide
+                  }>
                     <button
-                      className={styles.canvasPos}
+                      className={
+                      currentLayout === 'student' ? styles.canvasPosStudent :
+                      currentLayout === 'teacher' ? styles.canvasPosTeacher :
+                      styles.canvasPos
+                    }
                       onClick={() => props.setSpriteClickedState(false)}
                     >
-                      &times;
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                      </svg>
                     </button>
-                    <TargetPane stageSize={stageSize} vm={vm} />
+                    <TargetPane stageSize={stageSize} vm={vm} currentLayout={currentLayout} />
                   </Box>
                  
                 </Box>

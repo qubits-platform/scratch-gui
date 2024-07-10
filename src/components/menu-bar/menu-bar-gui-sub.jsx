@@ -244,13 +244,18 @@ class MenuBarGuiSub extends React.Component {
   }
 
   componentDidMount() {
-    localForage.getItem('Current_Project_Name')
+    if(this.props.currentLayout === 'teacher') {
+      console.log('firign from scratch teacher')
+      this.onLocalStorageFileUploadTeacher()
+    } else {
+      localForage.getItem('Current_Project_Name')
         .then(projectName => {
-            console.log('console log(projectName): ', projectName)
             this.setState({ projectName });
         })
         .then(() => this.onLocalStorageFileUpload())
         .catch((error) => console.log('console.log(error): ', error));
+    }
+    
 }
 
   componentDidUpdate(prevProps) {
@@ -272,6 +277,22 @@ class MenuBarGuiSub extends React.Component {
       // console.error('No project found in local storage');
     }
   }
+
+  async onLocalStorageFileUploadTeacher() {
+    const projectData = await localForage.getItem('loadteacher');
+    if (projectData) {
+        let binaryString = atob(projectData);
+        let len = binaryString.length;
+        let bytes = new Uint8Array(len);
+        for (let i = 0; i < len; i++) {
+            bytes[i] = binaryString.charCodeAt(i);
+        }
+        this.props.vm.loadProject(bytes.buffer);
+    } else {
+        console.error('No project found in local storage');
+    }
+  }
+  
   onLocalStorageSave(downloadLocalStorageProject) {
     return () => {
       this.props.onRequestCloseFile();
