@@ -53,7 +53,7 @@ const StageWrapperComponent = function (props) {
                 </div>
               )}
             </div>}
-            <Box className={ styles.stageCanvasWrapper}>
+            <Box className={ currentLayout==='teacher'?styles.stageCanvasWrapperTeacher:styles.stageCanvasWrapper}>
               {
                 isRendererSupported ? (
                   <Stage stageSize={stageSize} vm={vm} currentLayout={currentLayout}/>

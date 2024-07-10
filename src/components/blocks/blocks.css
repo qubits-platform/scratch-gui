@@ -50,6 +50,7 @@
 }
 
 .blocks :global(.blocklyMainBackground) {
+    background-color: aquamarine;
     stroke: none;
 }
 
@@ -114,7 +115,7 @@
 @media (max-width: 1024px) {
     .blocks :global(.injectionDiv){
         /* height: 500px !important; */
-        /* width: 720px !important; */
+        width: 720px !important;
     }
     .blocks-teacher :global(.injectionDiv){
         position: absolute;

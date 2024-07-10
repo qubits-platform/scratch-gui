@@ -248,6 +248,7 @@ class MenuBarGuiSub extends React.Component {
       console.log('firign from scratch teacher')
       this.onLocalStorageFileUploadTeacher()
     } else {
+      console.log('logged from normal')
       localForage.getItem('Current_Project_Name')
         .then(projectName => {
             this.setState({ projectName });
@@ -272,6 +273,7 @@ class MenuBarGuiSub extends React.Component {
       const buffer = new Uint8Array(
         projectData.split("").map((char) => char.charCodeAt(0)),
       ).buffer;
+      console.log('logged buffer: ', buffer)
       this.props.vm.loadProject(buffer);
     } else {
       // console.error('No project found in local storage');

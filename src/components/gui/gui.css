@@ -261,7 +261,7 @@
 
 .target-wrapper-student{
     position: absolute;
-    width: 71vw;
+    /* width: 71vw; */
     height: 25rem;
     bottom: 0;
     right: 1rem;
@@ -448,18 +448,20 @@ $fade-out-distance: 15px;
   }
   .body-wrapper {
     width: 720px !important;
+    
   }
   .body-wrapper-teacher {
     width: 40rem !important;
-    
   }
   .page-wrapper-teacher{
     width: 40rem !important;
+    
   }
   .stage-and-target-wrapper {
     width: 100%;
     padding-left: 0;
     padding-right: 0;
+    
   }
   .target-wrapper{
         position: absolute;
@@ -468,6 +470,7 @@ $fade-out-distance: 15px;
         bottom: 0rem;
         z-index: 10000;
         animation: slideInFromBottom 0.5s ease-in-out;
+        
   }
 
   .target-wrapper-hide{
