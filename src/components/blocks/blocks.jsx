@@ -9,7 +9,6 @@ import { c } from 'bowser'
 
 const BlocksComponent = (props) => {
   const { containerRef, dragOver, currentLayout, ...componentProps } = props
-  console.log('testing blockfromlayout',currentLayout)
   return (
     <Box className={classNames(currentLayout==='teacher'?stylesteacher.blocksteacher:styles.blocks,
       { [styles.dragOver]: dragOver, })}

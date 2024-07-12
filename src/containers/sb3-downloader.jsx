@@ -37,7 +37,6 @@ class SB3Downloader extends React.Component {
     }
     downloadLocalStorageProject = async () => {
         const projectName = await localforage.getItem('Current_Project_Name');
-        console.log('testing projectNam downloadLocalStorageProject', projectName);
         this.props.saveProjectSb3().then(content => {
             if (this.props.onSaveFinished) {
                 this.props.onSaveFinished();
@@ -52,9 +51,7 @@ class SB3Downloader extends React.Component {
                     new Uint8Array(buffer)
                         .reduce((data, byte) => data + String.fromCharCode(byte), '')
                 );
-                console.log('testing projectName binaryString', projectName, binaryString);
                 await localforage.setItem(projectName, binaryString);
-                console.log('testing assignmentProgress base64blocks', base64blocks);
                 await localforage.setItem('assignmentProgress', base64blocks);
             };
             reader.readAsArrayBuffer(content);

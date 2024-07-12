@@ -253,17 +253,16 @@ class MenuBarGuiSub extends React.Component {
     const currentLayout = await localforage.getItem('currentLayout');
     this.setState({ currentLayout });
     if(currentLayout === 'teacher') {
-      console.log('testing firign from scratch teacher',this.props.currentLayout)
       this.onLocalStorageFileUploadTeacher()
     } else {
-      console.log('testing logged from normal')
       localforage.getItem('Current_Project_Name')
         .then(projectName => {
-          console.log('testing logged projectName: ', projectName)
             this.setState({ projectName });
         })
         .then(() => this.onLocalStorageFileUpload())
-        .catch((error) => console.log('testing console.log(error): ', error));
+        .catch((error) => 
+            console.log('')
+        );
     }
     
 }
@@ -279,11 +278,9 @@ class MenuBarGuiSub extends React.Component {
   async onLocalStorageFileUpload() {
     const projectData = await localforage.getItem(this.state.projectName);
     if (projectData) {
-      console.log('testing logged projectData onLocalStorageFileUpload: ', projectData)
       const buffer = new Uint8Array(
         projectData.split("").map((char) => char.charCodeAt(0)),
       ).buffer;
-      console.log('testing logged buffer: ', buffer)
       this.props.vm.loadProject(buffer);
     } else {
       // console.error('No project found in local storage');
@@ -293,7 +290,6 @@ class MenuBarGuiSub extends React.Component {
   async onLocalStorageFileUploadTeacher() {
     const projectData = await localforage.getItem('loadteacher');
     if (projectData) {
-        console.log('testing logged projectData onLocalStorageFileUploadTeacher: ', projectData)
         let binaryString = atob(projectData);
         let len = binaryString.length;
         let bytes = new Uint8Array(len);
@@ -303,7 +299,7 @@ class MenuBarGuiSub extends React.Component {
         this.props.vm.loadProject(bytes.buffer);
         this.props.handleReload();
     } else {
-        console.error('testing No project found in local storage');
+        console.error('');
     }
   }
   

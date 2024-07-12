@@ -157,7 +157,6 @@ const GUIComponent = (props) => {
   useEffect(() => {
     localforage.getItem('currentLayout').then(value => {
       if (value !== null) {
-        console.log('testing currentLayout', value)
         setCurrentLayout(value)
       }
     }).catch(err => {
