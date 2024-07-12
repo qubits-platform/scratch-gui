@@ -12,10 +12,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #ffffff;
+    
 }
-
-
 
 .stage-menu-wrapper-student{
     position: absolute;
@@ -101,29 +99,45 @@
     bottom: 0;
     left: 2rem;
     height: 24.2rem;
-    background-color: rgb(255, 255, 255);
     z-index: 999;
-
+    visibility: visible;
+    opacity: 1;
+    background-color: white;
 }
 
 .stage-position-student-hide{
-    height: 0;
+    position: absolute;
+    width: 70vw;
+    bottom: 0;
+    left: 2rem;
+    height: 24.2rem;
+    z-index: 999;
+    visibility: hidden;
+    opacity: 0;
 
 }
 
 .stage-position-teacher{
     position: absolute;
-    width: 97vw;
-    bottom: 0;
-    left: 0;
+    width: 99vw;
+    bottom: 12rem;
+    left: 0rem;
     height: 24.2rem;
-    background-color: rgb(255, 255, 255);
     z-index: 999;
-
+    visibility: visible;
+    opacity: 1;
+    background-color: rgb(255, 255, 255);
 }
 
 .stage-position-teacher-hide{
-    height: 0;
+    position: absolute;
+    width: 97vw;
+    bottom: 0;
+    left: 0;
+    height: 23.2rem;
+    z-index: 999;
+    visibility: hidden;
+    opacity: 0;
 }
 
 @media (max-width: 1024px) {
@@ -134,7 +148,6 @@
         position: relative;
         width: 100%;
         left: 15%;
-        
     }
     .stage-canvas-wrapper-teacher{
         position: relative;
@@ -148,9 +161,18 @@
         height: 24.2rem;
         background-color: white;
         z-index: 999;
+        visibility: visible;
+        opacity: 1;
     }
     .stage-position-hide{
-        height: 0;
+        position: absolute;
+        bottom: 0;
+        width: 100vw;
+        height: 24.2rem;
+        background-color: white;
+        z-index: 999;
+        visibility: hidden;
+        opacity: 0;
     }
     .canvas-pos{
         cursor: pointer;

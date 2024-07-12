@@ -4,7 +4,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { projectTitleInitialState } from '../reducers/project-title'
 import downloadBlob from '../lib/download-blob'
-import localForage from 'localforage';
+import localforage from 'localforage';
 /**
  * Project saver component passes a downloadProject function to its child.
  * It expects this child to be a function with the signature
@@ -36,7 +36,8 @@ class SB3Downloader extends React.Component {
         });
     }
     downloadLocalStorageProject = async () => {
-        const projectName = await localForage.getItem('Current_Project_Name');
+        const projectName = await localforage.getItem('Current_Project_Name');
+        console.log('testing projectNam downloadLocalStorageProject', projectName);
         this.props.saveProjectSb3().then(content => {
             if (this.props.onSaveFinished) {
                 this.props.onSaveFinished();
@@ -51,8 +52,10 @@ class SB3Downloader extends React.Component {
                     new Uint8Array(buffer)
                         .reduce((data, byte) => data + String.fromCharCode(byte), '')
                 );
-                await localForage.setItem(projectName, binaryString);
-                await localForage.setItem('assignmentProgress', base64blocks);
+                console.log('testing projectName binaryString', projectName, binaryString);
+                await localforage.setItem(projectName, binaryString);
+                console.log('testing assignmentProgress base64blocks', base64blocks);
+                await localforage.setItem('assignmentProgress', base64blocks);
             };
             reader.readAsArrayBuffer(content);
         });

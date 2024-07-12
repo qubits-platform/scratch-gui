@@ -42,7 +42,7 @@ import costumesIcon from './icon--costumes.svg'
 import soundsIcon from './icon--sounds.svg'
 import { setSpriteClickedState } from './../../reducers/vm-status.js'
 import LanguageMenu from '../menu-bar/language-menu.jsx'
-import localForage from 'localforage';
+import localforage from 'localforage';
 import { MenuItem, MenuSection } from '../menu/menu.jsx'
 import sharedMessages from '../../lib/shared-messages'
 import SB3Downloader from '../../containers/sb3-downloader.jsx'
@@ -152,17 +152,18 @@ const GUIComponent = (props) => {
   if (isRendererSupported === null) {
     isRendererSupported = Renderer.isSupported()
   }
-  const [currentLayout, setCurrentLayout] = React.useState('normal')
+  const [currentLayout, setCurrentLayout] = React.useState('student')
 
   useEffect(() => {
-    localForage.getItem('currentLayout').then(value => {
+    localforage.getItem('currentLayout').then(value => {
       if (value !== null) {
+        console.log('testing currentLayout', value)
         setCurrentLayout(value)
       }
     }).catch(err => {
     
     });
-  }, [currentLayout])
+  }, [])
 
   return (
     <MediaQuery minWidth={layout.fullSizeMinWidth}>
@@ -181,7 +182,7 @@ const GUIComponent = (props) => {
             {alertsVisible ? <Alerts className={styles.alertsContainer} /> : null}
           </StageWrapper>
         ) : (
-          <Box className={currentLayout==='teacher'?styles.pageWrapperTeacher:styles.pageWrapper} dir={isRtl ? 'rtl' : 'ltr'} {...componentProps}>
+          <Box className={styles.pageWrapper} dir={isRtl ? 'rtl' : 'ltr'} {...componentProps}>
             {telemetryModalVisible ? (
               <TelemetryModal
                 isRtl={isRtl}
@@ -282,7 +283,7 @@ const GUIComponent = (props) => {
                     onStartSelectingFileUpload={onStartSelectingFileUpload}
                     onToggleLoginOpen={onToggleLoginOpen}
                 /> */}
-            <Box className={currentLayout === 'teacher' ? styles.bodyWrapperTeacher : styles.bodyWrapper}>
+            <Box className={styles.bodyWrapper}>
               <Box className={styles.flexWrapper}>
                 <Box className={styles.editorWrapper}>
                   <Tabs

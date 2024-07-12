@@ -98,7 +98,7 @@ import oldtimeyLogo from "./oldtimey-logo.svg";
 
 import sharedMessages from "../../lib/shared-messages";
 import { ChevronDoubleDownIcon, FolderIcon } from "@heroicons/react/24/outline";
-import localForage from 'localforage';
+import localforage from 'localforage';
 
 class MenuBarGuiSub extends React.Component {
   constructor(props) {
@@ -106,6 +106,7 @@ class MenuBarGuiSub extends React.Component {
     this.state = {
       projectName: null,
       downloadLocalStorageProject: null,
+      currentLayout: null,
     };
     bindAll(this, [
       "handleClickNew",
@@ -123,6 +124,11 @@ class MenuBarGuiSub extends React.Component {
       "handleDownloadLocalStorageProject",
     ]);
   }
+
+
+  handleReload = () => {
+    window.parent.postMessage('reloadIframe', '*');
+  };
 
   handleDownloadLocalStorageProject = (downloadLocalStorageProject) => {
     // Only update the state if downloadLocalStorageProject has changed
@@ -243,18 +249,21 @@ class MenuBarGuiSub extends React.Component {
     };
   }
 
-  componentDidMount() {
-    if(this.props.currentLayout === 'teacher') {
-      console.log('firign from scratch teacher')
+  async componentDidMount() {
+    const currentLayout = await localforage.getItem('currentLayout');
+    this.setState({ currentLayout });
+    if(currentLayout === 'teacher') {
+      console.log('testing firign from scratch teacher',this.props.currentLayout)
       this.onLocalStorageFileUploadTeacher()
     } else {
-      console.log('logged from normal')
-      localForage.getItem('Current_Project_Name')
+      console.log('testing logged from normal')
+      localforage.getItem('Current_Project_Name')
         .then(projectName => {
+          console.log('testing logged projectName: ', projectName)
             this.setState({ projectName });
         })
         .then(() => this.onLocalStorageFileUpload())
-        .catch((error) => console.log('console.log(error): ', error));
+        .catch((error) => console.log('testing console.log(error): ', error));
     }
     
 }
@@ -268,12 +277,13 @@ class MenuBarGuiSub extends React.Component {
     }
   }
   async onLocalStorageFileUpload() {
-    const projectData = await localForage.getItem(this.state.projectName);
+    const projectData = await localforage.getItem(this.state.projectName);
     if (projectData) {
+      console.log('testing logged projectData onLocalStorageFileUpload: ', projectData)
       const buffer = new Uint8Array(
         projectData.split("").map((char) => char.charCodeAt(0)),
       ).buffer;
-      console.log('logged buffer: ', buffer)
+      console.log('testing logged buffer: ', buffer)
       this.props.vm.loadProject(buffer);
     } else {
       // console.error('No project found in local storage');
@@ -281,8 +291,9 @@ class MenuBarGuiSub extends React.Component {
   }
 
   async onLocalStorageFileUploadTeacher() {
-    const projectData = await localForage.getItem('loadteacher');
+    const projectData = await localforage.getItem('loadteacher');
     if (projectData) {
+        console.log('testing logged projectData onLocalStorageFileUploadTeacher: ', projectData)
         let binaryString = atob(projectData);
         let len = binaryString.length;
         let bytes = new Uint8Array(len);
@@ -290,8 +301,9 @@ class MenuBarGuiSub extends React.Component {
             bytes[i] = binaryString.charCodeAt(i);
         }
         this.props.vm.loadProject(bytes.buffer);
+        this.props.handleReload();
     } else {
-        console.error('No project found in local storage');
+        console.error('testing No project found in local storage');
     }
   }
   

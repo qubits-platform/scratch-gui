@@ -8,7 +8,6 @@ import StopAll from '../stop-all/stop-all.jsx'
 import TurboMode from '../turbo-mode/turbo-mode.jsx'
 import { connect } from 'react-redux'
 import logo from './../../lib/assets/download.svg'
-import localForage from 'localforage';
 import styles from './controls.css'
 import Reload from '../customi-cons/reload.jsx';
 
