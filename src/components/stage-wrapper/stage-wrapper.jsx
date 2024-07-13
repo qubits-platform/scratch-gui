@@ -43,7 +43,7 @@ const StageWrapperComponent = function (props) {
             flagClicked ?styles.stagePosition:styles.stagePositionHide
           }>
             {/* <div className={styles.stageBackgroundPos}></div> */}
-            {flagClicked&&<div className={styles.relativeContainer}>
+            { currentLayout !== 'teacher' && flagClicked&&<div className={styles.relativeContainer}>
               {!isFullScreen && (
                 <div className={styles.canvasPos} onClick={() => props.setFlagClickedState(false)}>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">

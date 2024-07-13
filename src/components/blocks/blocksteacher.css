@@ -22,11 +22,11 @@
 
     position: absolute;
     top: 0;
-    right: 0;
     bottom: 0;
-    height: 55vh;
-    width: 146vw;
-    left: -19.3rem;
+    height: 55vh !important;
+    width: 84vw ;
+    margin-top: 0.3rem;
+    left: -47.3vh !important;
     border: 1px solid $ui-black-transparent;
     border-top-right-radius: $space;
     border-bottom-right-radius: $space;
@@ -102,15 +102,5 @@
 }
 
 @media (max-width: 1024px) {
-    .blocksteacher :global(.injectionDiv){
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        /* margin-top: 3rem; */
-        left: -19.2rem;
-        border: 1px solid $ui-black-transparent;
-        border-top-right-radius: $space;
-        border-bottom-right-radius: $space;
-    }
+   
   }

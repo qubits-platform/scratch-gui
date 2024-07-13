@@ -38,6 +38,7 @@
         https://github.com/LLK/scratch-gui/issues/318
     */
     overflow-y: hidden;
+    
 }
 
 .editor-wrapper {
@@ -239,7 +240,7 @@
     display: flex;
     flex-grow: 1;
     flex-basis: 0;
-
+    
     padding-top: $space;
     min-height: 0; /* this makes it work in Firefox */
 
@@ -274,15 +275,16 @@
 
 .target-wrapper-teacher{
     position: absolute;
-    width: 100vw;
-    height: 25rem;
-    bottom: 0;
+    width: 35vw;
     right: 0;
+    margin-right: 2rem;
+    top: 0;
+    height: 55vh;
+    margin-top: $menu-bar-height;
     z-index: 10000;
-    animation: slideInFromBottom 0.5s ease-in-out;
 }
 .target-wrapper-teacher-hide{
-    display: none;
+   display: none;
 }
 
 .extension-button-container {
@@ -411,6 +413,7 @@ $fade-out-distance: 15px;
     border: 1px solid #cccccc;
     background-color: #ffffff; /* change background to white */
     z-index: 100;
+    display: none;
 }
 .canvas-pos-teacher:hover{
     color: white;
