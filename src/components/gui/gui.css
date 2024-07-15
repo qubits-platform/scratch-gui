@@ -262,7 +262,7 @@
 
 .target-wrapper-student{
     position: absolute;
-    /* width: 71vw; */
+    width: 71vw;
     height: 25rem;
     bottom: 0;
     right: 1rem;
