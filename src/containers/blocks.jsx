@@ -703,6 +703,7 @@ const mapDispatchToProps = (dispatch) => ({
   onActivateCustomProcedures: (data, callback) =>
     dispatch(activateCustomProcedures(data, callback)),
   onOpenConnectionModal: (id) => {
+    if(id=== 'teachableMachine' || id === 'poseFace') return;
     dispatch(setConnectionModalExtensionId(id))
     dispatch(openConnectionModal())
   },

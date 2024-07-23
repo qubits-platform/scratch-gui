@@ -11,6 +11,7 @@ const postcssVars = require('postcss-simple-vars')
 const postcssImport = require('postcss-import')
 
 const ScratchWebpackConfigBuilder = require('scratch-webpack-configuration')
+const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 
 // const STATIC_PATH = process.env.STATIC_PATH || '/static';
 
@@ -192,6 +193,7 @@ const buildConfig = baseConfig
       ],
     }),
   )
+  .addPlugin(new NodePolyfillPlugin()) 
 
 // Skip building `dist/` unless explicitly requested
 // It roughly doubles build time and isn't needed for `scratch-gui` development

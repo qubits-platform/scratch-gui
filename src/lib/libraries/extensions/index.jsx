@@ -19,6 +19,12 @@ import translateInsetIconURL from './translate/translate-small.png'
 import makeymakeyIconURL from './makeymakey/makeymakey.png'
 import makeymakeyInsetIconURL from './makeymakey/makeymakey-small.svg'
 
+import poseFaceBlocksIconURL from './poseFace/pose-face.png'
+import poseFaceInsetIconUR from './poseFace/pose-face-small.svg'
+
+import teachableMachineIconURL from './teachableMachine/teachable-machine-blocks.png'
+import teachableMachineInsetIconURL from './teachableMachine/teachable-machine-blocks-small.svg'
+
 import microbitIconURL from './microbit/microbit.png'
 import microbitInsetIconURL from './microbit/microbit-small.svg'
 import microbitConnectionIconURL from './microbit/microbit-illustration.svg'
@@ -181,9 +187,9 @@ export default [
     ),
     featured: true,
     disabled: false,
-    bluetoothRequired: true,
+    bluetoothRequired: false,
     internetConnectionRequired: true,
-    launchPeripheralConnectionFlow: true,
+    launchPeripheralConnectionFlow: false,
     useAutoScan: false,
     connectionIconURL: microbitConnectionIconURL,
     connectionSmallIconURL: microbitConnectionSmallIconURL,
@@ -318,4 +324,37 @@ export default [
     ),
     helpLink: 'https://scratch.mit.edu/vernier',
   },
+  {
+    name: 'Teachable Machine',
+    extensionId: 'teachableMachine',
+    iconURL: teachableMachineIconURL,
+    insetIconURL: teachableMachineInsetIconURL,
+    description: (
+      <FormattedMessage
+        defaultMessage='Train and use machine learning models'
+        description="Description for the 'Teachable Machine' extension"
+        id='gui.extension.teachableMachine.description'
+      />
+    ),
+    featured: true,
+    disabled: false,
+    bluetoothRequired: false,
+    internetConnectionRequired: true,
+    launchPeripheralConnectionFlow: false,
+    useAutoScan: false,
+  },
+  {
+    name: 'Face Sensing',
+    extensionId: 'poseFace',
+    iconURL: poseFaceBlocksIconURL,
+    insetIconURL: poseFaceInsetIconUR,
+    description: (
+        <FormattedMessage
+            defaultMessage="Sense face movement with the camera."
+            description="PoseNet Description"
+            id="gui.extension.pose_face.description"
+        />
+    ),
+    featured: true
+},
 ]
