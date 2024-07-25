@@ -48,13 +48,16 @@ class Stage extends React.Component {
       colorInfo: null,
       question: null,
     }
-
+ 
     if (this.props.vm.renderer) {
       this.renderer = this.props.vm.renderer
       this.canvas = this.renderer.canvas
+      console.log('console vm',this.props.vm.canvas)
     } else {
+   
       this.canvas = document.createElement('canvas')
       this.renderer = new Renderer(this.canvas)
+      console.log('console vm',this.canvas)
       let sprite = this.props.vm.runtime.targets.find((target) => target.isSprite())
       if (sprite) {
         this.props.vm.setSpriteSize(sprite.id, 5)

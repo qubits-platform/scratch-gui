@@ -131,7 +131,7 @@ const StageHeaderComponent = function (props) {
               {spriteClicked ? stageControls : ''}
             </div>
 
-            <div className={styles.flagControlsDisplay}>
+           <div className={styles.flagControlsDisplay}>
               <div>
                 <Button className={styles.stageButton} onClick={onSetStageFull}>
                   <img

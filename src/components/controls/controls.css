@@ -1,5 +1,8 @@
 .controls-container {
     display: flex;
+    /* gap: 2; */
+    justify-content: center;
+    align-items: center;
 }
 .sprite-icon-hide{
     display: none;
@@ -13,86 +16,70 @@
     display: flex;
     justify-items: center;
     align-items:center ;
-    background-color: #720c8c;
-    padding-left: 0.4rem;
-    padding-right: 0.4rem;
-    font-size: 0.7rem;
     color: white;
     cursor: pointer;
     border-radius: 3px;
-    margin-right: 0.5rem;
-    border: 1px solid #801d80;
-    display: none;
+    background-color: #a67db8;
+    border: 1px solid #8f2390;
+    width: 2rem;
+    height: 2rem;
 }
 
 .sprite-icon-bg-student-hide{
-    display: flex;
-    justify-items: center;
-    align-items:center ;
-    background-color: rgb(255, 255, 255);
-    padding-left: 0.4rem;
-    padding-right: 0.4rem;
-    font-size: 0.7rem;
-    color: white;
-    cursor: pointer;
-    border-radius: 3px;
-    margin-right: 0.5rem;
-    border: 1px solid rgb(215, 215, 215);
-}
 
+    font-size: 0.7rem;
+    color: white;
+    cursor: pointer;
+
+
+}
+.sprite-icon-bg-student-hide:hover{
+    background-color: #f7f7f7;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 3px;
+
+}
 .sprite-icon-bg-teacher{
-    display: flex;
+  /* display: flex; */
     justify-items: center;
     align-items:center ;
-    background-color: #a97cb4;
-    padding-left: 0.4rem;
-    padding-right: 0.4rem;
+    background-color: #720c8c;
     font-size: 0.7rem;
     color: white;
     cursor: pointer;
     border-radius: 3px;
-    margin-right: 0.5rem;
+  
     border: 1px solid #801d80;
+
 }
 
 .sprite-icon-bg-teacher-hide{
-    display: flex;
-    justify-items: center;
-    align-items:center ;
-    background-color: rgb(255, 255, 255);
-    padding-left: 0.4rem;
-    padding-right: 0.4rem;
     font-size: 0.7rem;
     color: white;
     cursor: pointer;
-    border-radius: 3px;
-    margin-right: 0.5rem;
-    border: 1px solid rgb(215, 215, 215);
+
 }
 .sprite-icon-bg-teacher-hide:hover{
     background-color: #f7f7f7;
 }
 .sprite-image-outer {
     position: relative;
-    width: 100%;
-    height: 100%;
-    transform: translateZ(0);
-}
-
-.sprite-image-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
+    width: 2rem;
+    height: 2rem;
+    user-select: none;
+    cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+
 .sprite-image {
     user-select: none;
     pointer-events: none;
-    max-width: 20px;
-    max-height: 20px;
+    max-width: 18px;
+    max-height: 18x;
 }
 
 @media (max-width: 1024px) {
@@ -109,9 +96,9 @@
         font-size: 0.7rem;
         color: white;
         cursor: pointer;
-        border-radius: 3px;
+        /* border-radius: 3px;
         margin-right: 0.5rem;
-        border: 1px solid rgb(215, 215, 215);
+        border: 1px solid rgb(215, 215, 215); */
     }
     
     .sprite-icon-bg{

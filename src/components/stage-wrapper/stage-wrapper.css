@@ -12,7 +12,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    
 }
 
 
@@ -50,7 +49,25 @@
     margin-top: 0.3rem;
   }
   
+.stage-current-normal.full-screen{
+    position: fixed;
+    top: $stage-menu-height;
+    left: 0;
+    right: 0;
+    top:2.1rem;
+    z-index: $z-index-stage-wrapper-overlay;
+    background-color: white;
+    /* spacing between stage and control bar (on the top), or between
+    stage and window edges (on left/right/bottom) */
+    /* padding: $stage-full-screen-stage-padding; */
 
+    /* this centers the stage */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
 
 .stage-wrapper.full-screen {
     position: fixed;
@@ -59,10 +76,10 @@
     right: 0;
     bottom: 0;
     z-index: $z-index-stage-wrapper-overlay;
-    background-color: $ui-white;
+    background-color: white;
     /* spacing between stage and control bar (on the top), or between
     stage and window edges (on left/right/bottom) */
-    padding: $stage-full-screen-stage-padding;
+    /* padding: $stage-full-screen-stage-padding; */
 
     /* this centers the stage */
     display: flex;
@@ -108,7 +125,10 @@
     z-index: 999;
     visibility: visible;
     opacity: 1;
-    background-color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
 }
 
 .stage-position-student-hide{
@@ -168,6 +188,16 @@
         visibility: visible;
         opacity: 1;
     }
+    .stage-position-full-screen{
+        position: fixed;
+        bottom: 0;
+        width: 100vw;
+        /* height: 24.2rem; */
+        background-color: rgb(255, 255, 255);
+        z-index: 999;
+        visibility: visible;
+        opacity: 1;
+    }
     .stage-position-hide{
         position: absolute;
         bottom: 0;
@@ -215,4 +245,5 @@
             transform: translateY(0);
         }
     }
+    
 }

@@ -47,6 +47,7 @@ const Controls = function (props) {
 
   return (
     <div className={classNames(styles.controlsContainer, className)} {...componentProps}>
+      
       {!isFullScreen && (
         <div
           className={
@@ -57,9 +58,9 @@ const Controls = function (props) {
           onClick={onSpriteFlagClick}
         >
           <div className={styles.spriteImageOuter}>
-            <div className={styles.spriteImageInner}>
+            {/* <div className={styles.spriteImageInner}> */}
               <img className={styles.spriteImage} draggable={false} src={logo} />
-            </div>
+            {/* </div> */}
           </div>
         </div>
       )}
