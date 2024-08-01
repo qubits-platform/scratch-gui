@@ -37,6 +37,7 @@ const Controls = function (props) {
     spriteClicked,
     isFullScreen,
     currentLayout,
+    handleGreenbuttonClick,
     ...componentProps
   } = props
 
@@ -58,20 +59,25 @@ const Controls = function (props) {
           onClick={onSpriteFlagClick}
         >
           <div className={styles.spriteImageOuter}>
-            {/* <div className={styles.spriteImageInner}> */}
               <img className={styles.spriteImage} draggable={false} src={logo} />
-            {/* </div> */}
           </div>
         </div>
       )}
-      <div onClick={handleReload}><Reload /></div>
+      <div onClick={handleReload} className={styles.reloadButton}><Reload /></div>
+      <div onClick={handleGreenbuttonClick} className={styles.greenButton}>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="green" class="size-5">
+          <path d="M6.3 2.84A1.5 1.5 0 0 0 4 4.11v11.78a1.5 1.5 0 0 0 2.3 1.27l9.344-5.891a1.5 1.5 0 0 0 0-2.538L6.3 2.841Z" />
+        </svg>
+      </div>
 
-      <div ref={greenFlagRef}  className={styles.redGreenButtons}>
+      <div ref={greenFlagRef} className={styles.redGreenButtons}>
+     
         <GreenFlag
           active={active}
           title={intl.formatMessage(messages.goTitle)}
           onClick={onGreenFlagClick}
         />
+        
         <StopAll
           active={active}
           title={intl.formatMessage(messages.stopTitle)}

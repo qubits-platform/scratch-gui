@@ -41,7 +41,6 @@
 
 }
 .sprite-icon-bg-teacher{
-  /* display: flex; */
     justify-items: center;
     align-items:center ;
     background-color: #720c8c;
@@ -49,7 +48,6 @@
     color: white;
     cursor: pointer;
     border-radius: 3px;
-  
     border: 1px solid #801d80;
 
 }
@@ -81,6 +79,23 @@
     max-width: 18px;
     max-height: 18x;
 }
+.red-green-buttons{
+
+}
+.green-button svg{
+    width: 2rem;
+    height: 2rem;
+    padding: 0.445rem;
+    border-radius: 0.25rem;
+    user-select: none;
+    user-drag: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: green;
+}
+
 
 @media (max-width: 1024px) {
     .controls-container{
@@ -92,13 +107,9 @@
         align-items:center ;
         background-color: rgb(255, 255, 255);
         padding-left: 0.4rem;
-        padding-right: 0.4rem;
         font-size: 0.7rem;
         color: white;
         cursor: pointer;
-        /* border-radius: 3px;
-        margin-right: 0.5rem;
-        border: 1px solid rgb(215, 215, 215); */
     }
     
     .sprite-icon-bg{
@@ -106,23 +117,20 @@
         justify-items: center;
         align-items:center ;
         background-color: #a97cb4;
-        padding-left: 0.4rem;
-        padding-right: 0.4rem;
         font-size: 0.7rem;
         color: white;
         cursor: pointer;
         border-radius: 3px;
-        margin-right: 0.5rem;
-        border: 1px solid #801d80;
     }
     .red-green-buttons{
         width: 100%;
         position: relative;
         left: 0;
         border-radius: 5px;
-        border: 1px solid rgb(220, 220, 220);
+        border: none;
         margin-right: 1rem;
-
+        display: hidden;
     }
+    
   }
   
