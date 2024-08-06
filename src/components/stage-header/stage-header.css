@@ -94,6 +94,11 @@
 }
 
 @media (max-width: 1024px) {
+
+.stage-header-wrapper-layout{
+    position: absolute;
+    right: 0;
+}
 .stage-header-wrapper {
     position: absolute;
     top: 3rem;

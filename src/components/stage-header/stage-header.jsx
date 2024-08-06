@@ -121,7 +121,7 @@ const StageHeaderComponent = function (props) {
       </div>
     )
     header = (
-      <Box className={styles.stageHeaderWrapper}>
+      <Box className={currentLayout==="teacher" || currentLayout==="student" ? styles.stageHeaderWrapperLayout :styles.stageHeaderWrapper}>
         <Box className={styles.stageMenuWrapper}>
           <Controls vm={vm} currentLayout={currentLayout}/>
           <div className={styles.stageSizeRow}>
