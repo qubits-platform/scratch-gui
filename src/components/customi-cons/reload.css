@@ -13,20 +13,4 @@
   align-items: center;
   }
   
-  .reload-button {
-    border: none;
-    /* padding: 5.8px; */
-    background-color: transparent;
-    cursor: pointer;
-    background-color: #f7f7f7;
-    /* border-radius: 3px; */
-    /* border: 1px solid rgb(215, 215, 215); */
-  }
 
-  .reload-container:hover{
-    background-color: $looks-light-transparent;
-  }
-  
-  .reload-container svg {
-    color: #801D80;
-  }

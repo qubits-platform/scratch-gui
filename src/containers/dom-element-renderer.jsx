@@ -20,7 +20,7 @@ class DOMElementRenderer extends React.Component {
   }
   componentDidMount() {
     this.container.appendChild(this.props.domElement)
-    console.log('console canvas',this.props.domElement.toDataURL("image/png"))
+
   }
   componentWillUnmount() {
     this.container.removeChild(this.props.domElement)

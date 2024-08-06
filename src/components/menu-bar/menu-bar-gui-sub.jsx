@@ -289,6 +289,7 @@ class MenuBarGuiSub extends React.Component {
 
   async onLocalStorageFileUploadTeacher() {
     const projectData = await localforage.getItem('loadteacher');
+    console.log(projectData)
     if (projectData) {
         let binaryString = atob(projectData);
         let len = binaryString.length;
