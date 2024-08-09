@@ -18,9 +18,10 @@
 
 .stage-menu-wrapper-student{
     position: absolute;
-    width: 70%;
+    width: 100%;
     right: 0;
     top: 2.65rem;
+    background-color: rgb(255, 255, 255);
 }
 
 .stage-current-student{
@@ -33,11 +34,14 @@
 
 .stage-menu-wrapper-teacher{
     position: absolute;
-    width: 50%;
-    right: 1.2rem;
-    top:0rem;
+    width: 100%;
+    right: 0;
+    top: 0;
+    background-color: rgb(255, 255, 255);
 }
-
+.stage-menu-wrapper{
+    background-color: rgb(255, 255, 255);
+}
 .stage-current-teacher{
     position: relative;
     right: 0;
@@ -167,6 +171,9 @@
 @media (max-width: 1024px) {
     .stage-canvas-wrapper-hide{
        height: 0;
+    }
+    .stage-menu-wrapper{
+        background-color: white;
     }
     .stage-canvas-wrapper{
         position: relative;

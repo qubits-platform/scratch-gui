@@ -1,9 +1,36 @@
+
+
 .controls-container {
     display: flex;
-    /* gap: 2; */
+    gap: 0.4rem;
     justify-content: center;
     align-items: center;
+    
 }
+
+.controls-container-student {
+    display: flex;
+    gap: 0.4rem;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 20rem;
+}
+
+.controls-container-teacher {
+    display: flex;
+    gap: 0.4rem;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 7.6rem;
+}
+
+.reload-button{
+    border:1px solid #dedede;
+    border-radius: 4px;
+}
+
 .sprite-icon-hide{
     display: none;
 }
@@ -23,6 +50,7 @@
     border: 1px solid #8f2390;
     width: 2rem;
     height: 2rem;
+
 }
 
 .sprite-icon-bg-student-hide{
@@ -30,6 +58,8 @@
     font-size: 0.7rem;
     color: white;
     cursor: pointer;
+    border:1px solid #dedede;
+    border-radius: 4px;
 
 
 }
@@ -56,6 +86,8 @@
     font-size: 0.7rem;
     color: white;
     cursor: pointer;
+    border:1px solid #dedede;
+    border-radius: 4px;
 
 }
 .sprite-icon-bg-teacher-hide:hover{
@@ -80,13 +112,15 @@
     max-height: 18x;
 }
 .red-green-buttons{
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.4rem;
 }
 .green-button svg{
     width: 2rem;
     height: 2rem;
     padding: 0.445rem;
-    border-radius: 0.25rem;
     user-select: none;
     user-drag: none;
     cursor: pointer;
@@ -94,22 +128,27 @@
     justify-content: center;
     align-items: center;
     color: green;
+    border:1px solid #dedede;
+    border-radius: 4px;
 }
 
 
 @media (max-width: 1024px) {
     .controls-container{
-        padding-top: 4px;
+
     }
     .sprite-icon-hide{
         display: flex;
         justify-items: center;
         align-items:center ;
         background-color: rgb(255, 255, 255);
-        padding-left: 0.4rem;
+        height: 2rem;
+        width:2rem;
         font-size: 0.7rem;
         color: white;
         cursor: pointer;
+        border:1px solid #dedede;
+        border-radius: 4px;
     }
     
     .sprite-icon-bg{
@@ -121,6 +160,7 @@
         color: white;
         cursor: pointer;
         border-radius: 3px;
+        border: 1px solid #8f2390;
     }
     .red-green-buttons{
         width: 100%;
@@ -130,6 +170,7 @@
         border: none;
         margin-right: 1rem;
         display: hidden;
+        gap: 0.4rem;
     }
     
   }

@@ -47,7 +47,7 @@ const Controls = function (props) {
   };
 
   return (
-    <div className={classNames(styles.controlsContainer, className)} {...componentProps}>
+    <div className={classNames(currentLayout==='student'&&styles.controlsContainerStudent|| currentLayout==='teacher'&&styles.controlsContainerTeacher||currentLayout==='normal'&&styles.controlsContainer, className)} {...componentProps}>
       
       {!isFullScreen && (
         <div
@@ -63,12 +63,17 @@ const Controls = function (props) {
           </div>
         </div>
       )}
+
       <div onClick={handleReload} className={styles.reloadButton}><Reload /></div>
+
       {currentLayout!=='teacher' && <div onClick={handleGreenbuttonClick} className={styles.greenButton}>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="green" class="size-5">
-          <path d="M6.3 2.84A1.5 1.5 0 0 0 4 4.11v11.78a1.5 1.5 0 0 0 2.3 1.27l9.344-5.891a1.5 1.5 0 0 0 0-2.538L6.3 2.841Z" />
-        </svg>
+        <div >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="green" class="size-5">
+            <path d="M6.3 2.84A1.5 1.5 0 0 0 4 4.11v11.78a1.5 1.5 0 0 0 2.3 1.27l9.344-5.891a1.5 1.5 0 0 0 0-2.538L6.3 2.841Z" />
+          </svg>
+        </div>
       </div>}
+
 
       <div ref={greenFlagRef} className={styles.redGreenButtons}>
      
@@ -84,6 +89,7 @@ const Controls = function (props) {
           onClick={onStopAllClick}
         />
       </div>
+
       {turbo ? <TurboMode /> : null}
     </div>
   )

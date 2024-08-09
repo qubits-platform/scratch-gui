@@ -103,6 +103,8 @@
 
 @media (max-width: 1024px) {
     .blocks :global(.injectionDiv){
-        width: 720px !important;
+        width: 100vw !important;
     }
   }
+ 
+

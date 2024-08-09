@@ -122,6 +122,7 @@ class MenuBarGuiSub extends React.Component {
       "restoreOptionMessage",
       "onLocalStorageFileUpload",
       "handleDownloadLocalStorageProject",
+      "handleReload"
     ]);
   }
 
@@ -254,7 +255,10 @@ class MenuBarGuiSub extends React.Component {
     this.setState({ currentLayout });
     if(currentLayout === 'teacher') {
       this.onLocalStorageFileUploadTeacher()
-    } else {
+    } else if(currentLayout === 'student'){
+      this.onLocalStorageFileUploadStudent()
+    }
+    else {
       localforage.getItem('Current_Project_Name')
         .then(projectName => {
             this.setState({ projectName });
@@ -275,6 +279,18 @@ class MenuBarGuiSub extends React.Component {
       this.onLocalStorageSave(this.state.downloadLocalStorageProject)();
     }
   }
+
+  async onLocalStorageFileUploadStudent() {
+    let base64blocks = await localforage.getItem('ScratchStudentSubmission');
+    console.log('base64blocks same same', base64blocks);
+    let binaryString = atob(base64blocks);
+    let bytes = new Uint8Array(binaryString.length);
+    for (let i = 0; i < binaryString.length; i++) {
+        bytes[i] = binaryString.charCodeAt(i);
+    }
+    this.props.vm.loadProject(bytes.buffer);
+  }
+
   async onLocalStorageFileUpload() {
     const projectData = await localforage.getItem(this.state.projectName);
     if (projectData) {
@@ -288,20 +304,24 @@ class MenuBarGuiSub extends React.Component {
   }
 
   async onLocalStorageFileUploadTeacher() {
-    const projectData = await localforage.getItem('loadteacher');
-    if (projectData) {
-        let binaryString = atob(projectData);
-        let len = binaryString.length;
-        let bytes = new Uint8Array(len);
-        for (let i = 0; i < len; i++) {
-            bytes[i] = binaryString.charCodeAt(i);
-        }
-        this.props.vm.loadProject(bytes.buffer);
-        this.props.handleReload();
-    } else {
-        console.error('');
+    let base64blocks = await localforage.getItem('loadteacher');
+    let binaryString = atob(base64blocks);
+    let bytes = new Uint8Array(binaryString.length);
+    for (let i = 0; i < binaryString.length; i++) {
+        bytes[i] = binaryString.charCodeAt(i);
     }
-  }
+    this.props.vm.loadProject(bytes.buffer);
+    // const projectData = await localforage.getItem('loadteacher');
+    // console.log('loadteacher projectData', projectData);
+    // if (projectData) {
+    //   const buffer = new Uint8Array(
+    //     projectData.split("").map((char) => char.charCodeAt(0)),
+    //   ).buffer;
+    //   this.props.vm.loadProject(buffer);
+    // } else {
+    //   // console.error('No project found in local storage');
+    // }
+}
   
   onLocalStorageSave(downloadLocalStorageProject) {
     return () => {

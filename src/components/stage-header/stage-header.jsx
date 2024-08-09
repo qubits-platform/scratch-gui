@@ -124,8 +124,7 @@ const StageHeaderComponent = function (props) {
       <Box className={currentLayout==="teacher" || currentLayout==="student" ? styles.stageHeaderWrapperLayout :styles.stageHeaderWrapper}>
         <Box className={styles.stageMenuWrapper}>
           <Controls vm={vm} currentLayout={currentLayout}/>
-          <div className={styles.stageSizeRow}>
-            {/* todo change the css styles not efficient */}
+          <div className={currentLayout==="teacher" || currentLayout==="student" ? styles.stageSizeRowStudent :styles.stageSizeRow} >
             <div className={styles.stageControlsDisplay}>{stageControls}</div>
             <div className={styles.stageControlsDisplayRes}>
               {spriteClicked ? stageControls : ''}
