@@ -261,7 +261,6 @@ class MenuBarGuiSub extends React.Component {
     else {
       localforage.getItem('Current_Project_Name')
         .then(projectName => {
-          console.log('console project name', projectName)
             this.setState({ projectName });
         })
         .then(() => this.onLocalStorageFileUpload())
