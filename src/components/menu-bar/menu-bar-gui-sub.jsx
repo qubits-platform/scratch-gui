@@ -261,6 +261,7 @@ class MenuBarGuiSub extends React.Component {
     else {
       localforage.getItem('Current_Project_Name')
         .then(projectName => {
+          console.log('console project name', projectName)
             this.setState({ projectName });
         })
         .then(() => this.onLocalStorageFileUpload())
@@ -282,13 +283,13 @@ class MenuBarGuiSub extends React.Component {
 
   async onLocalStorageFileUploadStudent() {
     let base64blocks = await localforage.getItem('ScratchStudentSubmission');
-    console.log('base64blocks same same', base64blocks);
     let binaryString = atob(base64blocks);
     let bytes = new Uint8Array(binaryString.length);
     for (let i = 0; i < binaryString.length; i++) {
         bytes[i] = binaryString.charCodeAt(i);
     }
-    this.props.vm.loadProject(bytes.buffer);
+    await new Promise(resolve => setTimeout(resolve, 500));
+    await this.props.vm.loadProject(bytes.buffer);
   }
 
   async onLocalStorageFileUpload() {
@@ -297,7 +298,8 @@ class MenuBarGuiSub extends React.Component {
       const buffer = new Uint8Array(
         projectData.split("").map((char) => char.charCodeAt(0)),
       ).buffer;
-      this.props.vm.loadProject(buffer);
+      await new Promise(resolve => setTimeout(resolve, 500));
+      await this.props.vm.loadProject(buffer);
     } else {
       // console.error('No project found in local storage');
     }
@@ -310,17 +312,8 @@ class MenuBarGuiSub extends React.Component {
     for (let i = 0; i < binaryString.length; i++) {
         bytes[i] = binaryString.charCodeAt(i);
     }
-    this.props.vm.loadProject(bytes.buffer);
-    // const projectData = await localforage.getItem('loadteacher');
-    // console.log('loadteacher projectData', projectData);
-    // if (projectData) {
-    //   const buffer = new Uint8Array(
-    //     projectData.split("").map((char) => char.charCodeAt(0)),
-    //   ).buffer;
-    //   this.props.vm.loadProject(buffer);
-    // } else {
-    //   // console.error('No project found in local storage');
-    // }
+    await new Promise(resolve => setTimeout(resolve, 500));
+    await this.props.vm.loadProject(bytes.buffer);
 }
   
   onLocalStorageSave(downloadLocalStorageProject) {
