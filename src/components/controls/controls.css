@@ -40,51 +40,89 @@
 }
 
 .sprite-icon-bg-student{
-    display: flex;
-    justify-items: center;
-    align-items:center ;
-    color: white;
-    cursor: pointer;
-    border-radius: 3px;
-    background-color: #a67db8;
-    border: 1px solid #8f2390;
-    width: 2rem;
+    width: 100%;
     height: 2rem;
-
+    user-select: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(235, 235, 235);
+    font-size: 0.7rem;
+    border:1px solid #dedede;
+    border-radius: 4px;
+    background-color: #855CD6;
 }
 
-.sprite-icon-bg-student-hide{
 
+.sprite-icon-bg-student-hide{
     font-size: 0.7rem;
-    color: white;
+    color: black;
     cursor: pointer;
     border:1px solid #dedede;
     border-radius: 4px;
-
-
 }
 .sprite-icon-bg-student-hide:hover{
     background-color: #f7f7f7;
-    width: 2rem;
-    height: 2rem;
-    border-radius: 3px;
-
 }
-.sprite-icon-bg-teacher{
-    justify-items: center;
-    align-items:center ;
-    background-color: #720c8c;
-    font-size: 0.7rem;
-    color: white;
+
+.screen-stage {
+    width: 100%;
+    height: 2rem;
+    user-select: none;
     cursor: pointer;
-    border-radius: 3px;
-    border: 1px solid #801d80;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(235, 235, 235);
+    font-size: 0.7rem;
+    border:1px solid #dedede;
+    border-radius: 4px;
+    padding-right: 10px;
+    padding-left:  10px;
+    background-color: #855CD6;
+}
+
+
+.screen-stage-hide {
+    width: 100%;
+    height: 2rem;
+    user-select: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(0, 0, 0);
+    font-size: 0.7rem;
+    border:1px solid #dedede;
+    border-radius: 4px;
+    padding-right: 10px;
+    padding-left:  10px;
+}
+.screen-stage-hide:hover{
+    background-color: #f7f7f7;
+}
+
+
+.sprite-icon-bg-teacher{
+    width: 100%;
+    height: 2rem;
+    user-select: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(235, 235, 235);
+    font-size: 0.7rem;
+    border:1px solid #dedede;
+    border-radius: 4px;
+    background-color: #855CD6;
 
 }
 
 .sprite-icon-bg-teacher-hide{
     font-size: 0.7rem;
-    color: white;
+    color: black;
     cursor: pointer;
     border:1px solid #dedede;
     border-radius: 4px;
@@ -95,13 +133,15 @@
 }
 .sprite-image-outer {
     position: relative;
-    width: 2rem;
+    width: full;
     height: 2rem;
     user-select: none;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-right: 10px;
+    padding-left:  10px;
 }
 
 
@@ -130,37 +170,102 @@
     color: green;
     border:1px solid #dedede;
     border-radius: 4px;
+} 
+.green-button svg:hover{
+    background-color: #f7f7f7;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 3px;
 }
+
+.green-button-normal{
+    display: none;
+}
+[data-tooltip] {
+    position: relative;
+  }
+  
+  [data-tooltip]:hover::before {
+    width: fit-content;
+    content: attr(data-tooltip);
+    position: absolute;
+    top: 100%;
+    left: 70%;
+    transform: translate(-50%, 0);
+    padding: 10px 10px 10px 10px;
+    visibility: hidden;
+    opacity: 0;
+    background: white;
+    transition: all .250s cubic-bezier(0, 0, 0.2, 1);
+    color: #484848;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    font-size: 0.65rem;
+    font-weight: 500;
+    box-shadow: 0 2px 1px #ffffff;
+    z-index: 4;
+    text-align: center;
+    margin-top: 4px;
+    white-space: nowrap;
+  }
+  
+  [data-tooltip]:hover::before {
+    visibility: visible;
+    opacity: 1;
+  }
 
 
 @media (max-width: 1024px) {
     .controls-container{
 
     }
-    .sprite-icon-hide{
-        display: flex;
-        justify-items: center;
-        align-items:center ;
-        background-color: rgb(255, 255, 255);
+
+    .sprite-icon-bg{
+        width: 100%;
         height: 2rem;
-        width:2rem;
-        font-size: 0.7rem;
-        color: white;
+        user-select: none;
         cursor: pointer;
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+        color: rgb(235, 235, 235);
+        font-size: 0.7rem;
         border:1px solid #dedede;
         border-radius: 4px;
+        background-color: #855CD6;
+        white-space: nowrap;
+    
     }
     
-    .sprite-icon-bg{
-        display: flex;
-        justify-items: center;
-        align-items:center ;
-        background-color: #a97cb4;
-        font-size: 0.7rem;
-        color: white;
+    .sprite-icon-hide{
+        width: 100%;
+        height: 2rem;
+        user-select: none;
         cursor: pointer;
-        border-radius: 3px;
-        border: 1px solid #8f2390;
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+        color: black;
+        font-size: 0.7rem;
+        border:1px solid #dedede;
+        border-radius: 4px;
+        white-space: nowrap;
+    
+    }
+    .sprite-icon-hide:hover{
+        background-color: #f7f7f7;
+    }
+    .sprite-image-outer {
+        position: relative;
+        width: full;
+        height: 2rem;
+        user-select: none;
+        cursor: pointer;
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+        padding-right: 10px;
+        padding-left:  10px;
     }
     .red-green-buttons{
         width: 100%;
@@ -172,6 +277,8 @@
         display: hidden;
         gap: 0.4rem;
     }
-    
+    .green-button-normal{
+        display: block;
+    }
   }
   

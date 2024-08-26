@@ -35,6 +35,7 @@ const Controls = function (props) {
     onSpriteFlagClick,
     turbo,
     spriteClicked,
+    flagClicked,
     isFullScreen,
     currentLayout,
     handleGreenbuttonClick,
@@ -58,36 +59,46 @@ const Controls = function (props) {
           }
           onClick={onSpriteFlagClick}
         >
-          <div className={styles.spriteImageOuter}>
-              <img className={styles.spriteImage} draggable={false} src={logo} />
+          <div className={styles.spriteImageOuter} data-tooltip="Open Sprite Panel">
+              {/* <img className={styles.spriteImage} draggable={false} src={logo} /> */}
+              Sprite Panel
           </div>
         </div>
       )}
 
-      <div onClick={handleReload} className={styles.reloadButton}><Reload /></div>
-
-      {currentLayout!=='teacher' && <div onClick={handleGreenbuttonClick} className={styles.greenButton}>
-        <div >
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="green" class="size-5">
-            <path d="M6.3 2.84A1.5 1.5 0 0 0 4 4.11v11.78a1.5 1.5 0 0 0 2.3 1.27l9.344-5.891a1.5 1.5 0 0 0 0-2.538L6.3 2.841Z" />
-          </svg>
+     {currentLayout!=='teacher' && 
+        <div 
+          onClick={handleGreenbuttonClick}
+          className={
+            currentLayout === 'student' ? styles.greenButton : 
+            currentLayout === 'normal' ? styles.greenButtonNormal : 
+            ''
+          }
+        >
+          <div className={flagClicked ? styles.screenStage : styles.screenStageHide}  data-tooltip="Open Stage">
+            Stage
+          </div>
         </div>
-      </div>}
+      }
 
-
+     <div onClick={handleReload} className={styles.reloadButton} data-tooltip="Reload" ><Reload /></div>
+     
       <div ref={greenFlagRef} className={styles.redGreenButtons}>
      
+      <div data-tooltip="Green Flag" >
         <GreenFlag
           active={active}
           title={intl.formatMessage(messages.goTitle)}
           onClick={onGreenFlagClick}
         />
-        
+      </div>
+      <div data-tooltip="Stop" >
         <StopAll
           active={active}
           title={intl.formatMessage(messages.stopTitle)}
           onClick={onStopAllClick}
         />
+      </div>
       </div>
 
       {turbo ? <TurboMode /> : null}
@@ -113,6 +124,7 @@ const mapStateToProps = (state) => ({
   costumeURLFax: state.scratchGui.vmStatus.costumeURLFax,
   spriteClicked: state.scratchGui.vmStatus.spriteClicked,
   isFullScreen: state.scratchGui.mode.isFullScreen,
+  flagClicked: state.scratchGui.vmStatus.flagClicked,
 })
 
 export default injectIntl(connect(mapStateToProps, null)(Controls))
