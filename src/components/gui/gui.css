@@ -442,7 +442,6 @@ $fade-out-distance: 15px;
 }
 .language-res{
     width: fit-content; 
-    z-index: 10000000000;
     color: #787878;
 }
 

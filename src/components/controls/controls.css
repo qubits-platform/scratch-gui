@@ -49,21 +49,23 @@
     align-items: center;
     color: rgb(235, 235, 235);
     font-size: 0.7rem;
-    border:1px solid #dedede;
+    border:1px solid #6338b8;
     border-radius: 4px;
-    background-color: #855CD6;
+    background-color: #6338b8;
 }
 
 
 .sprite-icon-bg-student-hide{
     font-size: 0.7rem;
-    color: black;
+    height: 2rem;
+    color: rgb(255, 255, 255);
     cursor: pointer;
-    border:1px solid #dedede;
+    border:1px solid #855CD6;
     border-radius: 4px;
+    background-color: #855CD6;
 }
 .sprite-icon-bg-student-hide:hover{
-    background-color: #f7f7f7;
+    background-color: #8c6ad1;
 }
 
 .screen-stage {
@@ -76,11 +78,11 @@
     align-items: center;
     color: rgb(235, 235, 235);
     font-size: 0.7rem;
-    border:1px solid #dedede;
+    border:1px solid #6338b8;
     border-radius: 4px;
     padding-right: 10px;
     padding-left:  10px;
-    background-color: #855CD6;
+    background-color: #6338b8;
 }
 
 
@@ -92,15 +94,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
     font-size: 0.7rem;
-    border:1px solid #dedede;
+    border:1px solid #855CD6;
     border-radius: 4px;
     padding-right: 10px;
     padding-left:  10px;
+    background-color: #855CD6;
 }
 .screen-stage-hide:hover{
-    background-color: #f7f7f7;
+    background-color: #8c6ad1;
 }
 
 
@@ -114,22 +117,24 @@
     align-items: center;
     color: rgb(235, 235, 235);
     font-size: 0.7rem;
-    border:1px solid #dedede;
+    border:1px solid #855CD6;
     border-radius: 4px;
-    background-color: #855CD6;
+    background-color: #6338b8;
 
 }
 
 .sprite-icon-bg-teacher-hide{
     font-size: 0.7rem;
-    color: black;
+    height: 2rem;
+    color: rgb(255, 255, 255);
     cursor: pointer;
-    border:1px solid #dedede;
+    border:1px solid #855CD6;
     border-radius: 4px;
+    background-color: #855CD6;
 
 }
 .sprite-icon-bg-teacher-hide:hover{
-    background-color: #f7f7f7;
+    background-color: #8c6ad1;
 }
 .sprite-image-outer {
     position: relative;
