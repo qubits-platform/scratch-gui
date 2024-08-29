@@ -249,39 +249,6 @@ const GUIComponent = (props) => {
               </div>
             </div>
 
-            {/* <MenuBar
-                    accountNavOpen={accountNavOpen}
-                    authorId={authorId}
-                    authorThumbnailUrl={authorThumbnailUrl}
-                    authorUsername={authorUsername}
-                    canChangeLanguage={canChangeLanguage}
-                    canChangeTheme={canChangeTheme}
-                    canCreateCopy={canCreateCopy}
-                    canCreateNew={canCreateNew}
-                    canEditTitle={canEditTitle}
-                    canManageFiles={canManageFiles}
-                    canRemix={canRemix}
-                    canSave={canSave}
-                    canShare={canShare}
-                    className={styles.menuBarPosition}
-                    enableCommunity={enableCommunity}
-                    isShared={isShared}
-                    isTotallyNormal={isTotallyNormal}
-                    logo={logo}
-                    renderLogin={renderLogin}
-                    showComingSoon={showComingSoon}
-                    onClickAbout={onClickAbout}
-                    onClickAccountNav={onClickAccountNav}
-                    onClickLogo={onClickLogo}
-                    onCloseAccountNav={onCloseAccountNav}
-                    onLogOut={onLogOut}
-                    onOpenRegistration={onOpenRegistration}
-                    onProjectTelemetryEvent={onProjectTelemetryEvent}
-                    onSeeCommunity={onSeeCommunity}
-                    onShare={onShare}
-                    onStartSelectingFileUpload={onStartSelectingFileUpload}
-                    onToggleLoginOpen={onToggleLoginOpen}
-                /> */}
             <Box className={styles.bodyWrapper}>
               <Box className={styles.flexWrapper}>
                 <Box className={styles.editorWrapper}>
@@ -367,9 +334,6 @@ const GUIComponent = (props) => {
                       {soundsTabVisible ? <SoundTab vm={vm} /> : null}
                     </TabPanel>
                   </Tabs>
-                  {/* {backpackVisible ? (
-                                <Backpack host={backpackHost} />
-                            ) : null} */}
                 </Box>
 
                 <Box className={classNames(currentLayout === 'teacher' || currentLayout === 'student' ? styles.stageAndTargetWrapperStlayout:styles.stageAndTargetWrapper, styles[stageSize])}>

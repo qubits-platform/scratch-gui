@@ -35,8 +35,10 @@ const Controls = function (props) {
     onSpriteFlagClick,
     turbo,
     spriteClicked,
+    flagClicked,
     isFullScreen,
     currentLayout,
+    handleGreenbuttonClick,
     ...componentProps
   } = props
 
@@ -46,7 +48,8 @@ const Controls = function (props) {
   };
 
   return (
-    <div className={classNames(styles.controlsContainer, className)} {...componentProps}>
+    <div className={classNames(currentLayout==='student'&&styles.controlsContainerStudent|| currentLayout==='teacher'&&styles.controlsContainerTeacher||currentLayout==='normal'&&styles.controlsContainer, className)} {...componentProps}>
+      
       {!isFullScreen && (
         <div
           className={
@@ -56,27 +59,48 @@ const Controls = function (props) {
           }
           onClick={onSpriteFlagClick}
         >
-          <div className={styles.spriteImageOuter}>
-            <div className={styles.spriteImageInner}>
-              <img className={styles.spriteImage} draggable={false} src={logo} />
-            </div>
+          <div className={styles.spriteImageOuter} data-tooltip="Open Sprite Panel">
+              {/* <img className={styles.spriteImage} draggable={false} src={logo} /> */}
+              Sprite Panel
           </div>
         </div>
       )}
-      <div onClick={handleReload}><Reload /></div>
 
-      <div ref={greenFlagRef}  className={styles.redGreenButtons}>
+     {currentLayout!=='teacher' && 
+        <div 
+          onClick={handleGreenbuttonClick}
+          className={
+            currentLayout === 'student' ? styles.greenButton : 
+            currentLayout === 'normal' ? styles.greenButtonNormal : 
+            ''
+          }
+        >
+          <div className={flagClicked ? styles.screenStage : styles.screenStageHide}  data-tooltip="Open Stage">
+            Stage
+          </div>
+        </div>
+      }
+
+     <div onClick={handleReload} className={styles.reloadButton} data-tooltip="Reload" ><Reload /></div>
+     
+      <div ref={greenFlagRef} className={styles.redGreenButtons}>
+     
+      <div data-tooltip="Green Flag" >
         <GreenFlag
           active={active}
           title={intl.formatMessage(messages.goTitle)}
           onClick={onGreenFlagClick}
         />
+      </div>
+      <div data-tooltip="Stop" >
         <StopAll
           active={active}
           title={intl.formatMessage(messages.stopTitle)}
           onClick={onStopAllClick}
         />
       </div>
+      </div>
+
       {turbo ? <TurboMode /> : null}
     </div>
   )
@@ -100,6 +124,7 @@ const mapStateToProps = (state) => ({
   costumeURLFax: state.scratchGui.vmStatus.costumeURLFax,
   spriteClicked: state.scratchGui.vmStatus.spriteClicked,
   isFullScreen: state.scratchGui.mode.isFullScreen,
+  flagClicked: state.scratchGui.vmStatus.flagClicked,
 })
 
 export default injectIntl(connect(mapStateToProps, null)(Controls))

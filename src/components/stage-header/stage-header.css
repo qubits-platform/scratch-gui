@@ -4,16 +4,17 @@
 
 .stage-header-wrapper {
     position: relative;
+    
 }
 
 .stage-header-wrapper-overlay {
-  
+    
     position: fixed;
-    background-color: rgb(232, 237, 241);
     top: 0;
     left: 0;
     right: 0;
     z-index: $z-index-stage-header;
+    
 }
 
 .stage-menu-wrapper {
@@ -23,6 +24,7 @@
     flex-shrink: 0;
     align-items: center;
     height: $stage-menu-height;
+
     /* padding-top: $space; */
 }
 
@@ -34,6 +36,12 @@
 
 .stage-size-row {
     display: flex;
+}
+
+.stage-size-row-student {
+    display: flex;
+    position: absolute;
+    right: 0.4rem;
 }
 
 .stage-size-toggle-group {
@@ -93,10 +101,16 @@
 }
 
 @media (max-width: 1024px) {
+
+.stage-header-wrapper-layout{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .stage-header-wrapper {
     position: absolute;
-    top: 3rem;
-    right: 0;
+    top: 2.7rem;
+    left: 20rem;
 }
 .stage-controls-display{
     display: none;
@@ -105,7 +119,7 @@
     display: block;
 }
 .flag-controls-display{
-    /* display: none; */
+    display: none;
 }
 .flag-controls-display-res{
     display: block;
@@ -117,7 +131,5 @@
     flex-shrink: 0;
     align-items: center;
     height: $stage-menu-height;
-    /* padding-top: $space; */
-    padding-bottom: 0.8rem;
 }
 }

@@ -1,6 +1,36 @@
+
+
 .controls-container {
     display: flex;
+    gap: 0.4rem;
+    justify-content: center;
+    align-items: center;
+    
 }
+
+.controls-container-student {
+    display: flex;
+    gap: 0.4rem;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 20rem;
+}
+
+.controls-container-teacher {
+    display: flex;
+    gap: 0.4rem;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 7.6rem;
+}
+
+.reload-button{
+    border:1px solid #dedede;
+    border-radius: 4px;
+}
+
 .sprite-icon-hide{
     display: none;
 }
@@ -10,132 +40,250 @@
 }
 
 .sprite-icon-bg-student{
-    display: flex;
-    justify-items: center;
-    align-items:center ;
-    background-color: #720c8c;
-    padding-left: 0.4rem;
-    padding-right: 0.4rem;
-    font-size: 0.7rem;
-    color: white;
-    cursor: pointer;
-    border-radius: 3px;
-    margin-right: 0.5rem;
-    border: 1px solid #801d80;
-    display: none;
-}
-
-.sprite-icon-bg-student-hide{
-    display: flex;
-    justify-items: center;
-    align-items:center ;
-    background-color: rgb(255, 255, 255);
-    padding-left: 0.4rem;
-    padding-right: 0.4rem;
-    font-size: 0.7rem;
-    color: white;
-    cursor: pointer;
-    border-radius: 3px;
-    margin-right: 0.5rem;
-    border: 1px solid rgb(215, 215, 215);
-}
-
-.sprite-icon-bg-teacher{
-    display: flex;
-    justify-items: center;
-    align-items:center ;
-    background-color: #a97cb4;
-    padding-left: 0.4rem;
-    padding-right: 0.4rem;
-    font-size: 0.7rem;
-    color: white;
-    cursor: pointer;
-    border-radius: 3px;
-    margin-right: 0.5rem;
-    border: 1px solid #801d80;
-}
-
-.sprite-icon-bg-teacher-hide{
-    display: flex;
-    justify-items: center;
-    align-items:center ;
-    background-color: rgb(255, 255, 255);
-    padding-left: 0.4rem;
-    padding-right: 0.4rem;
-    font-size: 0.7rem;
-    color: white;
-    cursor: pointer;
-    border-radius: 3px;
-    margin-right: 0.5rem;
-    border: 1px solid rgb(215, 215, 215);
-}
-.sprite-icon-bg-teacher-hide:hover{
-    background-color: #f7f7f7;
-}
-.sprite-image-outer {
-    position: relative;
     width: 100%;
-    height: 100%;
-    transform: translateZ(0);
-}
-
-.sprite-image-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
+    height: 2rem;
+    user-select: none;
+    cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
+    color: rgb(235, 235, 235);
+    font-size: 0.7rem;
+    border:1px solid #6338b8;
+    border-radius: 4px;
+    background-color: #6338b8;
 }
+
+
+.sprite-icon-bg-student-hide{
+    font-size: 0.7rem;
+    height: 2rem;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    border:1px solid #855CD6;
+    border-radius: 4px;
+    background-color: #855CD6;
+}
+.sprite-icon-bg-student-hide:hover{
+    background-color: #8c6ad1;
+}
+
+.screen-stage {
+    width: 100%;
+    height: 2rem;
+    user-select: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(235, 235, 235);
+    font-size: 0.7rem;
+    border:1px solid #6338b8;
+    border-radius: 4px;
+    padding-right: 10px;
+    padding-left:  10px;
+    background-color: #6338b8;
+}
+
+
+.screen-stage-hide {
+    width: 100%;
+    height: 2rem;
+    user-select: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(255, 255, 255);
+    font-size: 0.7rem;
+    border:1px solid #855CD6;
+    border-radius: 4px;
+    padding-right: 10px;
+    padding-left:  10px;
+    background-color: #855CD6;
+}
+.screen-stage-hide:hover{
+    background-color: #8c6ad1;
+}
+
+
+.sprite-icon-bg-teacher{
+    width: 100%;
+    height: 2rem;
+    user-select: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(235, 235, 235);
+    font-size: 0.7rem;
+    border:1px solid #855CD6;
+    border-radius: 4px;
+    background-color: #6338b8;
+
+}
+
+.sprite-icon-bg-teacher-hide{
+    font-size: 0.7rem;
+    height: 2rem;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    border:1px solid #855CD6;
+    border-radius: 4px;
+    background-color: #855CD6;
+
+}
+.sprite-icon-bg-teacher-hide:hover{
+    background-color: #8c6ad1;
+}
+.sprite-image-outer {
+    position: relative;
+    width: full;
+    height: 2rem;
+    user-select: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 10px;
+    padding-left:  10px;
+}
+
 
 .sprite-image {
     user-select: none;
     pointer-events: none;
-    max-width: 20px;
-    max-height: 20px;
+    max-width: 18px;
+    max-height: 18x;
 }
+.red-green-buttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.4rem;
+}
+.green-button svg{
+    width: 2rem;
+    height: 2rem;
+    padding: 0.445rem;
+    user-select: none;
+    user-drag: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: green;
+    border:1px solid #dedede;
+    border-radius: 4px;
+} 
+.green-button svg:hover{
+    background-color: #f7f7f7;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 3px;
+}
+
+.green-button-normal{
+    display: none;
+}
+[data-tooltip] {
+    position: relative;
+  }
+  
+  [data-tooltip]:hover::before {
+    width: fit-content;
+    content: attr(data-tooltip);
+    position: absolute;
+    top: 100%;
+    left: 70%;
+    transform: translate(-50%, 0);
+    padding: 10px 10px 10px 10px;
+    visibility: hidden;
+    opacity: 0;
+    background: white;
+    transition: all .250s cubic-bezier(0, 0, 0.2, 1);
+    color: #484848;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    font-size: 0.65rem;
+    font-weight: 500;
+    box-shadow: 0 2px 1px #ffffff;
+    z-index: 4;
+    text-align: center;
+    margin-top: 4px;
+    white-space: nowrap;
+  }
+  
+  [data-tooltip]:hover::before {
+    visibility: visible;
+    opacity: 1;
+  }
+
 
 @media (max-width: 1024px) {
     .controls-container{
-        padding-top: 4px;
+
     }
-    .sprite-icon-hide{
-        display: flex;
-        justify-items: center;
-        align-items:center ;
-        background-color: rgb(255, 255, 255);
-        padding-left: 0.4rem;
-        padding-right: 0.4rem;
-        font-size: 0.7rem;
-        color: white;
+
+    .sprite-icon-bg{
+        width: 100%;
+        height: 2rem;
+        user-select: none;
         cursor: pointer;
-        border-radius: 3px;
-        margin-right: 0.5rem;
-        border: 1px solid rgb(215, 215, 215);
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+        color: rgb(235, 235, 235);
+        font-size: 0.7rem;
+        border:1px solid #dedede;
+        border-radius: 4px;
+        background-color: #855CD6;
+        white-space: nowrap;
+    
     }
     
-    .sprite-icon-bg{
-        display: flex;
-        justify-items: center;
-        align-items:center ;
-        background-color: #a97cb4;
-        padding-left: 0.4rem;
-        padding-right: 0.4rem;
-        font-size: 0.7rem;
-        color: white;
+    .sprite-icon-hide{
+        width: 100%;
+        height: 2rem;
+        user-select: none;
         cursor: pointer;
-        border-radius: 3px;
-        margin-right: 0.5rem;
-        border: 1px solid #801d80;
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+        color: black;
+        font-size: 0.7rem;
+        border:1px solid #dedede;
+        border-radius: 4px;
+        white-space: nowrap;
+    
+    }
+    .sprite-icon-hide:hover{
+        background-color: #f7f7f7;
+    }
+    .sprite-image-outer {
+        position: relative;
+        width: full;
+        height: 2rem;
+        user-select: none;
+        cursor: pointer;
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+        padding-right: 10px;
+        padding-left:  10px;
     }
     .red-green-buttons{
         width: 100%;
         position: relative;
         left: 0;
         border-radius: 5px;
-        border: 1px solid rgb(220, 220, 220);
+        border: none;
         margin-right: 1rem;
-
+        display: hidden;
+        gap: 0.4rem;
+    }
+    .green-button-normal{
+        display: block;
     }
   }
   

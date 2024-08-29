@@ -17,7 +17,6 @@ import Reload from '../customi-cons/reload.jsx'
 
 const StageWrapperComponent = function (props) {
   const { isFullScreen, isRtl, isRendererSupported, loading, stageSize, vm, flagClicked,currentLayout } = props
-
   return (
     <Box
       className={classNames(styles.stageWrapper, { [styles.fullScreen]: isFullScreen })}
@@ -32,15 +31,18 @@ const StageWrapperComponent = function (props) {
       </Box>
       <div className={styles.stageBackground}>
            
-        <div className={
-            currentLayout === 'student' ? styles.stageCurrentStudent :
-            currentLayout === 'teacher' ? styles.stageCurrentTeacher :
-            styles.stageCurrentNormal
-          }>
+          <div className={
+              classNames(
+                currentLayout === 'student' ? styles.stageCurrentStudent :
+                currentLayout === 'teacher' ? styles.stageCurrentTeacher :
+                styles.stageCurrentNormal,
+                { [styles.fullScreen]: isFullScreen }
+              )
+            }>
             <div className={
             currentLayout === 'student' ? (flagClicked?styles.stagePositionStudent:styles.stagePositionStudentHide) :
             currentLayout === 'teacher' ? (flagClicked?styles.stagePositionTeacher:styles.stagePositionTeacherHide) :
-            flagClicked ?styles.stagePosition:styles.stagePositionHide
+            flagClicked ?(isFullScreen ? styles.stagePositionFullScreen : styles.stagePosition) :styles.stagePositionHide
           }>
             {/* <div className={styles.stageBackgroundPos}></div> */}
             { currentLayout !== 'teacher' && flagClicked&&<div className={styles.relativeContainer}>

@@ -9,6 +9,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const autoprefixer = require('autoprefixer')
 const postcssVars = require('postcss-simple-vars')
 const postcssImport = require('postcss-import')
+const TerserPlugin = require('terser-webpack-plugin');
 
 const ScratchWebpackConfigBuilder = require('scratch-webpack-configuration')
 const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
@@ -40,6 +41,27 @@ const baseConfig = new ScratchWebpackConfigBuilder({
       },
       mergeDuplicateChunks: true,
       runtimeChunk: 'single',
+      minimize: true, 
+      minimizer: [
+        new TerserPlugin({
+          terserOptions: {
+            compress: {
+              drop_console: true, 
+              drop_debugger: true, 
+              dead_code: true,
+              passes: 2, 
+              toplevel: true,
+            },
+            output: {
+              comments: false, 
+            },
+            mangle: {
+              safari10: true, 
+            },
+          },
+          extractComments: false, 
+        }),
+      ],
     },
   })
   .addModuleRule({

@@ -10,15 +10,17 @@ import ControlsComponent from '../components/controls/controls.jsx'
 class Controls extends React.Component {
   constructor(props) {
     super(props)
-    bindAll(this, ['handleGreenFlagClick', 'handleStopAllClick', 'handleSpriteFlagClick'])
+    bindAll(this, ['handleGreenFlagClick', 'handleStopAllClick', 'handleSpriteFlagClick', 'handleGreenbuttonClick'])
+  }
+  handleGreenbuttonClick() {
+    this.props.setSpriteClickedState(false)
+    this.props.setFlagClickedState(true)
   }
   handleGreenFlagClick(e) {
     e.preventDefault()
     if (e.shiftKey) {
       this.props.vm.setTurboMode(!this.props.turbo)
     } else {
-      this.props.setSpriteClickedState(false)
-      this.props.setFlagClickedState(true)
       if (!this.props.isStarted) {
         this.props.vm.start()
       }
@@ -31,6 +33,7 @@ class Controls extends React.Component {
   }
   handleSpriteFlagClick(e) {
     e.preventDefault()
+    this.props.setSpriteClickedState(false)
     if (this.props.spriteClicked === true) {
       this.props.setSpriteClickedState(false)
     } else {
@@ -55,6 +58,7 @@ class Controls extends React.Component {
         onGreenFlagClick={this.handleGreenFlagClick}
         onStopAllClick={this.handleStopAllClick}
         onSpriteFlagClick={this.handleSpriteFlagClick}
+        handleGreenbuttonClick={this.handleGreenbuttonClick}
       />
     )
   }
