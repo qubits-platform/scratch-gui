@@ -104,7 +104,7 @@
     "scratch-render-fonts": "^1.0.2",
     "scratch-storage": "^2.3.1",
     "scratch-svg-renderer": "^2.2.0",
-    "scratch-vm": "^4.5.336",
+    "scratch-vm": "git+https://github.com/qubits-platform/scratch-vm.git",
     "startaudiocontext": "^1.2.1",
     "style-loader": "^0.23.0",
     "text-encoding": "^0.7.0",
